@@ -1,0 +1,12 @@
+{
+  "result_dir": "/Users/youmaowei/Workspace/PythonProject/6004/groupproject/result/logisticmultiresult",
+  "debug_max_stays": 0,
+  "n_epochs": 25,
+  "alpha": 0.0001,
+  "patience": 8,
+  "best_epoch": 25,
+  "best_lambda": 1.121105583065397,
+  "best_val_total_loss": 0.7380364800382097,
+  "trainable_head1": true,
+  "trainable_head2": true
+}

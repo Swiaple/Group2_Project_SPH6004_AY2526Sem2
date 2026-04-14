@@ -1,0 +1,13 @@
+{
+  "result_dir": "/Users/youmaowei/Workspace/PythonProject/6004/groupproject/result/xgboostmultiresult",
+  "debug_max_stays": 0,
+  "n_estimators": 200,
+  "learning_rate": 0.05,
+  "max_depth": 5,
+  "model_n_jobs": 1,
+  "best_round": 196,
+  "best_lambda": 0.8718305765736778,
+  "best_val_total_loss": 0.8570363413651144,
+  "trainable_head1": true,
+  "trainable_head2": true
+}
