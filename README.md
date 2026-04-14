@@ -1,49 +1,104 @@
-# Project Title
+# Group2 Project (SPH6004 AY2526 Sem2)
 
 ## Overview
-This project is aimed at developing a comprehensive solution for [provide a brief overview of the project’s purpose].
+This repository contains ICU prediction pipelines built on MIMIC-IV derived data.  
+The project focuses on:
+- Task 1: Predict whether a patient can be discharged from ICU within the next 24 hours.
+- Task 2: Predict whether the patient will **not** return to ICU within 72 hours after discharge.
 
-## Features
-- Feature 1: [Description of feature 1]
-- Feature 2: [Description of feature 2]
-- Feature 3: [Description of feature 3]
+The main recommended baseline is the **XGBoost multi-task pipeline** (`model/xgboostmulti.py`).
 
 ## Project Structure
-```
-/
-├── src/         # Source files
-├── tests/       # Unit tests
-├── docs/        # Documentation
-└── README.md    # Project overview
+```text
+.
+├── dataset/                     # Input CSV files
+│   ├── MIMIC-IV-static(Group Assignment).csv
+│   ├── MIMIC-IV-text(Group Assignment).csv
+│   └── MIMIC-IV-time_series(Group Assignment).csv
+├── model/                       # Train/eval entry scripts
+│   ├── xgboostmulti.py          # Multi-task XGBoost (recommended)
+│   ├── logisticmulti.py         # Multi-task logistic baseline
+│   ├── xgboost111.py            # Single-task XGBoost pipeline
+│   └── 1.py                     # Quick xgboost version check
+├── utils/
+│   └── multitask_common.py      # Shared data processing and evaluation
+└── result/                      # Output artifacts
+    ├── xgboostmultiresult/
+    ├── logisticmultiresult/
+    └── xgboost111result/
 ```
 
-## Getting Started
-### Prerequisites
-Before you begin, ensure you have met the following requirements:
-- You have a [specific software] installed (e.g., Node.js, Python).
-- You have a [specific library/package] installed (if applicable).
+## Requirements
+- Python 3.11 (recommended)
+- `numpy`, `pandas`, `scikit-learn`, `matplotlib`, `joblib`, `xgboost`
+- Optional: `shap` (only needed for SHAP plots in `xgboost111.py`)
+- `git-lfs` (required to pull large files in `dataset/`)
 
-### Installation
+## Setup
 1. Clone the repository:
    ```bash
    git clone https://github.com/Swiaple/Group2_Project_SPH6004_AY2526Sem2.git
-   ```
-2. Navigate to the project directory:
-   ```bash
    cd Group2_Project_SPH6004_AY2526Sem2
    ```
-3. Install dependencies:
+2. Pull large dataset files (LFS):
    ```bash
-   [include instructions here, e.g., npm install or pip install -r requirements.txt]
+   git lfs pull
+   ```
+3. Install Python dependencies (example):
+   ```bash
+   pip install numpy pandas scikit-learn matplotlib joblib xgboost
    ```
 
-## Usage
-To use this project, follow these instructions:
-1. [Instruction 1: How to run the project]
-2. [Instruction 2: How to use specific features]
+## Quick Start (XGBoost Multi-Task)
+Run from project root:
+```bash
+python model/xgboostmulti.py
+```
 
-## Contributing
-We welcome contributions from everyone! Please read our [contributing guidelines](CONTRIBUTING.md) to get started.
+Outputs will be written to:
+```text
+result/xgboostmultiresult/
+```
 
-## License
-This project is licensed under the [insert license name, e.g., MIT License]. You can find the details in the LICENSE file located at the root of the project.
+Key files include:
+- `metrics_summary.csv`
+- `test_predictions.csv`
+- `train_val_loss_curve.csv`
+- `run_config.json`
+
+## Common Run Commands
+XGBoost multi-task:
+```bash
+python model/xgboostmulti.py
+```
+
+Logistic multi-task:
+```bash
+python model/logisticmulti.py
+```
+
+Single-task XGBoost:
+```bash
+python model/xgboost111.py
+```
+
+## Optional Runtime Parameters
+You can control training via environment variables.
+
+Example (XGBoost multi-task):
+```bash
+DEBUG_MAX_STAYS=0 XGB_N_ESTIMATORS=200 XGB_LR=0.05 XGB_MAX_DEPTH=5 MODEL_N_JOBS=1 python model/xgboostmulti.py
+```
+
+Important notes:
+- `DEBUG_MAX_STAYS=0` means full dataset.
+- `DEBUG_MAX_STAYS>0` enables fast debug subsampling.
+
+## Evaluation Notes
+- Data split is group-aware by `subject_id` into train/val/test.
+- Task 2 metrics are computed on masked samples only (`task2_mask == 1`), i.e., windows eligible for discharge interpretation.
+- The scripts save confusion matrices, ROC curves, PR summaries, and probability outputs for reproducibility.
+
+## Troubleshooting
+- If `xgboost` import fails on macOS, install OpenMP runtime (`libomp`) and reinstall xgboost.
+- If `shap` is not installed, `xgboost111.py` will skip SHAP plotting but still finish training/evaluation.
