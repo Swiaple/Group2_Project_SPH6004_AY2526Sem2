@@ -18,14 +18,12 @@ The main recommended baseline is the **XGBoost multi-task pipeline** (`model/xgb
 ├── model/                       # Train/eval entry scripts
 │   ├── xgboostmulti.py          # Multi-task XGBoost (recommended)
 │   ├── logisticmulti.py         # Multi-task logistic baseline
-│   ├── xgboost111.py            # Single-task XGBoost pipeline
 │   └── 1.py                     # Quick xgboost version check
 ├── utils/
 │   └── multitask_common.py      # Shared data processing and evaluation
 └── result/                      # Output artifacts
     ├── xgboostmultiresult/
-    ├── logisticmultiresult/
-    └── xgboost111result/
+    └── logisticmultiresult/
 ```
 
 ## Requirements
@@ -77,10 +75,6 @@ Logistic multi-task:
 python model/logisticmulti.py
 ```
 
-Single-task XGBoost:
-```bash
-python model/xgboost111.py
-```
 
 ## Optional Runtime Parameters
 You can control training via environment variables.
