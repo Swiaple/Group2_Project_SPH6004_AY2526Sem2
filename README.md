@@ -95,4 +95,3 @@ Important notes:
 
 ## Troubleshooting
 - If `xgboost` import fails on macOS, install OpenMP runtime (`libomp`) and reinstall xgboost.
-- If `shap` is not installed, `xgboost111.py` will skip SHAP plotting but still finish training/evaluation.
