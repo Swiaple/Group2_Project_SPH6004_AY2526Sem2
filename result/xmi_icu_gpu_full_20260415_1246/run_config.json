@@ -1,0 +1,21 @@
+{
+  "result_dir": "D:\\NUS\\SPH6004\\Group2_Project_SPH6004_AY2526Sem2\\result\\xmi_icu_gpu_full_20260415_1246",
+  "result_subdir": "xmi_icu_gpu_full_20260415_1246",
+  "debug_max_stays": 0,
+  "feature_mode": "xmi_pseudo_dynamic",
+  "xmi_min_landmark": 24,
+  "xmi_step_size": 12,
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "max_depth": 5,
+  "model_n_jobs": 1,
+  "xgb_use_gpu": true,
+  "xmi_run_shap": true,
+  "xmi_shap_max_samples": 2000,
+  "best_round": 259,
+  "best_lambda": 1.0428113084237158,
+  "best_val_total_loss": 0.9522844321626738,
+  "trainable_head1": true,
+  "trainable_head2": true,
+  "device": "cuda"
+}
