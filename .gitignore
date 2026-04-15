@@ -1,2 +1,4 @@
 .codex/
 *docx
+*smoke*
+__pycache__/

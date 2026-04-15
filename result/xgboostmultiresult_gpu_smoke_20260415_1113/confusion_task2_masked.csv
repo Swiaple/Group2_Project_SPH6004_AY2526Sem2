@@ -1,2 +1,0 @@
-auc,pr_auc,recall,precision,threshold,n_eval,tn,fp,fn,tp
-,,1.0,1.0,0.5,67,0,0,0,67
