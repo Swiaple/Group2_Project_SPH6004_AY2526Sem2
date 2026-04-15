@@ -50,6 +50,7 @@ def fit_xgboost_multitask(
     learning_rate: float,
     max_depth: int,
     model_n_jobs: int,
+    use_gpu: bool,
 ) -> Tuple[object, object, pd.DataFrame, Dict[str, float]]:
     try:
         from xgboost import XGBClassifier
@@ -70,6 +71,7 @@ def fit_xgboost_multitask(
         "eval_metric": "logloss",
         "objective": "binary:logistic",
         "tree_method": "hist",
+        "device": "cuda" if use_gpu else "cpu",
     }
 
     # Task 1
@@ -192,6 +194,7 @@ def fit_xgboost_multitask(
         "best_val_total_loss": best_val_total_loss,
         "trainable_head1": bool(trainable_head1),
         "trainable_head2": bool(trainable_head2),
+        "device": "cuda" if use_gpu else "cpu",
     }
 
     print(f"Best boosting round by val total loss: {best_round}")
@@ -208,7 +211,8 @@ def predict_prob_xgb(model, x: np.ndarray, best_round: int) -> np.ndarray:
 
 
 def main():
-    result_dir = PROJECT_ROOT / "result" / "xgboostmultiresult"
+    result_subdir = (os.getenv("RESULT_SUBDIR", "xgboostmultiresult") or "xgboostmultiresult").strip()
+    result_dir = PROJECT_ROOT / "result" / result_subdir
     result_dir.mkdir(parents=True, exist_ok=True)
 
     debug_max_stays = int(os.getenv("DEBUG_MAX_STAYS", "0") or "0")
@@ -216,6 +220,7 @@ def main():
     learning_rate = float(os.getenv("XGB_LR", "0.05") or "0.05")
     max_depth = int(os.getenv("XGB_MAX_DEPTH", "5") or "5")
     model_n_jobs = int(os.getenv("MODEL_N_JOBS", "1") or "1")
+    use_gpu = (os.getenv("XGB_USE_GPU", "1") or "1").strip().lower() in {"1", "true", "yes", "y", "on"}
 
     print("Preparing shared master table...")
     df_master = prepare_master_table(debug_max_stays=debug_max_stays)
@@ -262,6 +267,7 @@ def main():
         learning_rate=learning_rate,
         max_depth=max_depth,
         model_n_jobs=model_n_jobs,
+        use_gpu=use_gpu,
     )
 
     save_loss_curve(
@@ -313,11 +319,13 @@ def main():
     save_json(
         {
             "result_dir": str(result_dir),
+            "result_subdir": result_subdir,
             "debug_max_stays": debug_max_stays,
             "n_estimators": n_estimators,
             "learning_rate": learning_rate,
             "max_depth": max_depth,
             "model_n_jobs": model_n_jobs,
+            "xgb_use_gpu": use_gpu,
             **train_info,
         },
         result_dir / "run_config.json",

@@ -1,0 +1,16 @@
+{
+  "result_dir": "D:\\NUS\\SPH6004\\Group2_Project_SPH6004_AY2526Sem2\\result\\xgboostmultiresult_gpu_full_20260415_1115",
+  "result_subdir": "xgboostmultiresult_gpu_full_20260415_1115",
+  "debug_max_stays": 0,
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "max_depth": 5,
+  "model_n_jobs": 1,
+  "xgb_use_gpu": true,
+  "best_round": 198,
+  "best_lambda": 0.8745086777099171,
+  "best_val_total_loss": 0.8566865755566921,
+  "trainable_head1": true,
+  "trainable_head2": true,
+  "device": "cuda"
+}
