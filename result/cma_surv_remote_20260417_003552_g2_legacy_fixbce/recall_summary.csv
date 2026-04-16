@@ -1,0 +1,4 @@
+task,recall
+task1_discharge,0.6205010224948875
+task2_no_return72_masked,1.0
+joint_both_positive,0.6248721399730821

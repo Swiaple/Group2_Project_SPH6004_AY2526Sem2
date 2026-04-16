@@ -1,0 +1,825 @@
+Torch runtime: version=2.6.0+cu124, torch.cuda=12.4, cuda_available=True, cuda_device_count=2
+Runtime setup: rank=0, world_size=2, local_rank=0, use_ddp=True, device=cuda:0, freeze_bert=False, heartbeat_steps=100
+Preparing CMA data bundle...
+Torch runtime: version=2.6.0+cu124, torch.cuda=12.4, cuda_available=True, cuda_device_count=2
+Runtime setup: rank=1, world_size=2, local_rank=1, use_ddp=True, device=cuda:1, freeze_bert=False, heartbeat_steps=100
+Loaded:
+static: (76943, 142)
+text  : (76943, 6)
+time  : (6451036, 26)
+Loaded:
+static: (76943, 142)
+text  : (76943, 6)
+time  : (6451036, 26)
+Total stays: 76943
+Stays with ICU LOS < 24h: 16254 (21.12%)
+Total stays: 76943
+Stays with ICU LOS < 24h: 16254 (21.12%)
+After removing short stays:
+static: (60689, 142)
+text  : (60689, 6)
+time  : (6164478, 26)
+Removed 23 leakage/static-outcome columns.
+After removing short stays:
+static: (60689, 142)
+text  : (60689, 6)
+time  : (6164478, 26)
+Removed 23 leakage/static-outcome columns.
+Text records after cleaning: (272184, 11)
+Text records after cleaning: (272184, 11)
+Unified relative time range: 0.0h to 2645.5h
+Unified relative time range: 0.0h to 2645.5h
+Processed stays: 5000/60689 | elapsed=36.2s
+Processed stays: 5000/60689 | elapsed=36.6s
+Processed stays: 10000/60689 | elapsed=72.3s
+Processed stays: 10000/60689 | elapsed=73.1s
+Processed stays: 15000/60689 | elapsed=108.5s
+Processed stays: 15000/60689 | elapsed=109.8s
+Processed stays: 20000/60689 | elapsed=144.8s
+Processed stays: 20000/60689 | elapsed=146.5s
+Processed stays: 25000/60689 | elapsed=181.1s
+Processed stays: 25000/60689 | elapsed=183.2s
+Processed stays: 30000/60689 | elapsed=217.0s
+Processed stays: 30000/60689 | elapsed=219.6s
+Processed stays: 35000/60689 | elapsed=253.3s
+Processed stays: 35000/60689 | elapsed=256.5s
+Processed stays: 40000/60689 | elapsed=289.9s
+Processed stays: 40000/60689 | elapsed=293.6s
+Processed stays: 45000/60689 | elapsed=325.7s
+Processed stays: 45000/60689 | elapsed=329.8s
+Processed stays: 50000/60689 | elapsed=361.4s
+Processed stays: 50000/60689 | elapsed=366.1s
+Processed stays: 55000/60689 | elapsed=398.0s
+Processed stays: 55000/60689 | elapsed=403.4s
+Processed stays: 60000/60689 | elapsed=433.6s
+Processed stays: 60000/60689 | elapsed=439.6s
+Sliding-window time feature table: (419069, 99)
+Sliding-window time feature table: (419069, 99)
+Merged master table: (419069, 219)
+Removed 539 rows with t_end after ICU discharge.
+Dropped 0 rows with missing key cols.
+label_can_discharge_24h    0.235665
+label_no_return_72h        0.948130
+task2_mask                 0.235665
+dtype: float64
+--------------------------------------------------
+[Train] rows=269007, patients=28391
+[Val  ] rows=65985, patients=7098
+[Test ] rows=83538, patients=8873
+[Train] task1 pos rate=0.2354
+[Val  ] task1 pos rate=0.2387
+[Test ] task1 pos rate=0.2341
+Merged master table: (419069, 219)
+Removed 539 rows with t_end after ICU discharge.
+Dropped 0 rows with missing key cols.
+label_can_discharge_24h    0.235665
+label_no_return_72h        0.948130
+task2_mask                 0.235665
+dtype: float64
+--------------------------------------------------
+[Train] rows=269007, patients=28391
+[Val  ] rows=65985, patients=7098
+[Test ] rows=83538, patients=8873
+[Train] task1 pos rate=0.2354
+[Val  ] task1 pos rate=0.2387
+[Test ] task1 pos rate=0.2341
+Train rows=269007, Val rows=65985, Test rows=83538
+Static dim=108, Time dim=24
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 44064.33it/s]
+[1mBertModel LOAD REPORT[0m from: emilyalsentzer/Bio_ClinicalBERT
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.decoder.weight             | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Wrapping model with DistributedDataParallel.
+DDP config: find_unused_parameters=False, static_graph=True, bucket_cap_mb=50
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 42558.97it/s]
+[1mBertModel LOAD REPORT[0m from: emilyalsentzer/Bio_ClinicalBERT
+Key                                        | Status     |  | 
+-------------------------------------------+------------+--+-
+cls.predictions.transform.dense.weight     | UNEXPECTED |  | 
+cls.predictions.transform.dense.bias       | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.weight | UNEXPECTED |  | 
+cls.predictions.transform.LayerNorm.bias   | UNEXPECTED |  | 
+cls.predictions.decoder.weight             | UNEXPECTED |  | 
+cls.seq_relationship.weight                | UNEXPECTED |  | 
+cls.predictions.bias                       | UNEXPECTED |  | 
+cls.seq_relationship.bias                  | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+DDP config: find_unused_parameters=False, static_graph=True, bucket_cap_mb=50
+Optimizer groups: head_decay(lr=7.93e-09,wd=1.00e-02,n=1169920), head_no_decay(lr=7.93e-09,wd=0.00e+00,n=5642), bert_decay(lr=7.93e-10,wd=1.00e-02,n=107598336), bert_no_decay(lr=7.93e-10,wd=0.00e+00,n=121344)
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=001 split=train step=1 loss_total=3.36664 mem_alloc_mb=1816.7 mem_reserved_mb=1856.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=001 split=train step=1 loss_total=3.22748 mem_alloc_mb=1816.7 mem_reserved_mb=1856.0
+[HB] epoch=001 split=train step=100/8407 loss_total=3.23179 l1=2.47020 l2=0.76159 surv=1.41093 task1=0.57365 joint=0.48561 lambda=1.0000 lr_min=4.04e-08 lr_max=4.04e-07 it/s=8.41
+[HB] epoch=001 split=train step=200/8407 loss_total=3.26135 l1=2.41409 l2=0.84726 surv=1.19508 task1=0.58731 joint=0.63170 lambda=1.0000 lr_min=8.01e-08 lr_max=8.01e-07 it/s=12.06
+[HB] epoch=001 split=train step=300/8407 loss_total=3.35758 l1=2.76299 l2=0.59459 surv=1.24920 task1=0.73919 joint=0.77460 lambda=1.0000 lr_min=1.20e-07 lr_max=1.20e-06 it/s=14.10
+[HB] epoch=001 split=train step=400/8407 loss_total=2.89778 l1=2.34598 l2=0.55180 surv=1.24187 task1=0.53392 joint=0.57019 lambda=1.0000 lr_min=1.59e-07 lr_max=1.59e-06 it/s=15.40
+[HB] epoch=001 split=train step=500/8407 loss_total=2.68753 l1=2.18016 l2=0.50737 surv=1.04940 task1=0.56006 joint=0.57069 lambda=1.0000 lr_min=1.99e-07 lr_max=1.99e-06 it/s=16.30
+[HB] epoch=001 split=train step=600/8407 loss_total=2.50625 l1=2.07460 l2=0.43165 surv=1.14036 task1=0.48604 joint=0.44821 lambda=1.0000 lr_min=2.39e-07 lr_max=2.39e-06 it/s=16.96
+[HB] epoch=001 split=train step=700/8407 loss_total=2.35732 l1=2.07964 l2=0.27769 surv=0.92544 task1=0.57387 joint=0.58032 lambda=1.0000 lr_min=2.78e-07 lr_max=2.78e-06 it/s=17.46
+[HB] epoch=001 split=train step=800/8407 loss_total=2.19591 l1=1.93150 l2=0.26441 surv=0.87321 task1=0.52872 joint=0.52956 lambda=1.0000 lr_min=3.18e-07 lr_max=3.18e-06 it/s=17.84
+[HB] epoch=001 split=train step=900/8407 loss_total=2.15172 l1=1.52772 l2=0.62401 surv=0.72327 task1=0.41774 joint=0.38671 lambda=1.0000 lr_min=3.58e-07 lr_max=3.58e-06 it/s=18.16
+[HB] epoch=001 split=train step=1000/8407 loss_total=1.58480 l1=1.43444 l2=0.15036 surv=0.60772 task1=0.42379 joint=0.40293 lambda=1.0000 lr_min=3.97e-07 lr_max=3.97e-06 it/s=18.42
+[HB] epoch=001 split=train step=1100/8407 loss_total=1.79422 l1=1.63259 l2=0.16164 surv=0.62470 task1=0.50632 joint=0.50157 lambda=1.0000 lr_min=4.37e-07 lr_max=4.37e-06 it/s=18.66
+[HB] epoch=001 split=train step=1200/8407 loss_total=1.64512 l1=1.52566 l2=0.11946 surv=0.59517 task1=0.46881 joint=0.46168 lambda=1.0000 lr_min=4.77e-07 lr_max=4.77e-06 it/s=18.90
+[HB] epoch=001 split=train step=1300/8407 loss_total=2.07292 l1=1.94948 l2=0.12344 surv=0.56168 task1=0.68292 joint=0.70488 lambda=1.0000 lr_min=5.16e-07 lr_max=5.16e-06 it/s=19.10
+[HB] epoch=001 split=train step=1400/8407 loss_total=2.58868 l1=1.37318 l2=1.21550 surv=0.57686 task1=0.40787 joint=0.38845 lambda=1.0000 lr_min=5.56e-07 lr_max=5.56e-06 it/s=19.29
+[HB] epoch=001 split=train step=1500/8407 loss_total=1.41147 l1=1.33806 l2=0.07341 surv=0.49618 task1=0.42258 joint=0.41930 lambda=1.0000 lr_min=5.95e-07 lr_max=5.95e-06 it/s=19.45
+[HB] epoch=001 split=train step=1600/8407 loss_total=2.27336 l1=1.67058 l2=0.60279 surv=0.50533 task1=0.63371 joint=0.53154 lambda=1.0000 lr_min=6.35e-07 lr_max=6.35e-06 it/s=19.59
+[HB] epoch=001 split=train step=1700/8407 loss_total=2.14163 l1=1.33250 l2=0.80913 surv=0.52181 task1=0.46742 joint=0.34326 lambda=1.0000 lr_min=6.75e-07 lr_max=6.75e-06 it/s=19.72
+[HB] epoch=001 split=train step=1800/8407 loss_total=1.21688 l1=1.14219 l2=0.07469 surv=0.47537 task1=0.33643 joint=0.33039 lambda=1.0000 lr_min=7.14e-07 lr_max=7.14e-06 it/s=19.83
+[HB] epoch=001 split=train step=1900/8407 loss_total=1.99607 l1=1.93899 l2=0.05708 surv=0.56722 task1=0.69571 joint=0.67605 lambda=1.0000 lr_min=7.54e-07 lr_max=7.54e-06 it/s=19.93
+[HB] epoch=001 split=train step=2000/8407 loss_total=1.68998 l1=1.62614 l2=0.06384 surv=0.53433 task1=0.53997 joint=0.55184 lambda=1.0000 lr_min=7.94e-07 lr_max=7.94e-06 it/s=19.99
+[HB] epoch=001 split=train step=2100/8407 loss_total=1.36221 l1=1.29289 l2=0.06932 surv=0.43756 task1=0.43547 joint=0.41986 lambda=1.0000 lr_min=8.33e-07 lr_max=8.33e-06 it/s=20.05
+[HB] epoch=001 split=train step=2200/8407 loss_total=1.41036 l1=1.32502 l2=0.08534 surv=0.53446 task1=0.39983 joint=0.39074 lambda=1.0000 lr_min=8.73e-07 lr_max=8.73e-06 it/s=20.13
+[HB] epoch=001 split=train step=2300/8407 loss_total=2.11528 l1=1.06580 l2=1.04948 surv=0.46839 task1=0.27706 joint=0.32035 lambda=1.0000 lr_min=9.13e-07 lr_max=9.13e-06 it/s=20.21
+[HB] epoch=001 split=train step=2400/8407 loss_total=1.40005 l1=1.33995 l2=0.06010 surv=0.48311 task1=0.42763 joint=0.42922 lambda=1.0000 lr_min=9.52e-07 lr_max=9.52e-06 it/s=20.29
+[HB] epoch=001 split=train step=2500/8407 loss_total=1.01096 l1=0.94951 l2=0.06145 surv=0.40899 task1=0.26925 joint=0.27128 lambda=1.0000 lr_min=9.92e-07 lr_max=9.92e-06 it/s=20.36
+[HB] epoch=001 split=train step=2600/8407 loss_total=1.41119 l1=0.88981 l2=0.52138 surv=0.41247 task1=0.33434 joint=0.14299 lambda=1.0000 lr_min=1.03e-06 lr_max=1.03e-05 it/s=20.42
+[HB] epoch=001 split=train step=2700/8407 loss_total=1.54844 l1=1.50153 l2=0.04691 surv=0.48775 task1=0.51109 joint=0.50269 lambda=1.0000 lr_min=1.07e-06 lr_max=1.07e-05 it/s=20.48
+[HB] epoch=001 split=train step=2800/8407 loss_total=1.00492 l1=0.95356 l2=0.05136 surv=0.42682 task1=0.26316 joint=0.26358 lambda=1.0000 lr_min=1.11e-06 lr_max=1.11e-05 it/s=20.54
+[HB] epoch=001 split=train step=2900/8407 loss_total=1.02717 l1=0.98317 l2=0.04399 surv=0.38217 task1=0.29424 joint=0.30677 lambda=1.0000 lr_min=1.15e-06 lr_max=1.15e-05 it/s=20.59
+[HB] epoch=001 split=train step=3000/8407 loss_total=2.17034 l1=1.55591 l2=0.61443 surv=0.46449 task1=0.54855 joint=0.54288 lambda=1.0000 lr_min=1.19e-06 lr_max=1.19e-05 it/s=20.64
+[HB] epoch=001 split=train step=3100/8407 loss_total=2.21473 l1=1.21392 l2=1.00081 surv=0.45705 task1=0.41673 joint=0.34015 lambda=1.0000 lr_min=1.23e-06 lr_max=1.23e-05 it/s=20.69
+[HB] epoch=001 split=train step=3200/8407 loss_total=0.84530 l1=0.78538 l2=0.05992 surv=0.30243 task1=0.24153 joint=0.24143 lambda=1.0000 lr_min=1.27e-06 lr_max=1.27e-05 it/s=20.73
+[HB] epoch=001 split=train step=3300/8407 loss_total=1.99412 l1=1.31514 l2=0.67899 surv=0.50324 task1=0.50471 joint=0.30719 lambda=1.0000 lr_min=1.31e-06 lr_max=1.31e-05 it/s=20.77
+[HB] epoch=001 split=train step=3400/8407 loss_total=1.99605 l1=1.93838 l2=0.05767 surv=0.62537 task1=0.65023 joint=0.66278 lambda=1.0000 lr_min=1.35e-06 lr_max=1.35e-05 it/s=20.81
+[HB] epoch=001 split=train step=3500/8407 loss_total=0.95012 l1=0.90276 l2=0.04736 surv=0.32397 task1=0.28812 joint=0.29067 lambda=1.0000 lr_min=1.39e-06 lr_max=1.39e-05 it/s=20.85
+[HB] epoch=001 split=train step=3600/8407 loss_total=1.15302 l1=1.11185 l2=0.04117 surv=0.51223 task1=0.30508 joint=0.29454 lambda=1.0000 lr_min=1.43e-06 lr_max=1.43e-05 it/s=20.88
+[HB] epoch=001 split=train step=3700/8407 loss_total=2.01379 l1=1.45558 l2=0.55821 surv=0.38025 task1=0.62968 joint=0.44565 lambda=1.0000 lr_min=1.47e-06 lr_max=1.47e-05 it/s=20.91
+[HB] epoch=001 split=train step=3800/8407 loss_total=1.19623 l1=1.14182 l2=0.05440 surv=0.48311 task1=0.33582 joint=0.32290 lambda=1.0000 lr_min=1.51e-06 lr_max=1.51e-05 it/s=20.92
+[HB] epoch=001 split=train step=3900/8407 loss_total=1.67531 l1=1.60785 l2=0.06746 surv=0.46526 task1=0.56267 joint=0.57992 lambda=1.0000 lr_min=1.55e-06 lr_max=1.55e-05 it/s=20.93
+[HB] epoch=001 split=train step=4000/8407 loss_total=1.08311 l1=1.02533 l2=0.05778 surv=0.34887 task1=0.34283 joint=0.33362 lambda=1.0000 lr_min=1.59e-06 lr_max=1.59e-05 it/s=20.94
+[HB] epoch=001 split=train step=4100/8407 loss_total=1.74963 l1=1.69708 l2=0.05255 surv=0.56256 task1=0.55793 joint=0.57659 lambda=1.0000 lr_min=1.63e-06 lr_max=1.63e-05 it/s=20.95
+[HB] epoch=001 split=train step=4200/8407 loss_total=1.04181 l1=1.00993 l2=0.03189 surv=0.46294 task1=0.27731 joint=0.26968 lambda=1.0000 lr_min=1.67e-06 lr_max=1.67e-05 it/s=20.96
+[HB] epoch=001 split=train step=4300/8407 loss_total=0.94219 l1=0.90987 l2=0.03232 surv=0.49212 task1=0.21593 joint=0.20182 lambda=1.0000 lr_min=1.71e-06 lr_max=1.71e-05 it/s=20.96
+[HB] epoch=001 split=train step=4400/8407 loss_total=0.97199 l1=0.93532 l2=0.03667 surv=0.33455 task1=0.30896 joint=0.29182 lambda=1.0000 lr_min=1.75e-06 lr_max=1.75e-05 it/s=20.97
+[HB] epoch=001 split=train step=4500/8407 loss_total=1.44604 l1=1.39675 l2=0.04930 surv=0.42897 task1=0.47810 joint=0.48967 lambda=1.0000 lr_min=1.78e-06 lr_max=1.78e-05 it/s=20.98
+[HB] epoch=001 split=train step=4600/8407 loss_total=0.83530 l1=0.80589 l2=0.02941 surv=0.45286 task1=0.18299 joint=0.17004 lambda=1.0000 lr_min=1.82e-06 lr_max=1.82e-05 it/s=20.98
+[HB] epoch=001 split=train step=4700/8407 loss_total=1.02594 l1=0.98344 l2=0.04250 surv=0.45299 task1=0.26793 joint=0.26252 lambda=1.0000 lr_min=1.86e-06 lr_max=1.86e-05 it/s=20.99
+[HB] epoch=001 split=train step=4800/8407 loss_total=1.10595 l1=1.04026 l2=0.06569 surv=0.42859 task1=0.30107 joint=0.31060 lambda=1.0000 lr_min=1.90e-06 lr_max=1.90e-05 it/s=20.99
+[HB] epoch=001 split=train step=4900/8407 loss_total=1.22392 l1=1.17281 l2=0.05111 surv=0.53699 task1=0.31647 joint=0.31935 lambda=1.0000 lr_min=1.94e-06 lr_max=1.94e-05 it/s=21.02
+[HB] epoch=001 split=train step=5000/8407 loss_total=0.97173 l1=0.92683 l2=0.04490 surv=0.38483 task1=0.27293 joint=0.26907 lambda=1.0000 lr_min=1.98e-06 lr_max=1.98e-05 it/s=21.04
+[HB] epoch=001 split=train step=5100/8407 loss_total=2.04770 l1=1.14409 l2=0.90361 surv=0.52003 task1=0.41140 joint=0.21266 lambda=1.0000 lr_min=2.02e-06 lr_max=2.02e-05 it/s=21.05
+[HB] epoch=001 split=train step=5200/8407 loss_total=2.00460 l1=1.63326 l2=0.37133 surv=0.46853 task1=0.57957 joint=0.58516 lambda=1.0000 lr_min=2.06e-06 lr_max=2.06e-05 it/s=21.07
+[HB] epoch=001 split=train step=5300/8407 loss_total=1.72501 l1=1.68668 l2=0.03833 surv=0.53811 task1=0.57672 joint=0.57185 lambda=1.0000 lr_min=2.10e-06 lr_max=2.10e-05 it/s=21.08
+[HB] epoch=001 split=train step=5400/8407 loss_total=1.63500 l1=1.15287 l2=0.48213 surv=0.39396 task1=0.36542 joint=0.39349 lambda=1.0000 lr_min=2.14e-06 lr_max=2.14e-05 it/s=21.09
+[HB] epoch=001 split=train step=5500/8407 loss_total=2.57498 l1=1.81625 l2=0.75873 surv=0.57444 task1=0.59216 joint=0.64964 lambda=1.0000 lr_min=2.18e-06 lr_max=2.18e-05 it/s=21.09
+[HB] epoch=001 split=train step=5600/8407 loss_total=1.29021 l1=1.26327 l2=0.02694 surv=0.61556 task1=0.32903 joint=0.31867 lambda=1.0000 lr_min=2.22e-06 lr_max=2.22e-05 it/s=21.09
+[HB] epoch=001 split=train step=5700/8407 loss_total=1.92277 l1=1.19679 l2=0.72599 surv=0.50045 task1=0.37727 joint=0.31906 lambda=1.0000 lr_min=2.26e-06 lr_max=2.26e-05 it/s=21.09
+[HB] epoch=001 split=train step=5800/8407 loss_total=1.14129 l1=1.09413 l2=0.04716 surv=0.46049 task1=0.32037 joint=0.31327 lambda=1.0000 lr_min=2.30e-06 lr_max=2.30e-05 it/s=21.09
+[HB] epoch=001 split=train step=5900/8407 loss_total=1.83619 l1=1.14091 l2=0.69529 surv=0.45089 task1=0.34895 joint=0.34107 lambda=1.0000 lr_min=2.34e-06 lr_max=2.34e-05 it/s=21.10
+[HB] epoch=001 split=train step=6000/8407 loss_total=1.26419 l1=1.22269 l2=0.04149 surv=0.49105 task1=0.36327 joint=0.36837 lambda=1.0000 lr_min=2.38e-06 lr_max=2.38e-05 it/s=21.10
+[HB] epoch=001 split=train step=6100/8407 loss_total=1.10796 l1=1.06335 l2=0.04461 surv=0.45487 task1=0.30839 joint=0.30009 lambda=1.0000 lr_min=2.42e-06 lr_max=2.42e-05 it/s=21.10
+[HB] epoch=001 split=train step=6200/8407 loss_total=2.72182 l1=1.95740 l2=0.76442 surv=0.54777 task1=0.65797 joint=0.75166 lambda=1.0000 lr_min=2.46e-06 lr_max=2.46e-05 it/s=21.11
+[HB] epoch=001 split=train step=6300/8407 loss_total=1.06188 l1=1.02086 l2=0.04102 surv=0.50689 task1=0.25372 joint=0.26025 lambda=1.0000 lr_min=2.50e-06 lr_max=2.50e-05 it/s=21.13
+[HB] epoch=001 split=train step=6400/8407 loss_total=1.01342 l1=0.98747 l2=0.02595 surv=0.38706 task1=0.30819 joint=0.29222 lambda=1.0000 lr_min=2.54e-06 lr_max=2.54e-05 it/s=21.14
+[HB] epoch=001 split=train step=6500/8407 loss_total=0.84286 l1=0.80089 l2=0.04196 surv=0.32627 task1=0.24056 joint=0.23407 lambda=1.0000 lr_min=2.58e-06 lr_max=2.58e-05 it/s=21.16
+[HB] epoch=001 split=train step=6600/8407 loss_total=1.11507 l1=1.06239 l2=0.05268 surv=0.45316 task1=0.30745 joint=0.30177 lambda=1.0000 lr_min=2.62e-06 lr_max=2.62e-05 it/s=21.16
+[HB] epoch=001 split=train step=6700/8407 loss_total=0.99981 l1=0.95645 l2=0.04336 surv=0.40063 task1=0.27827 joint=0.27755 lambda=1.0000 lr_min=2.66e-06 lr_max=2.66e-05 it/s=21.16
+[HB] epoch=001 split=train step=6800/8407 loss_total=0.75004 l1=0.69727 l2=0.05277 surv=0.24301 task1=0.22659 joint=0.22767 lambda=1.0000 lr_min=2.70e-06 lr_max=2.70e-05 it/s=21.18
+[HB] epoch=001 split=train step=6900/8407 loss_total=0.77025 l1=0.72667 l2=0.04358 surv=0.28631 task1=0.21637 joint=0.22399 lambda=1.0000 lr_min=2.74e-06 lr_max=2.74e-05 it/s=21.20
+[HB] epoch=001 split=train step=7000/8407 loss_total=0.45579 l1=0.45579 l2=0.00000 surv=0.20251 task1=0.13067 joint=0.12262 lambda=1.0000 lr_min=2.78e-06 lr_max=2.78e-05 it/s=21.20
+[HB] epoch=001 split=train step=7100/8407 loss_total=1.36151 l1=1.29679 l2=0.06472 surv=0.30171 task1=0.49388 joint=0.50120 lambda=1.0000 lr_min=2.82e-06 lr_max=2.82e-05 it/s=21.19
+[HB] epoch=001 split=train step=7200/8407 loss_total=1.70918 l1=1.64053 l2=0.06864 surv=0.55003 task1=0.55115 joint=0.53935 lambda=1.0000 lr_min=2.86e-06 lr_max=2.86e-05 it/s=21.19
+[HB] epoch=001 split=train step=7300/8407 loss_total=1.41194 l1=1.36429 l2=0.04765 surv=0.36862 task1=0.49273 joint=0.50295 lambda=1.0000 lr_min=2.89e-06 lr_max=2.89e-05 it/s=21.20
+[HB] epoch=001 split=train step=7400/8407 loss_total=0.64352 l1=0.60213 l2=0.04139 surv=0.20947 task1=0.19200 joint=0.20066 lambda=1.0000 lr_min=2.93e-06 lr_max=2.93e-05 it/s=21.21
+[HB] epoch=001 split=train step=7500/8407 loss_total=0.93545 l1=0.88835 l2=0.04710 surv=0.32051 task1=0.27969 joint=0.28816 lambda=1.0000 lr_min=2.97e-06 lr_max=2.97e-05 it/s=21.22
+[HB] epoch=001 split=train step=7600/8407 loss_total=2.23763 l1=1.41132 l2=0.82631 surv=0.54531 task1=0.46910 joint=0.39692 lambda=1.0000 lr_min=3.01e-06 lr_max=3.01e-05 it/s=21.23
+[HB] epoch=001 split=train step=7700/8407 loss_total=2.40065 l1=1.10339 l2=1.29725 surv=0.38415 task1=0.32111 joint=0.39813 lambda=1.0000 lr_min=3.05e-06 lr_max=3.05e-05 it/s=21.24
+[HB] epoch=001 split=train step=7800/8407 loss_total=1.22492 l1=1.16374 l2=0.06117 surv=0.49455 task1=0.33411 joint=0.33508 lambda=1.0000 lr_min=3.09e-06 lr_max=3.09e-05 it/s=21.25
+[HB] epoch=001 split=train step=7900/8407 loss_total=1.94435 l1=1.28016 l2=0.66419 surv=0.36842 task1=0.45242 joint=0.45932 lambda=1.0000 lr_min=3.13e-06 lr_max=3.13e-05 it/s=21.26
+[HB] epoch=001 split=train step=8000/8407 loss_total=2.00729 l1=1.90543 l2=0.10187 surv=0.52958 task1=0.68705 joint=0.68880 lambda=1.0000 lr_min=3.17e-06 lr_max=3.17e-05 it/s=21.28
+[HB] epoch=001 split=train step=8100/8407 loss_total=0.92351 l1=0.88158 l2=0.04193 surv=0.25318 task1=0.30827 joint=0.32012 lambda=1.0000 lr_min=3.21e-06 lr_max=3.21e-05 it/s=21.29
+[HB] epoch=001 split=train step=8200/8407 loss_total=0.85057 l1=0.81517 l2=0.03539 surv=0.32462 task1=0.24605 joint=0.24450 lambda=1.0000 lr_min=3.25e-06 lr_max=3.25e-05 it/s=21.30
+[HB] epoch=001 split=train step=8300/8407 loss_total=0.92547 l1=0.89153 l2=0.03394 surv=0.36224 task1=0.26439 joint=0.26490 lambda=1.0000 lr_min=3.29e-06 lr_max=3.29e-05 it/s=21.30
+[HB] epoch=001 split=train step=8400/8407 loss_total=1.02532 l1=0.98434 l2=0.04097 surv=0.33825 task1=0.31864 joint=0.32745 lambda=1.0000 lr_min=3.33e-06 lr_max=3.33e-05 it/s=21.31
+Epoch 001 | monitor=legacy val_legacy=0.59527 val_aligned=1.38935 surv=0.40737 task1=0.35696 joint=0.35119 task2=0.18789 lambda=1.0000->1.4574
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=002 split=train step=1 loss_total=1.52558 mem_alloc_mb=2680.9 mem_reserved_mb=2792.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=002 split=train step=1 loss_total=1.02754 mem_alloc_mb=2680.9 mem_reserved_mb=2792.0
+[HB] epoch=002 split=train step=100/8407 loss_total=1.71361 l1=1.66524 l2=0.03319 surv=0.41768 task1=0.62608 joint=0.62148 lambda=1.4574 lr_min=3.37e-06 lr_max=3.37e-05 it/s=21.39
+[HB] epoch=002 split=train step=200/8407 loss_total=0.87854 l1=0.83475 l2=0.03005 surv=0.34345 task1=0.25448 joint=0.23683 lambda=1.4574 lr_min=3.41e-06 lr_max=3.41e-05 it/s=21.32
+[HB] epoch=002 split=train step=300/8407 loss_total=0.64317 l1=0.60171 l2=0.02845 surv=0.28831 task1=0.15812 joint=0.15528 lambda=1.4574 lr_min=3.45e-06 lr_max=3.45e-05 it/s=21.29
+[HB] epoch=002 split=train step=400/8407 loss_total=2.78941 l1=2.09167 l2=0.47876 surv=0.51021 task1=0.81974 joint=0.76173 lambda=1.4574 lr_min=3.49e-06 lr_max=3.49e-05 it/s=21.34
+[HB] epoch=002 split=train step=500/8407 loss_total=1.48709 l1=1.32672 l2=0.11004 surv=0.43474 task1=0.43605 joint=0.45593 lambda=1.4574 lr_min=3.53e-06 lr_max=3.53e-05 it/s=21.50
+[HB] epoch=002 split=train step=600/8407 loss_total=1.06152 l1=1.00338 l2=0.03989 surv=0.32656 task1=0.33946 joint=0.33736 lambda=1.4574 lr_min=3.57e-06 lr_max=3.57e-05 it/s=21.62
+[HB] epoch=002 split=train step=700/8407 loss_total=0.85838 l1=0.81547 l2=0.02945 surv=0.25970 task1=0.27652 joint=0.27925 lambda=1.4574 lr_min=3.61e-06 lr_max=3.61e-05 it/s=21.67
+[HB] epoch=002 split=train step=800/8407 loss_total=1.08499 l1=1.03536 l2=0.03405 surv=0.56558 task1=0.23817 joint=0.23161 lambda=1.4574 lr_min=3.65e-06 lr_max=3.65e-05 it/s=21.73
+[HB] epoch=002 split=train step=900/8407 loss_total=2.57604 l1=1.14566 l2=0.98147 surv=0.43458 task1=0.31920 joint=0.39189 lambda=1.4574 lr_min=3.69e-06 lr_max=3.69e-05 it/s=21.77
+[HB] epoch=002 split=train step=1000/8407 loss_total=1.35533 l1=1.27890 l2=0.05244 surv=0.42890 task1=0.42302 joint=0.42698 lambda=1.4574 lr_min=3.73e-06 lr_max=3.73e-05 it/s=21.80
+[HB] epoch=002 split=train step=1100/8407 loss_total=1.31056 l1=1.25753 l2=0.03639 surv=0.35170 task1=0.45237 joint=0.45346 lambda=1.4574 lr_min=3.77e-06 lr_max=3.77e-05 it/s=21.83
+[HB] epoch=002 split=train step=1200/8407 loss_total=0.97217 l1=0.92958 l2=0.02922 surv=0.41160 task1=0.26368 joint=0.25430 lambda=1.4574 lr_min=3.81e-06 lr_max=3.81e-05 it/s=21.87
+[HB] epoch=002 split=train step=1300/8407 loss_total=2.23115 l1=1.09779 l2=0.77767 surv=0.52308 task1=0.26090 joint=0.31380 lambda=1.4574 lr_min=3.85e-06 lr_max=3.85e-05 it/s=21.89
+[HB] epoch=002 split=train step=1400/8407 loss_total=1.35256 l1=1.25734 l2=0.06533 surv=0.44014 task1=0.40014 joint=0.41706 lambda=1.4574 lr_min=3.89e-06 lr_max=3.89e-05 it/s=21.92
+[HB] epoch=002 split=train step=1500/8407 loss_total=3.19119 l1=1.53434 l2=1.13686 surv=0.41607 task1=0.56003 joint=0.55824 lambda=1.4574 lr_min=3.93e-06 lr_max=3.93e-05 it/s=21.93
+[HB] epoch=002 split=train step=1600/8407 loss_total=1.27535 l1=1.21252 l2=0.04311 surv=0.40358 task1=0.40146 joint=0.40748 lambda=1.4574 lr_min=3.97e-06 lr_max=3.97e-05 it/s=21.94
+[HB] epoch=002 split=train step=1700/8407 loss_total=1.36458 l1=1.30216 l2=0.04283 surv=0.35643 task1=0.47506 joint=0.47068 lambda=1.4574 lr_min=4.01e-06 lr_max=4.01e-05 it/s=21.96
+[HB] epoch=002 split=train step=1800/8407 loss_total=0.61118 l1=0.56390 l2=0.03244 surv=0.18423 task1=0.18950 joint=0.19017 lambda=1.4574 lr_min=4.05e-06 lr_max=4.05e-05 it/s=21.97
+[HB] epoch=002 split=train step=1900/8407 loss_total=1.24399 l1=1.18456 l2=0.04078 surv=0.41725 task1=0.38058 joint=0.38673 lambda=1.4574 lr_min=4.09e-06 lr_max=4.09e-05 it/s=21.97
+[HB] epoch=002 split=train step=2000/8407 loss_total=0.75144 l1=0.70554 l2=0.03149 surv=0.23952 task1=0.24256 joint=0.22347 lambda=1.4574 lr_min=4.13e-06 lr_max=4.13e-05 it/s=21.98
+[HB] epoch=002 split=train step=2100/8407 loss_total=1.57147 l1=1.46691 l2=0.07174 surv=0.51128 task1=0.47886 joint=0.47677 lambda=1.4574 lr_min=4.17e-06 lr_max=4.17e-05 it/s=21.94
+[HB] epoch=002 split=train step=2200/8407 loss_total=0.90420 l1=0.84107 l2=0.04331 surv=0.33525 task1=0.25121 joint=0.25461 lambda=1.4574 lr_min=4.21e-06 lr_max=4.21e-05 it/s=21.90
+[HB] epoch=002 split=train step=2300/8407 loss_total=1.33011 l1=1.27094 l2=0.04060 surv=0.54219 task1=0.37346 joint=0.35529 lambda=1.4574 lr_min=4.25e-06 lr_max=4.25e-05 it/s=21.86
+[HB] epoch=002 split=train step=2400/8407 loss_total=2.30344 l1=1.05176 l2=0.85885 surv=0.34821 task1=0.33112 joint=0.37242 lambda=1.4574 lr_min=4.29e-06 lr_max=4.29e-05 it/s=21.82
+[HB] epoch=002 split=train step=2500/8407 loss_total=1.06593 l1=1.00616 l2=0.04101 surv=0.35378 task1=0.32609 joint=0.32628 lambda=1.4574 lr_min=4.33e-06 lr_max=4.33e-05 it/s=21.79
+[HB] epoch=002 split=train step=2600/8407 loss_total=0.97320 l1=0.95439 l2=0.01290 surv=0.53519 task1=0.21517 joint=0.20403 lambda=1.4574 lr_min=4.36e-06 lr_max=4.36e-05 it/s=21.76
+[HB] epoch=002 split=train step=2700/8407 loss_total=1.64259 l1=0.96852 l2=0.46252 surv=0.39226 task1=0.28990 joint=0.28637 lambda=1.4574 lr_min=4.40e-06 lr_max=4.40e-05 it/s=21.76
+[HB] epoch=002 split=train step=2800/8407 loss_total=2.76057 l1=1.04929 l2=1.17421 surv=0.41502 task1=0.30727 joint=0.32699 lambda=1.4574 lr_min=4.44e-06 lr_max=4.44e-05 it/s=21.77
+[HB] epoch=002 split=train step=2900/8407 loss_total=0.86649 l1=0.82234 l2=0.03029 surv=0.35878 task1=0.23031 joint=0.23325 lambda=1.4574 lr_min=4.48e-06 lr_max=4.48e-05 it/s=21.77
+[HB] epoch=002 split=train step=3000/8407 loss_total=1.30039 l1=1.24438 l2=0.03843 surv=0.41934 task1=0.40662 joint=0.41841 lambda=1.4574 lr_min=4.52e-06 lr_max=4.52e-05 it/s=21.75
+[HB] epoch=002 split=train step=3100/8407 loss_total=0.99684 l1=0.96308 l2=0.02316 surv=0.33464 task1=0.31278 joint=0.31566 lambda=1.4574 lr_min=4.56e-06 lr_max=4.56e-05 it/s=21.76
+[HB] epoch=002 split=train step=3200/8407 loss_total=1.26973 l1=1.21699 l2=0.03619 surv=0.58427 task1=0.32181 joint=0.31091 lambda=1.4574 lr_min=4.60e-06 lr_max=4.60e-05 it/s=21.74
+[HB] epoch=002 split=train step=3300/8407 loss_total=0.93554 l1=0.85570 l2=0.05478 surv=0.32681 task1=0.26204 joint=0.26685 lambda=1.4574 lr_min=4.64e-06 lr_max=4.64e-05 it/s=21.72
+[HB] epoch=002 split=train step=3400/8407 loss_total=1.76595 l1=1.70516 l2=0.04171 surv=0.52368 task1=0.58987 joint=0.59162 lambda=1.4574 lr_min=4.68e-06 lr_max=4.68e-05 it/s=21.70
+[HB] epoch=002 split=train step=3500/8407 loss_total=1.06599 l1=1.01349 l2=0.03603 surv=0.31651 task1=0.34740 joint=0.34958 lambda=1.4574 lr_min=4.72e-06 lr_max=4.72e-05 it/s=21.68
+[HB] epoch=002 split=train step=3600/8407 loss_total=0.85179 l1=0.79925 l2=0.03605 surv=0.55890 task1=0.12385 joint=0.11649 lambda=1.4574 lr_min=4.76e-06 lr_max=4.76e-05 it/s=21.67
+[HB] epoch=002 split=train step=3700/8407 loss_total=1.29065 l1=1.16110 l2=0.08889 surv=0.37163 task1=0.38492 joint=0.40455 lambda=1.4574 lr_min=4.80e-06 lr_max=4.80e-05 it/s=21.65
+[HB] epoch=002 split=train step=3800/8407 loss_total=1.64882 l1=1.56006 l2=0.06090 surv=0.48868 task1=0.53326 joint=0.53813 lambda=1.4574 lr_min=4.84e-06 lr_max=4.84e-05 it/s=21.65
+[HB] epoch=002 split=train step=3900/8407 loss_total=0.46749 l1=0.42001 l2=0.03258 surv=0.19690 task1=0.10963 joint=0.11348 lambda=1.4574 lr_min=4.88e-06 lr_max=4.88e-05 it/s=21.64
+[HB] epoch=002 split=train step=4000/8407 loss_total=1.41545 l1=1.33136 l2=0.05770 surv=0.38330 task1=0.47348 joint=0.47458 lambda=1.4574 lr_min=4.92e-06 lr_max=4.92e-05 it/s=21.62
+[HB] epoch=002 split=train step=4100/8407 loss_total=1.06086 l1=1.03033 l2=0.02095 surv=0.42866 task1=0.30078 joint=0.30089 lambda=1.4574 lr_min=4.96e-06 lr_max=4.96e-05 it/s=21.61
+[HB] epoch=002 split=train step=4200/8407 loss_total=1.97990 l1=1.85192 l2=0.08782 surv=0.57446 task1=0.64253 joint=0.63493 lambda=1.4574 lr_min=5.00e-06 lr_max=5.00e-05 it/s=21.60
+[HB] epoch=002 split=train step=4300/8407 loss_total=1.39586 l1=1.33490 l2=0.04182 surv=0.54131 task1=0.40388 joint=0.38971 lambda=1.4574 lr_min=5.04e-06 lr_max=5.04e-05 it/s=21.60
+[HB] epoch=002 split=train step=4400/8407 loss_total=2.34198 l1=1.16647 l2=0.80658 surv=0.42502 task1=0.35063 joint=0.39083 lambda=1.4574 lr_min=5.08e-06 lr_max=5.08e-05 it/s=21.61
+[HB] epoch=002 split=train step=4500/8407 loss_total=0.74823 l1=0.67224 l2=0.05214 surv=0.24346 task1=0.21231 joint=0.21647 lambda=1.4574 lr_min=5.12e-06 lr_max=5.12e-05 it/s=21.61
+[HB] epoch=002 split=train step=4600/8407 loss_total=0.94050 l1=0.89594 l2=0.03057 surv=0.35262 task1=0.27433 joint=0.26899 lambda=1.4574 lr_min=5.16e-06 lr_max=5.16e-05 it/s=21.62
+[HB] epoch=002 split=train step=4700/8407 loss_total=1.27053 l1=1.17733 l2=0.06395 surv=0.35331 task1=0.40815 joint=0.41588 lambda=1.4574 lr_min=5.20e-06 lr_max=5.20e-05 it/s=21.62
+[HB] epoch=002 split=train step=4800/8407 loss_total=1.50382 l1=1.42070 l2=0.05703 surv=0.47220 task1=0.47428 joint=0.47421 lambda=1.4574 lr_min=5.24e-06 lr_max=5.24e-05 it/s=21.63
+[HB] epoch=002 split=train step=4900/8407 loss_total=1.19918 l1=1.15396 l2=0.03103 surv=0.42776 task1=0.36234 joint=0.36386 lambda=1.4574 lr_min=5.28e-06 lr_max=5.28e-05 it/s=21.64
+[HB] epoch=002 split=train step=5000/8407 loss_total=1.64024 l1=1.52367 l2=0.07999 surv=0.55379 task1=0.48315 joint=0.48672 lambda=1.4574 lr_min=5.32e-06 lr_max=5.32e-05 it/s=21.65
+[HB] epoch=002 split=train step=5100/8407 loss_total=1.29563 l1=1.24848 l2=0.03235 surv=0.53632 task1=0.35974 joint=0.35242 lambda=1.4574 lr_min=5.36e-06 lr_max=5.36e-05 it/s=21.65
+[HB] epoch=002 split=train step=5200/8407 loss_total=1.42948 l1=1.38822 l2=0.02831 surv=0.56156 task1=0.41860 joint=0.40806 lambda=1.4574 lr_min=5.40e-06 lr_max=5.40e-05 it/s=21.63
+[HB] epoch=002 split=train step=5300/8407 loss_total=0.83094 l1=0.75152 l2=0.05449 surv=0.34138 task1=0.20394 joint=0.20620 lambda=1.4574 lr_min=5.44e-06 lr_max=5.44e-05 it/s=21.63
+[HB] epoch=002 split=train step=5400/8407 loss_total=1.14153 l1=1.10215 l2=0.02702 surv=0.52235 task1=0.29488 joint=0.28492 lambda=1.4574 lr_min=5.47e-06 lr_max=5.47e-05 it/s=21.62
+[HB] epoch=002 split=train step=5500/8407 loss_total=1.09171 l1=1.01542 l2=0.05234 surv=0.35708 task1=0.32744 joint=0.33091 lambda=1.4574 lr_min=5.51e-06 lr_max=5.51e-05 it/s=21.61
+[HB] epoch=002 split=train step=5600/8407 loss_total=2.09859 l1=0.92783 l2=0.80333 surv=0.40801 task1=0.23311 joint=0.28671 lambda=1.4574 lr_min=5.55e-06 lr_max=5.55e-05 it/s=21.62
+[HB] epoch=002 split=train step=5700/8407 loss_total=1.18295 l1=1.14829 l2=0.02378 surv=0.42607 task1=0.36215 joint=0.36008 lambda=1.4574 lr_min=5.59e-06 lr_max=5.59e-05 it/s=21.63
+[HB] epoch=002 split=train step=5800/8407 loss_total=1.99936 l1=1.91374 l2=0.05875 surv=0.50712 task1=0.71079 joint=0.69583 lambda=1.4574 lr_min=5.63e-06 lr_max=5.63e-05 it/s=21.63
+[HB] epoch=002 split=train step=5900/8407 loss_total=0.94483 l1=0.87803 l2=0.04583 surv=0.44089 task1=0.21756 joint=0.21958 lambda=1.4574 lr_min=5.67e-06 lr_max=5.67e-05 it/s=21.64
+[HB] epoch=002 split=train step=6000/8407 loss_total=0.97824 l1=0.90685 l2=0.04898 surv=0.29597 task1=0.29833 joint=0.31254 lambda=1.4574 lr_min=5.71e-06 lr_max=5.71e-05 it/s=21.64
+[HB] epoch=002 split=train step=6100/8407 loss_total=1.13295 l1=1.08505 l2=0.03287 surv=0.53264 task1=0.27799 joint=0.27443 lambda=1.4574 lr_min=5.75e-06 lr_max=5.75e-05 it/s=21.63
+[HB] epoch=002 split=train step=6200/8407 loss_total=0.79264 l1=0.74155 l2=0.03506 surv=0.40385 task1=0.17108 joint=0.16662 lambda=1.4574 lr_min=5.79e-06 lr_max=5.79e-05 it/s=21.63
+[HB] epoch=002 split=train step=6300/8407 loss_total=2.52221 l1=1.14565 l2=0.94454 surv=0.31966 task1=0.40709 joint=0.41889 lambda=1.4574 lr_min=5.83e-06 lr_max=5.83e-05 it/s=21.62
+[HB] epoch=002 split=train step=6400/8407 loss_total=0.91280 l1=0.85931 l2=0.03670 surv=0.35134 task1=0.25468 joint=0.25329 lambda=1.4574 lr_min=5.87e-06 lr_max=5.87e-05 it/s=21.61
+[HB] epoch=002 split=train step=6500/8407 loss_total=0.73762 l1=0.64002 l2=0.06697 surv=0.21271 task1=0.20997 joint=0.21734 lambda=1.4574 lr_min=5.91e-06 lr_max=5.91e-05 it/s=21.60
+[HB] epoch=002 split=train step=6600/8407 loss_total=1.20555 l1=1.15689 l2=0.03339 surv=0.49508 task1=0.34167 joint=0.32014 lambda=1.4574 lr_min=5.95e-06 lr_max=5.95e-05 it/s=21.59
+[HB] epoch=002 split=train step=6700/8407 loss_total=0.87540 l1=0.81615 l2=0.04066 surv=0.30252 task1=0.25593 joint=0.25769 lambda=1.4574 lr_min=5.99e-06 lr_max=5.99e-05 it/s=21.59
+[HB] epoch=002 split=train step=6800/8407 loss_total=1.45488 l1=1.42343 l2=0.02158 surv=0.47141 task1=0.48402 joint=0.46800 lambda=1.4574 lr_min=6.03e-06 lr_max=6.03e-05 it/s=21.58
+[HB] epoch=002 split=train step=6900/8407 loss_total=1.06720 l1=1.02130 l2=0.03149 surv=0.38277 task1=0.32373 joint=0.31481 lambda=1.4574 lr_min=6.07e-06 lr_max=6.07e-05 it/s=21.58
+[HB] epoch=002 split=train step=7000/8407 loss_total=1.10348 l1=1.05221 l2=0.03518 surv=0.39443 task1=0.33054 joint=0.32724 lambda=1.4574 lr_min=6.11e-06 lr_max=6.11e-05 it/s=21.59
+[HB] epoch=002 split=train step=7100/8407 loss_total=0.90534 l1=0.82595 l2=0.05447 surv=0.25638 task1=0.27905 joint=0.29052 lambda=1.4574 lr_min=6.15e-06 lr_max=6.15e-05 it/s=21.59
+[HB] epoch=002 split=train step=7200/8407 loss_total=0.60994 l1=0.51671 l2=0.06397 surv=0.28367 task1=0.11461 joint=0.11843 lambda=1.4574 lr_min=6.19e-06 lr_max=6.19e-05 it/s=21.60
+[HB] epoch=002 split=train step=7300/8407 loss_total=1.28751 l1=1.21455 l2=0.05006 surv=0.42979 task1=0.39299 joint=0.39178 lambda=1.4574 lr_min=6.23e-06 lr_max=6.23e-05 it/s=21.60
+[HB] epoch=002 split=train step=7400/8407 loss_total=1.34377 l1=1.29173 l2=0.03571 surv=0.53474 task1=0.37726 joint=0.37973 lambda=1.4574 lr_min=6.27e-06 lr_max=6.27e-05 it/s=21.59
+[HB] epoch=002 split=train step=7500/8407 loss_total=1.39871 l1=1.34038 l2=0.04002 surv=0.44744 task1=0.44491 joint=0.44803 lambda=1.4574 lr_min=6.31e-06 lr_max=6.31e-05 it/s=21.58
+[HB] epoch=002 split=train step=7600/8407 loss_total=0.97728 l1=0.90234 l2=0.05142 surv=0.48212 task1=0.21325 joint=0.20697 lambda=1.4574 lr_min=6.35e-06 lr_max=6.35e-05 it/s=21.57
+[HB] epoch=002 split=train step=7700/8407 loss_total=1.19058 l1=1.14950 l2=0.02819 surv=0.41013 task1=0.36895 joint=0.37042 lambda=1.4574 lr_min=6.39e-06 lr_max=6.39e-05 it/s=21.58
+[HB] epoch=002 split=train step=7800/8407 loss_total=2.26514 l1=2.20191 l2=0.04338 surv=0.63418 task1=0.78323 joint=0.78450 lambda=1.4574 lr_min=6.43e-06 lr_max=6.43e-05 it/s=21.59
+[HB] epoch=002 split=train step=7900/8407 loss_total=1.65718 l1=0.99906 l2=0.45157 surv=0.33381 task1=0.32764 joint=0.33760 lambda=1.4574 lr_min=6.47e-06 lr_max=6.47e-05 it/s=21.59
+[HB] epoch=002 split=train step=8000/8407 loss_total=1.25205 l1=1.20271 l2=0.03385 surv=0.57723 task1=0.31248 joint=0.31300 lambda=1.4574 lr_min=6.51e-06 lr_max=6.51e-05 it/s=21.58
+[HB] epoch=002 split=train step=8100/8407 loss_total=2.82004 l1=1.37419 l2=0.99208 surv=0.47160 task1=0.45688 joint=0.44571 lambda=1.4574 lr_min=6.55e-06 lr_max=6.55e-05 it/s=21.58
+[HB] epoch=002 split=train step=8200/8407 loss_total=1.56909 l1=1.51708 l2=0.03568 surv=0.47208 task1=0.52162 joint=0.52338 lambda=1.4574 lr_min=6.58e-06 lr_max=6.58e-05 it/s=21.58
+[HB] epoch=002 split=train step=8300/8407 loss_total=2.15897 l1=1.49197 l2=0.45767 surv=0.41280 task1=0.56425 joint=0.51492 lambda=1.4574 lr_min=6.62e-06 lr_max=6.62e-05 it/s=21.57
+[HB] epoch=002 split=train step=8400/8407 loss_total=1.93740 l1=1.16764 l2=0.52818 surv=0.36054 task1=0.45025 joint=0.35684 lambda=1.4574 lr_min=6.66e-06 lr_max=6.66e-05 it/s=21.58
+Epoch 002 | monitor=legacy val_legacy=0.58955 val_aligned=1.45740 surv=0.39885 task1=0.35265 joint=0.34666 task2=0.19070 lambda=1.4574->1.8838
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=003 split=train step=1 loss_total=0.99774 mem_alloc_mb=2680.9 mem_reserved_mb=2792.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=003 split=train step=1 loss_total=1.71147 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[HB] epoch=003 split=train step=100/8407 loss_total=1.15723 l1=1.07976 l2=0.04113 surv=0.33946 task1=0.36557 joint=0.37473 lambda=1.8838 lr_min=6.71e-06 lr_max=6.71e-05 it/s=21.30
+[HB] epoch=003 split=train step=200/8407 loss_total=0.95876 l1=0.90591 l2=0.02806 surv=0.32193 task1=0.29461 joint=0.28937 lambda=1.8838 lr_min=6.75e-06 lr_max=6.75e-05 it/s=21.62
+[HB] epoch=003 split=train step=300/8407 loss_total=3.97883 l1=0.90055 l2=1.63405 surv=0.44270 task1=0.25912 joint=0.19873 lambda=1.8838 lr_min=6.79e-06 lr_max=6.79e-05 it/s=21.57
+[HB] epoch=003 split=train step=400/8407 loss_total=1.09526 l1=1.03254 l2=0.03329 surv=0.47093 task1=0.28086 joint=0.28075 lambda=1.8838 lr_min=6.83e-06 lr_max=6.83e-05 it/s=21.49
+[HB] epoch=003 split=train step=500/8407 loss_total=0.93275 l1=0.88224 l2=0.02681 surv=0.31267 task1=0.29442 joint=0.27515 lambda=1.8838 lr_min=6.87e-06 lr_max=6.87e-05 it/s=21.43
+[HB] epoch=003 split=train step=600/8407 loss_total=0.87252 l1=0.81284 l2=0.03168 surv=0.35367 task1=0.22823 joint=0.23094 lambda=1.8838 lr_min=6.91e-06 lr_max=6.91e-05 it/s=21.46
+[HB] epoch=003 split=train step=700/8407 loss_total=8.08369 l1=0.91799 l2=3.80379 surv=0.42806 task1=0.20879 joint=0.28114 lambda=1.8838 lr_min=6.94e-06 lr_max=6.94e-05 it/s=21.51
+[HB] epoch=003 split=train step=800/8407 loss_total=1.17222 l1=1.12970 l2=0.02257 surv=0.45777 task1=0.33996 joint=0.33198 lambda=1.8838 lr_min=6.98e-06 lr_max=6.98e-05 it/s=21.48
+[HB] epoch=003 split=train step=900/8407 loss_total=1.38561 l1=1.30105 l2=0.04489 surv=0.42650 task1=0.44602 joint=0.42853 lambda=1.8838 lr_min=7.02e-06 lr_max=7.02e-05 it/s=21.46
+[HB] epoch=003 split=train step=1000/8407 loss_total=1.69473 l1=1.62756 l2=0.03566 surv=0.49045 task1=0.56931 joint=0.56779 lambda=1.8838 lr_min=7.06e-06 lr_max=7.06e-05 it/s=21.53
+[HB] epoch=003 split=train step=1100/8407 loss_total=1.87287 l1=1.75749 l2=0.06124 surv=0.46557 task1=0.63473 joint=0.65718 lambda=1.8838 lr_min=7.10e-06 lr_max=7.10e-05 it/s=21.59
+[HB] epoch=003 split=train step=1200/8407 loss_total=0.81634 l1=0.75788 l2=0.03103 surv=0.45257 task1=0.15221 joint=0.15309 lambda=1.8838 lr_min=7.14e-06 lr_max=7.14e-05 it/s=21.64
+[HB] epoch=003 split=train step=1300/8407 loss_total=0.83280 l1=0.72509 l2=0.05718 surv=0.30690 task1=0.21026 joint=0.20794 lambda=1.8838 lr_min=7.18e-06 lr_max=7.18e-05 it/s=21.66
+[HB] epoch=003 split=train step=1400/8407 loss_total=0.90367 l1=0.77369 l2=0.06900 surv=0.38836 task1=0.18931 joint=0.19603 lambda=1.8838 lr_min=7.22e-06 lr_max=7.22e-05 it/s=21.70
+[HB] epoch=003 split=train step=1500/8407 loss_total=0.77068 l1=0.74454 l2=0.01387 surv=0.33685 task1=0.20731 joint=0.20038 lambda=1.8838 lr_min=7.26e-06 lr_max=7.26e-05 it/s=21.69
+[HB] epoch=003 split=train step=1600/8407 loss_total=1.51883 l1=1.48243 l2=0.01932 surv=0.44611 task1=0.52741 joint=0.50891 lambda=1.8838 lr_min=7.30e-06 lr_max=7.30e-05 it/s=21.72
+[HB] epoch=003 split=train step=1700/8407 loss_total=1.61290 l1=1.53289 l2=0.04247 surv=0.53082 task1=0.50384 joint=0.49823 lambda=1.8838 lr_min=7.34e-06 lr_max=7.34e-05 it/s=21.72
+[HB] epoch=003 split=train step=1800/8407 loss_total=1.71223 l1=0.96772 l2=0.39521 surv=0.32312 task1=0.37879 joint=0.26580 lambda=1.8838 lr_min=7.38e-06 lr_max=7.38e-05 it/s=21.69
+[HB] epoch=003 split=train step=1900/8407 loss_total=0.78451 l1=0.72755 l2=0.03024 surv=0.33878 task1=0.19298 joint=0.19580 lambda=1.8838 lr_min=7.42e-06 lr_max=7.42e-05 it/s=21.66
+[HB] epoch=003 split=train step=2000/8407 loss_total=0.99650 l1=0.90158 l2=0.05039 surv=0.23625 task1=0.32976 joint=0.33557 lambda=1.8838 lr_min=7.46e-06 lr_max=7.46e-05 it/s=21.65
+[HB] epoch=003 split=train step=2100/8407 loss_total=1.39903 l1=1.32383 l2=0.03992 surv=0.37954 task1=0.48844 joint=0.45585 lambda=1.8838 lr_min=7.50e-06 lr_max=7.50e-05 it/s=21.68
+[HB] epoch=003 split=train step=2200/8407 loss_total=1.72418 l1=1.60475 l2=0.06340 surv=0.40063 task1=0.59240 joint=0.61171 lambda=1.8838 lr_min=7.54e-06 lr_max=7.54e-05 it/s=21.67
+[HB] epoch=003 split=train step=2300/8407 loss_total=1.09417 l1=1.04034 l2=0.02857 surv=0.44405 task1=0.29861 joint=0.29768 lambda=1.8838 lr_min=7.58e-06 lr_max=7.58e-05 it/s=21.66
+[HB] epoch=003 split=train step=2400/8407 loss_total=2.43539 l1=1.21608 l2=0.64725 surv=0.38748 task1=0.41234 joint=0.41626 lambda=1.8838 lr_min=7.62e-06 lr_max=7.62e-05 it/s=21.68
+[HB] epoch=003 split=train step=2500/8407 loss_total=1.66861 l1=1.59645 l2=0.03830 surv=0.48454 task1=0.55597 joint=0.55595 lambda=1.8838 lr_min=7.66e-06 lr_max=7.66e-05 it/s=21.70
+[HB] epoch=003 split=train step=2600/8407 loss_total=0.75971 l1=0.73154 l2=0.01495 surv=0.33046 task1=0.20487 joint=0.19622 lambda=1.8838 lr_min=7.70e-06 lr_max=7.70e-05 it/s=21.72
+[HB] epoch=003 split=train step=2700/8407 loss_total=0.86970 l1=0.80440 l2=0.03466 surv=0.35315 task1=0.22534 joint=0.22590 lambda=1.8838 lr_min=7.74e-06 lr_max=7.74e-05 it/s=21.73
+[HB] epoch=003 split=train step=2800/8407 loss_total=3.59964 l1=0.75916 l2=1.50782 surv=0.36718 task1=0.30707 joint=0.08491 lambda=1.8838 lr_min=7.78e-06 lr_max=7.78e-05 it/s=21.75
+[HB] epoch=003 split=train step=2900/8407 loss_total=0.96823 l1=0.91049 l2=0.03065 surv=0.25716 task1=0.32544 joint=0.32789 lambda=1.8838 lr_min=7.82e-06 lr_max=7.82e-05 it/s=21.77
+[HB] epoch=003 split=train step=3000/8407 loss_total=1.39038 l1=1.29148 l2=0.05250 surv=0.44137 task1=0.42472 joint=0.42538 lambda=1.8838 lr_min=7.86e-06 lr_max=7.86e-05 it/s=21.75
+[HB] epoch=003 split=train step=3100/8407 loss_total=0.95489 l1=0.85578 l2=0.05261 surv=0.34131 task1=0.25478 joint=0.25969 lambda=1.8838 lr_min=7.90e-06 lr_max=7.90e-05 it/s=21.73
+[HB] epoch=003 split=train step=3200/8407 loss_total=1.28879 l1=1.22659 l2=0.03302 surv=0.42153 task1=0.40523 joint=0.39983 lambda=1.8838 lr_min=7.94e-06 lr_max=7.94e-05 it/s=21.72
+[HB] epoch=003 split=train step=3300/8407 loss_total=1.23537 l1=1.18557 l2=0.02643 surv=0.57904 task1=0.30901 joint=0.29752 lambda=1.8838 lr_min=7.98e-06 lr_max=7.98e-05 it/s=21.70
+[HB] epoch=003 split=train step=3400/8407 loss_total=0.93367 l1=0.88468 l2=0.02601 surv=0.39804 task1=0.24417 joint=0.24247 lambda=1.8838 lr_min=8.02e-06 lr_max=8.02e-05 it/s=21.69
+[HB] epoch=003 split=train step=3500/8407 loss_total=1.30295 l1=1.25219 l2=0.02695 surv=0.43904 task1=0.40294 joint=0.41020 lambda=1.8838 lr_min=8.06e-06 lr_max=8.06e-05 it/s=21.67
+[HB] epoch=003 split=train step=3600/8407 loss_total=1.21410 l1=1.15805 l2=0.02975 surv=0.35642 task1=0.40334 joint=0.39828 lambda=1.8838 lr_min=8.09e-06 lr_max=8.09e-05 it/s=21.66
+[HB] epoch=003 split=train step=3700/8407 loss_total=0.95531 l1=0.89463 l2=0.03221 surv=0.29884 task1=0.29965 joint=0.29614 lambda=1.8838 lr_min=8.13e-06 lr_max=8.13e-05 it/s=21.65
+[HB] epoch=003 split=train step=3800/8407 loss_total=2.37096 l1=0.74179 l2=0.86482 surv=0.33078 task1=0.23685 joint=0.17416 lambda=1.8838 lr_min=8.17e-06 lr_max=8.17e-05 it/s=21.64
+[HB] epoch=003 split=train step=3900/8407 loss_total=1.39654 l1=1.27773 l2=0.06307 surv=0.37739 task1=0.44829 joint=0.45205 lambda=1.8838 lr_min=8.21e-06 lr_max=8.21e-05 it/s=21.63
+[HB] epoch=003 split=train step=4000/8407 loss_total=2.11216 l1=0.79450 l2=0.69946 surv=0.32775 task1=0.21754 joint=0.24922 lambda=1.8838 lr_min=8.25e-06 lr_max=8.25e-05 it/s=21.62
+[HB] epoch=003 split=train step=4100/8407 loss_total=1.34251 l1=1.20103 l2=0.07510 surv=0.36678 task1=0.42078 joint=0.41347 lambda=1.8838 lr_min=8.29e-06 lr_max=8.29e-05 it/s=21.61
+[HB] epoch=003 split=train step=4200/8407 loss_total=1.58267 l1=0.79831 l2=0.41636 surv=0.36000 task1=0.22120 joint=0.21711 lambda=1.8838 lr_min=8.33e-06 lr_max=8.33e-05 it/s=21.62
+[HB] epoch=003 split=train step=4300/8407 loss_total=1.16799 l1=1.10197 l2=0.03504 surv=0.42434 task1=0.33988 joint=0.33775 lambda=1.8838 lr_min=8.37e-06 lr_max=8.37e-05 it/s=21.63
+[HB] epoch=003 split=train step=4400/8407 loss_total=3.23654 l1=0.72775 l2=1.33175 surv=0.37210 task1=0.12765 joint=0.22800 lambda=1.8838 lr_min=8.41e-06 lr_max=8.41e-05 it/s=21.65
+[HB] epoch=003 split=train step=4500/8407 loss_total=1.25163 l1=1.21924 l2=0.01719 surv=0.47045 task1=0.38161 joint=0.36718 lambda=1.8838 lr_min=8.45e-06 lr_max=8.45e-05 it/s=21.66
+[HB] epoch=003 split=train step=4600/8407 loss_total=3.89198 l1=1.72153 l2=1.15215 surv=0.43444 task1=0.73581 joint=0.55127 lambda=1.8838 lr_min=8.49e-06 lr_max=8.49e-05 it/s=21.67
+[HB] epoch=003 split=train step=4700/8407 loss_total=1.74349 l1=1.63834 l2=0.05582 surv=0.45987 task1=0.58642 joint=0.59204 lambda=1.8838 lr_min=8.53e-06 lr_max=8.53e-05 it/s=21.68
+[HB] epoch=003 split=train step=4800/8407 loss_total=0.96780 l1=0.92682 l2=0.02176 surv=0.32666 task1=0.30036 joint=0.29980 lambda=1.8838 lr_min=8.57e-06 lr_max=8.57e-05 it/s=21.69
+[HB] epoch=003 split=train step=4900/8407 loss_total=1.02278 l1=0.92733 l2=0.05067 surv=0.38497 task1=0.27472 joint=0.26764 lambda=1.8838 lr_min=8.61e-06 lr_max=8.61e-05 it/s=21.69
+[HB] epoch=003 split=train step=5000/8407 loss_total=0.79254 l1=0.71374 l2=0.04183 surv=0.27664 task1=0.21790 joint=0.21920 lambda=1.8838 lr_min=8.65e-06 lr_max=8.65e-05 it/s=21.68
+[HB] epoch=003 split=train step=5100/8407 loss_total=0.69141 l1=0.59807 l2=0.04955 surv=0.24370 task1=0.17737 joint=0.17699 lambda=1.8838 lr_min=8.69e-06 lr_max=8.69e-05 it/s=21.67
+[HB] epoch=003 split=train step=5200/8407 loss_total=1.30832 l1=1.26985 l2=0.02042 surv=0.49848 task1=0.38633 joint=0.38504 lambda=1.8838 lr_min=8.73e-06 lr_max=8.73e-05 it/s=21.65
+[HB] epoch=003 split=train step=5300/8407 loss_total=1.03257 l1=0.98863 l2=0.02332 surv=0.38668 task1=0.30860 joint=0.29335 lambda=1.8838 lr_min=8.77e-06 lr_max=8.77e-05 it/s=21.65
+[HB] epoch=003 split=train step=5400/8407 loss_total=1.08073 l1=0.99328 l2=0.04642 surv=0.36083 task1=0.31412 joint=0.31833 lambda=1.8838 lr_min=8.81e-06 lr_max=8.81e-05 it/s=21.64
+[HB] epoch=003 split=train step=5500/8407 loss_total=2.80607 l1=1.83584 l2=0.51503 surv=0.47729 task1=0.74549 joint=0.61306 lambda=1.8838 lr_min=8.85e-06 lr_max=8.85e-05 it/s=21.63
+[HB] epoch=003 split=train step=5600/8407 loss_total=1.28632 l1=1.20002 l2=0.04581 surv=0.42944 task1=0.38898 joint=0.38159 lambda=1.8838 lr_min=8.89e-06 lr_max=8.89e-05 it/s=21.61
+[HB] epoch=003 split=train step=5700/8407 loss_total=1.20215 l1=1.13307 l2=0.03667 surv=0.48176 task1=0.32284 joint=0.32847 lambda=1.8838 lr_min=8.93e-06 lr_max=8.93e-05 it/s=21.61
+[HB] epoch=003 split=train step=5800/8407 loss_total=1.30855 l1=1.20896 l2=0.05287 surv=0.43476 task1=0.38691 joint=0.38730 lambda=1.8838 lr_min=8.97e-06 lr_max=8.97e-05 it/s=21.60
+[HB] epoch=003 split=train step=5900/8407 loss_total=1.13660 l1=1.08428 l2=0.02777 surv=0.43653 task1=0.32648 joint=0.32128 lambda=1.8838 lr_min=9.01e-06 lr_max=9.01e-05 it/s=21.59
+[HB] epoch=003 split=train step=6000/8407 loss_total=2.10886 l1=2.01267 l2=0.05106 surv=0.54300 task1=0.72733 joint=0.74234 lambda=1.8838 lr_min=9.05e-06 lr_max=9.05e-05 it/s=21.59
+[HB] epoch=003 split=train step=6100/8407 loss_total=1.13872 l1=1.09173 l2=0.02494 surv=0.37290 task1=0.36057 joint=0.35826 lambda=1.8838 lr_min=9.09e-06 lr_max=9.09e-05 it/s=21.58
+[HB] epoch=003 split=train step=6200/8407 loss_total=2.07510 l1=0.88259 l2=0.63302 surv=0.32274 task1=0.31966 joint=0.24019 lambda=1.8838 lr_min=9.13e-06 lr_max=9.13e-05 it/s=21.59
+[HB] epoch=003 split=train step=6300/8407 loss_total=1.42405 l1=1.36091 l2=0.03352 surv=0.49222 task1=0.43237 joint=0.43632 lambda=1.8838 lr_min=9.17e-06 lr_max=9.17e-05 it/s=21.59
+[HB] epoch=003 split=train step=6400/8407 loss_total=2.17035 l1=0.96673 l2=0.63892 surv=0.45770 task1=0.23003 joint=0.27899 lambda=1.8838 lr_min=9.20e-06 lr_max=9.20e-05 it/s=21.60
+[HB] epoch=003 split=train step=6500/8407 loss_total=1.16360 l1=1.11500 l2=0.02580 surv=0.44098 task1=0.34198 joint=0.33205 lambda=1.8838 lr_min=9.24e-06 lr_max=9.24e-05 it/s=21.61
+[HB] epoch=003 split=train step=6600/8407 loss_total=1.17710 l1=1.09795 l2=0.04202 surv=0.34181 task1=0.37918 joint=0.37697 lambda=1.8838 lr_min=9.28e-06 lr_max=9.28e-05 it/s=21.62
+[HB] epoch=003 split=train step=6700/8407 loss_total=1.08993 l1=1.03083 l2=0.03137 surv=0.28951 task1=0.37185 joint=0.36946 lambda=1.8838 lr_min=9.32e-06 lr_max=9.32e-05 it/s=21.63
+[HB] epoch=003 split=train step=6800/8407 loss_total=1.08166 l1=1.01384 l2=0.03600 surv=0.35907 task1=0.32708 joint=0.32769 lambda=1.8838 lr_min=9.36e-06 lr_max=9.36e-05 it/s=21.62
+[HB] epoch=003 split=train step=6900/8407 loss_total=3.46288 l1=1.68768 l2=0.94233 surv=0.55979 task1=0.58424 joint=0.54365 lambda=1.8838 lr_min=9.40e-06 lr_max=9.40e-05 it/s=21.62
+[HB] epoch=003 split=train step=7000/8407 loss_total=0.95450 l1=0.91533 l2=0.02079 surv=0.31888 task1=0.29918 joint=0.29727 lambda=1.8838 lr_min=9.44e-06 lr_max=9.44e-05 it/s=21.61
+[HB] epoch=003 split=train step=7100/8407 loss_total=1.63972 l1=1.58391 l2=0.02962 surv=0.37231 task1=0.60309 joint=0.60852 lambda=1.8838 lr_min=9.48e-06 lr_max=9.48e-05 it/s=21.60
+[HB] epoch=003 split=train step=7200/8407 loss_total=3.05779 l1=0.85763 l2=1.16792 surv=0.36928 task1=0.18758 joint=0.30077 lambda=1.8838 lr_min=9.52e-06 lr_max=9.52e-05 it/s=21.60
+[HB] epoch=003 split=train step=7300/8407 loss_total=1.08559 l1=1.04455 l2=0.02178 surv=0.34295 task1=0.35165 joint=0.34995 lambda=1.8838 lr_min=9.56e-06 lr_max=9.56e-05 it/s=21.59
+[HB] epoch=003 split=train step=7400/8407 loss_total=0.88237 l1=0.83026 l2=0.02767 surv=0.31932 task1=0.25620 joint=0.25473 lambda=1.8838 lr_min=9.60e-06 lr_max=9.60e-05 it/s=21.60
+[HB] epoch=003 split=train step=7500/8407 loss_total=0.94342 l1=0.86667 l2=0.04074 surv=0.23885 task1=0.30852 joint=0.31931 lambda=1.8838 lr_min=9.64e-06 lr_max=9.64e-05 it/s=21.61
+[HB] epoch=003 split=train step=7600/8407 loss_total=0.88610 l1=0.84230 l2=0.02325 surv=0.32158 task1=0.26097 joint=0.25975 lambda=1.8838 lr_min=9.68e-06 lr_max=9.68e-05 it/s=21.60
+[HB] epoch=003 split=train step=7700/8407 loss_total=1.23009 l1=1.19617 l2=0.01801 surv=0.39884 task1=0.40225 joint=0.39508 lambda=1.8838 lr_min=9.72e-06 lr_max=9.72e-05 it/s=21.60
+[HB] epoch=003 split=train step=7800/8407 loss_total=0.88286 l1=0.81765 l2=0.03462 surv=0.32321 task1=0.24078 joint=0.25365 lambda=1.8838 lr_min=9.76e-06 lr_max=9.76e-05 it/s=21.60
+[HB] epoch=003 split=train step=7900/8407 loss_total=0.86598 l1=0.81984 l2=0.02450 surv=0.34567 task1=0.23682 joint=0.23736 lambda=1.8838 lr_min=9.80e-06 lr_max=9.80e-05 it/s=21.60
+[HB] epoch=003 split=train step=8000/8407 loss_total=0.89826 l1=0.84709 l2=0.02716 surv=0.29992 task1=0.27418 joint=0.27298 lambda=1.8838 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.60
+[HB] epoch=003 split=train step=8100/8407 loss_total=0.89682 l1=0.82121 l2=0.04013 surv=0.38089 task1=0.21915 joint=0.22117 lambda=1.8838 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.59
+[HB] epoch=003 split=train step=8200/8407 loss_total=1.49651 l1=1.36610 l2=0.06922 surv=0.54477 task1=0.42116 joint=0.40017 lambda=1.8838 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.59
+[HB] epoch=003 split=train step=8300/8407 loss_total=1.25927 l1=1.22061 l2=0.02052 surv=0.43971 task1=0.40196 joint=0.37894 lambda=1.8838 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.59
+[HB] epoch=003 split=train step=8400/8407 loss_total=0.74763 l1=0.67209 l2=0.04010 surv=0.30163 task1=0.18371 joint=0.18675 lambda=1.8838 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.59
+Epoch 003 | monitor=legacy val_legacy=0.58473 val_aligned=1.51621 surv=0.39363 task1=0.34716 joint=0.34291 task2=0.19110 lambda=1.8838->2.2633
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=004 split=train step=1 loss_total=1.29523 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=004 split=train step=1 loss_total=0.70859 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[HB] epoch=004 split=train step=100/8407 loss_total=0.77639 l1=0.74043 l2=0.01589 surv=0.32462 task1=0.20926 joint=0.20654 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.49
+[HB] epoch=004 split=train step=200/8407 loss_total=1.01380 l1=0.89129 l2=0.05413 surv=0.45014 task1=0.21819 joint=0.22296 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.40
+[HB] epoch=004 split=train step=300/8407 loss_total=1.04006 l1=1.00773 l2=0.01428 surv=0.42279 task1=0.29609 joint=0.28886 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=400/8407 loss_total=1.75849 l1=1.56858 l2=0.08391 surv=0.48884 task1=0.53367 joint=0.54607 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.29
+[HB] epoch=004 split=train step=500/8407 loss_total=0.91138 l1=0.86271 l2=0.02151 surv=0.32190 task1=0.26879 joint=0.27202 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.27
+[HB] epoch=004 split=train step=600/8407 loss_total=1.15884 l1=1.09919 l2=0.02635 surv=0.42122 task1=0.33594 joint=0.34204 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.24
+[HB] epoch=004 split=train step=700/8407 loss_total=1.48847 l1=1.36736 l2=0.05351 surv=0.51282 task1=0.43089 joint=0.42365 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.23
+[HB] epoch=004 split=train step=800/8407 loss_total=0.84275 l1=0.80117 l2=0.01837 surv=0.38596 task1=0.20997 joint=0.20523 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.22
+[HB] epoch=004 split=train step=900/8407 loss_total=0.91332 l1=0.80217 l2=0.04911 surv=0.36629 task1=0.21858 joint=0.21730 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.22
+[HB] epoch=004 split=train step=1000/8407 loss_total=1.12979 l1=1.10050 l2=0.01294 surv=0.42667 task1=0.33832 joint=0.33551 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.21
+[HB] epoch=004 split=train step=1100/8407 loss_total=2.07878 l1=0.63893 l2=0.63618 surv=0.28198 task1=0.19280 joint=0.16415 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.27
+[HB] epoch=004 split=train step=1200/8407 loss_total=1.13834 l1=1.07823 l2=0.02656 surv=0.44860 task1=0.31517 joint=0.31447 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.32
+[HB] epoch=004 split=train step=1300/8407 loss_total=3.33203 l1=1.56450 l2=0.78096 surv=0.52629 task1=0.51566 joint=0.52255 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=1400/8407 loss_total=0.97063 l1=0.92113 l2=0.02187 surv=0.29801 task1=0.30862 joint=0.31450 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.36
+[HB] epoch=004 split=train step=1500/8407 loss_total=1.39712 l1=1.30392 l2=0.04118 surv=0.57291 task1=0.36198 joint=0.36903 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.39
+[HB] epoch=004 split=train step=1600/8407 loss_total=3.73672 l1=1.04340 l2=1.19000 surv=0.34168 task1=0.34411 joint=0.35762 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.38
+[HB] epoch=004 split=train step=1700/8407 loss_total=1.86022 l1=1.78253 l2=0.03432 surv=0.49088 task1=0.64358 joint=0.64807 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.38
+[HB] epoch=004 split=train step=1800/8407 loss_total=1.02381 l1=0.90548 l2=0.05228 surv=0.34348 task1=0.28175 joint=0.28025 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.37
+[HB] epoch=004 split=train step=1900/8407 loss_total=1.33916 l1=1.26355 l2=0.03341 surv=0.38518 task1=0.43606 joint=0.44230 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.36
+[HB] epoch=004 split=train step=2000/8407 loss_total=1.24439 l1=1.13197 l2=0.04967 surv=0.38196 task1=0.37777 joint=0.37224 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.35
+[HB] epoch=004 split=train step=2100/8407 loss_total=1.37017 l1=1.18696 l2=0.08095 surv=0.30347 task1=0.43527 joint=0.44823 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.35
+[HB] epoch=004 split=train step=2200/8407 loss_total=0.71537 l1=0.71537 l2=0.00000 surv=0.37303 task1=0.17419 joint=0.16816 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=2300/8407 loss_total=1.83759 l1=1.79160 l2=0.02032 surv=0.39804 task1=0.69265 joint=0.70090 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=2400/8407 loss_total=0.84369 l1=0.80324 l2=0.01787 surv=0.37586 task1=0.21431 joint=0.21308 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=2500/8407 loss_total=1.15358 l1=1.04741 l2=0.04691 surv=0.53067 task1=0.26291 joint=0.25384 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=2600/8407 loss_total=1.23189 l1=1.15236 l2=0.03514 surv=0.57130 task1=0.29306 joint=0.28800 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.34
+[HB] epoch=004 split=train step=2700/8407 loss_total=1.26047 l1=1.22404 l2=0.01609 surv=0.48757 task1=0.37743 joint=0.35904 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.33
+[HB] epoch=004 split=train step=2800/8407 loss_total=0.56298 l1=0.50287 l2=0.02656 surv=0.30668 task1=0.09739 joint=0.09880 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.33
+[HB] epoch=004 split=train step=2900/8407 loss_total=1.07994 l1=1.05287 l2=0.01196 surv=0.57752 task1=0.25438 joint=0.22097 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.32
+[HB] epoch=004 split=train step=3000/8407 loss_total=0.85239 l1=0.79642 l2=0.02473 surv=0.35006 task1=0.22800 joint=0.21837 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.31
+[HB] epoch=004 split=train step=3100/8407 loss_total=0.87709 l1=0.82728 l2=0.02201 surv=0.32455 task1=0.25187 joint=0.25086 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.31
+[HB] epoch=004 split=train step=3200/8407 loss_total=0.68127 l1=0.68127 l2=0.00000 surv=0.34699 task1=0.17015 joint=0.16413 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.31
+[HB] epoch=004 split=train step=3300/8407 loss_total=0.85290 l1=0.79540 l2=0.02540 surv=0.35985 task1=0.21935 joint=0.21621 lambda=2.2633 lr_min=1.00e-05 lr_max=1.00e-04 it/s=21.33
+[HB] epoch=004 split=train step=3400/8407 loss_total=3.32888 l1=1.03707 l2=1.01260 surv=0.32247 task1=0.35359 joint=0.36100 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.36
+[HB] epoch=004 split=train step=3500/8407 loss_total=1.00295 l1=0.96638 l2=0.01616 surv=0.45259 task1=0.26240 joint=0.25140 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.38
+[HB] epoch=004 split=train step=3600/8407 loss_total=1.26754 l1=1.20989 l2=0.02547 surv=0.45140 task1=0.38003 joint=0.37845 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.40
+[HB] epoch=004 split=train step=3700/8407 loss_total=0.98544 l1=0.91153 l2=0.03266 surv=0.30915 task1=0.30048 joint=0.30189 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.40
+[HB] epoch=004 split=train step=3800/8407 loss_total=1.28404 l1=1.23372 l2=0.02223 surv=0.40172 task1=0.41605 joint=0.41596 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.40
+[HB] epoch=004 split=train step=3900/8407 loss_total=2.67160 l1=0.88213 l2=0.79065 surv=0.31487 task1=0.31533 joint=0.25193 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.39
+[HB] epoch=004 split=train step=4000/8407 loss_total=0.81034 l1=0.71863 l2=0.04052 surv=0.28220 task1=0.21177 joint=0.22466 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.39
+[HB] epoch=004 split=train step=4100/8407 loss_total=0.53166 l1=0.48007 l2=0.02280 surv=0.25946 task1=0.11018 joint=0.11043 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.38
+[HB] epoch=004 split=train step=4200/8407 loss_total=3.98540 l1=1.24002 l2=1.21300 surv=0.40491 task1=0.40830 joint=0.42682 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.37
+[HB] epoch=004 split=train step=4300/8407 loss_total=1.70208 l1=1.51385 l2=0.08317 surv=0.47556 task1=0.50378 joint=0.53451 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.37
+[HB] epoch=004 split=train step=4400/8407 loss_total=3.40613 l1=0.97923 l2=1.07229 surv=0.43842 task1=0.30140 joint=0.23941 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.37
+[HB] epoch=004 split=train step=4500/8407 loss_total=1.20335 l1=1.15822 l2=0.01994 surv=0.50635 task1=0.32597 joint=0.32590 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.38
+[HB] epoch=004 split=train step=4600/8407 loss_total=0.81942 l1=0.75619 l2=0.02794 surv=0.32238 task1=0.21498 joint=0.21883 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.40
+[HB] epoch=004 split=train step=4700/8407 loss_total=1.71650 l1=1.64548 l2=0.03138 surv=0.50535 task1=0.57375 joint=0.56638 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.41
+[HB] epoch=004 split=train step=4800/8407 loss_total=0.87075 l1=0.79437 l2=0.03375 surv=0.21880 task1=0.28512 joint=0.29045 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.42
+[HB] epoch=004 split=train step=4900/8407 loss_total=0.74586 l1=0.71638 l2=0.01302 surv=0.33060 task1=0.19603 joint=0.18975 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.44
+[HB] epoch=004 split=train step=5000/8407 loss_total=0.69596 l1=0.57934 l2=0.05153 surv=0.22766 task1=0.17329 joint=0.17838 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.45
+[HB] epoch=004 split=train step=5100/8407 loss_total=0.95364 l1=0.91900 l2=0.01530 surv=0.39939 task1=0.26146 joint=0.25814 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.44
+[HB] epoch=004 split=train step=5200/8407 loss_total=1.00795 l1=0.90071 l2=0.04738 surv=0.42158 task1=0.23838 joint=0.24076 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.44
+[HB] epoch=004 split=train step=5300/8407 loss_total=0.91865 l1=0.84658 l2=0.03184 surv=0.43597 task1=0.20500 joint=0.20561 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.45
+[HB] epoch=004 split=train step=5400/8407 loss_total=3.52826 l1=0.76324 l2=1.22168 surv=0.24173 task1=0.23021 joint=0.29131 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.45
+[HB] epoch=004 split=train step=5500/8407 loss_total=1.15693 l1=0.93055 l2=0.10002 surv=0.50860 task1=0.21259 joint=0.20936 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.44
+[HB] epoch=004 split=train step=5600/8407 loss_total=1.06731 l1=0.79302 l2=0.12119 surv=0.34461 task1=0.26513 joint=0.18328 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.44
+[HB] epoch=004 split=train step=5700/8407 loss_total=0.94821 l1=0.92375 l2=0.01081 surv=0.38122 task1=0.27439 joint=0.26814 lambda=2.2633 lr_min=9.99e-06 lr_max=9.99e-05 it/s=21.43
+[HB] epoch=004 split=train step=5800/8407 loss_total=0.44559 l1=0.38179 l2=0.02819 surv=0.21825 task1=0.08321 joint=0.08033 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.43
+[HB] epoch=004 split=train step=5900/8407 loss_total=1.35454 l1=1.19966 l2=0.06843 surv=0.44841 task1=0.37487 joint=0.37638 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.42
+[HB] epoch=004 split=train step=6000/8407 loss_total=1.07272 l1=1.03777 l2=0.01544 surv=0.39912 task1=0.32474 joint=0.31391 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.42
+[HB] epoch=004 split=train step=6100/8407 loss_total=2.08995 l1=1.23958 l2=0.37572 surv=0.33137 task1=0.42400 joint=0.48421 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.41
+[HB] epoch=004 split=train step=6200/8407 loss_total=1.57577 l1=1.51107 l2=0.02859 surv=0.51460 task1=0.50184 joint=0.49463 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.41
+[HB] epoch=004 split=train step=6300/8407 loss_total=1.59632 l1=0.74343 l2=0.37684 surv=0.27588 task1=0.30908 joint=0.15846 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.41
+[HB] epoch=004 split=train step=6400/8407 loss_total=1.28883 l1=1.21739 l2=0.03156 surv=0.39537 task1=0.41197 joint=0.41005 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.40
+[HB] epoch=004 split=train step=6500/8407 loss_total=1.43788 l1=1.18535 l2=0.11158 surv=0.54162 task1=0.32333 joint=0.32040 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.40
+[HB] epoch=004 split=train step=6600/8407 loss_total=1.44260 l1=1.11703 l2=0.14385 surv=0.38905 task1=0.36275 joint=0.36523 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.40
+[HB] epoch=004 split=train step=6700/8407 loss_total=0.68683 l1=0.66400 l2=0.01009 surv=0.40929 task1=0.12836 joint=0.12635 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.40
+[HB] epoch=004 split=train step=6800/8407 loss_total=1.63265 l1=1.58998 l2=0.01885 surv=0.52635 task1=0.53831 joint=0.52532 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.40
+[HB] epoch=004 split=train step=6900/8407 loss_total=0.73704 l1=0.66909 l2=0.03002 surv=0.19282 task1=0.23470 joint=0.24157 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.40
+[HB] epoch=004 split=train step=7000/8407 loss_total=0.98908 l1=0.84021 l2=0.06578 surv=0.39598 task1=0.22381 joint=0.22041 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.39
+[HB] epoch=004 split=train step=7100/8407 loss_total=2.88016 l1=1.29523 l2=0.70027 surv=0.46275 task1=0.44492 joint=0.38757 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.39
+[HB] epoch=004 split=train step=7200/8407 loss_total=0.65060 l1=0.62120 l2=0.01299 surv=0.21452 task1=0.20497 joint=0.20171 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.38
+[HB] epoch=004 split=train step=7300/8407 loss_total=1.44876 l1=1.41383 l2=0.01544 surv=0.55055 task1=0.43113 joint=0.43214 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.38
+[HB] epoch=004 split=train step=7400/8407 loss_total=1.34376 l1=1.30598 l2=0.01669 surv=0.58748 task1=0.36220 joint=0.35630 lambda=2.2633 lr_min=9.98e-06 lr_max=9.98e-05 it/s=21.37
+[HB] epoch=004 split=train step=7500/8407 loss_total=0.58466 l1=0.54331 l2=0.01827 surv=0.20569 task1=0.17121 joint=0.16641 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.38
+[HB] epoch=004 split=train step=7600/8407 loss_total=0.91838 l1=0.87321 l2=0.01996 surv=0.43073 task1=0.22181 joint=0.22067 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.39
+[HB] epoch=004 split=train step=7700/8407 loss_total=0.55752 l1=0.43612 l2=0.05364 surv=0.19433 task1=0.11712 joint=0.12467 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.39
+[HB] epoch=004 split=train step=7800/8407 loss_total=0.50454 l1=0.45919 l2=0.02004 surv=0.17986 task1=0.14043 joint=0.13890 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.40
+[HB] epoch=004 split=train step=7900/8407 loss_total=1.21072 l1=1.18213 l2=0.01263 surv=0.43164 task1=0.37675 joint=0.37375 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.41
+[HB] epoch=004 split=train step=8000/8407 loss_total=1.12065 l1=1.08260 l2=0.01681 surv=0.32037 task1=0.38119 joint=0.38103 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.41
+[HB] epoch=004 split=train step=8100/8407 loss_total=0.93560 l1=0.87807 l2=0.02542 surv=0.35923 task1=0.26035 joint=0.25848 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.41
+[HB] epoch=004 split=train step=8200/8407 loss_total=0.84536 l1=0.75240 l2=0.04107 surv=0.28450 task1=0.23222 joint=0.23567 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.41
+[HB] epoch=004 split=train step=8300/8407 loss_total=1.09208 l1=1.03654 l2=0.02454 surv=0.33711 task1=0.35482 joint=0.34462 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.42
+[HB] epoch=004 split=train step=8400/8407 loss_total=1.93289 l1=1.74427 l2=0.08334 surv=0.49923 task1=0.61890 joint=0.62614 lambda=2.2633 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.43
+Epoch 004 | monitor=legacy val_legacy=0.60227 val_aligned=1.63102 surv=0.39250 task1=0.34531 joint=0.34191 task2=0.20977 lambda=2.2633->2.6281
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=005 split=train step=1 loss_total=0.84020 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=005 split=train step=1 loss_total=4.36057 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[HB] epoch=005 split=train step=100/8407 loss_total=1.19311 l1=1.13587 l2=0.02178 surv=0.32720 task1=0.40161 joint=0.40706 lambda=2.6281 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.20
+[HB] epoch=005 split=train step=200/8407 loss_total=3.22384 l1=1.44603 l2=0.67646 surv=0.32476 task1=0.48250 joint=0.63877 lambda=2.6281 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.22
+[HB] epoch=005 split=train step=300/8407 loss_total=1.10878 l1=1.06127 l2=0.01808 surv=0.39966 task1=0.32924 joint=0.33237 lambda=2.6281 lr_min=9.97e-06 lr_max=9.97e-05 it/s=21.20
+[HB] epoch=005 split=train step=400/8407 loss_total=1.15360 l1=1.10478 l2=0.01858 surv=0.38717 task1=0.35925 joint=0.35835 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.19
+[HB] epoch=005 split=train step=500/8407 loss_total=1.14703 l1=1.10510 l2=0.01596 surv=0.36475 task1=0.36903 joint=0.37132 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.19
+[HB] epoch=005 split=train step=600/8407 loss_total=0.80746 l1=0.74716 l2=0.02294 surv=0.31808 task1=0.21430 joint=0.21477 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.19
+[HB] epoch=005 split=train step=700/8407 loss_total=0.76900 l1=0.74296 l2=0.00991 surv=0.41261 task1=0.16714 joint=0.16320 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.18
+[HB] epoch=005 split=train step=800/8407 loss_total=2.27225 l1=2.09551 l2=0.06725 surv=0.68737 task1=0.69430 joint=0.71384 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.17
+[HB] epoch=005 split=train step=900/8407 loss_total=0.90518 l1=0.78789 l2=0.04463 surv=0.29090 task1=0.24862 joint=0.24838 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.14
+[HB] epoch=005 split=train step=1000/8407 loss_total=1.99737 l1=1.07514 l2=0.35091 surv=0.46906 task1=0.31246 joint=0.29362 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.10
+[HB] epoch=005 split=train step=1100/8407 loss_total=1.00732 l1=0.92703 l2=0.03055 surv=0.28276 task1=0.32572 joint=0.31855 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.09
+[HB] epoch=005 split=train step=1200/8407 loss_total=1.52306 l1=1.48773 l2=0.01344 surv=0.58183 task1=0.45519 joint=0.45071 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.08
+[HB] epoch=005 split=train step=1300/8407 loss_total=0.59599 l1=0.55168 l2=0.01686 surv=0.30577 task1=0.12358 joint=0.12232 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.11
+[HB] epoch=005 split=train step=1400/8407 loss_total=0.85015 l1=0.79177 l2=0.02221 surv=0.28900 task1=0.25219 joint=0.25059 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.11
+[HB] epoch=005 split=train step=1500/8407 loss_total=1.33347 l1=1.22034 l2=0.04304 surv=0.47711 task1=0.37287 joint=0.37037 lambda=2.6281 lr_min=9.96e-06 lr_max=9.96e-05 it/s=21.11
+[HB] epoch=005 split=train step=1600/8407 loss_total=0.90320 l1=0.85556 l2=0.01813 surv=0.28752 task1=0.28689 joint=0.28114 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.11
+[HB] epoch=005 split=train step=1700/8407 loss_total=0.93786 l1=0.89198 l2=0.01746 surv=0.27499 task1=0.30852 joint=0.30848 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.11
+[HB] epoch=005 split=train step=1800/8407 loss_total=3.07822 l1=1.68534 l2=0.52999 surv=0.45955 task1=0.82460 joint=0.40119 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.15
+[HB] epoch=005 split=train step=1900/8407 loss_total=2.30815 l1=0.78203 l2=0.58069 surv=0.27231 task1=0.31151 joint=0.19821 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.15
+[HB] epoch=005 split=train step=2000/8407 loss_total=1.05791 l1=0.94562 l2=0.04273 surv=0.36724 task1=0.30793 joint=0.27045 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.16
+[HB] epoch=005 split=train step=2100/8407 loss_total=0.85198 l1=0.80307 l2=0.01861 surv=0.27687 task1=0.26117 joint=0.26503 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.16
+[HB] epoch=005 split=train step=2200/8407 loss_total=0.66303 l1=0.63502 l2=0.01066 surv=0.28159 task1=0.18122 joint=0.17221 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.16
+[HB] epoch=005 split=train step=2300/8407 loss_total=1.20603 l1=1.13009 l2=0.02889 surv=0.30565 task1=0.40898 joint=0.41546 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.16
+[HB] epoch=005 split=train step=2400/8407 loss_total=1.18947 l1=1.14393 l2=0.01733 surv=0.47330 task1=0.33606 joint=0.33457 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.16
+[HB] epoch=005 split=train step=2500/8407 loss_total=3.01505 l1=1.19599 l2=0.69215 surv=0.33773 task1=0.44838 joint=0.40987 lambda=2.6281 lr_min=9.95e-06 lr_max=9.95e-05 it/s=21.16
+[HB] epoch=005 split=train step=2600/8407 loss_total=1.23658 l1=1.19745 l2=0.01489 surv=0.41932 task1=0.38936 joint=0.38877 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.16
+[HB] epoch=005 split=train step=2700/8407 loss_total=1.37102 l1=1.27723 l2=0.03569 surv=0.41718 task1=0.43054 joint=0.42952 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.16
+[HB] epoch=005 split=train step=2800/8407 loss_total=1.51050 l1=1.43798 l2=0.02759 surv=0.53772 task1=0.44930 joint=0.45096 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.16
+[HB] epoch=005 split=train step=2900/8407 loss_total=1.21415 l1=1.15054 l2=0.02420 surv=0.41911 task1=0.36452 joint=0.36691 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.16
+[HB] epoch=005 split=train step=3000/8407 loss_total=0.71611 l1=0.65318 l2=0.02394 surv=0.32823 task1=0.16230 joint=0.16266 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.17
+[HB] epoch=005 split=train step=3100/8407 loss_total=1.11239 l1=1.05733 l2=0.02095 surv=0.37736 task1=0.33864 joint=0.34134 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.18
+[HB] epoch=005 split=train step=3200/8407 loss_total=0.69334 l1=0.64851 l2=0.01706 surv=0.33757 task1=0.15802 joint=0.15292 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.18
+[HB] epoch=005 split=train step=3300/8407 loss_total=0.93133 l1=0.86464 l2=0.02537 surv=0.31669 task1=0.27342 joint=0.27453 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.18
+[HB] epoch=005 split=train step=3400/8407 loss_total=1.07515 l1=1.04056 l2=0.01316 surv=0.39529 task1=0.32465 joint=0.32062 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.18
+[HB] epoch=005 split=train step=3500/8407 loss_total=0.63294 l1=0.55533 l2=0.02953 surv=0.26693 task1=0.14281 joint=0.14559 lambda=2.6281 lr_min=9.94e-06 lr_max=9.94e-05 it/s=21.18
+[HB] epoch=005 split=train step=3600/8407 loss_total=1.52423 l1=1.32586 l2=0.07548 surv=0.46359 task1=0.42778 joint=0.43449 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.18
+[HB] epoch=005 split=train step=3700/8407 loss_total=0.76936 l1=0.72817 l2=0.01567 surv=0.29324 task1=0.21779 joint=0.21714 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.17
+[HB] epoch=005 split=train step=3800/8407 loss_total=1.08559 l1=0.99200 l2=0.03561 surv=0.41429 task1=0.28534 joint=0.29237 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.18
+[HB] epoch=005 split=train step=3900/8407 loss_total=0.90107 l1=0.86580 l2=0.01342 surv=0.32192 task1=0.27070 joint=0.27318 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.19
+[HB] epoch=005 split=train step=4000/8407 loss_total=1.46588 l1=1.40039 l2=0.02492 surv=0.50995 task1=0.44298 joint=0.44746 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.22
+[HB] epoch=005 split=train step=4100/8407 loss_total=1.11566 l1=1.08038 l2=0.01343 surv=0.40976 task1=0.35108 joint=0.31954 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.24
+[HB] epoch=005 split=train step=4200/8407 loss_total=1.04199 l1=0.94614 l2=0.03647 surv=0.28603 task1=0.33090 joint=0.32921 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.25
+[HB] epoch=005 split=train step=4300/8407 loss_total=1.39889 l1=1.35592 l2=0.01635 surv=0.43058 task1=0.46527 joint=0.46007 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.27
+[HB] epoch=005 split=train step=4400/8407 loss_total=1.19787 l1=1.16895 l2=0.01100 surv=0.45001 task1=0.36400 joint=0.35494 lambda=2.6281 lr_min=9.93e-06 lr_max=9.93e-05 it/s=21.27
+[HB] epoch=005 split=train step=4500/8407 loss_total=2.09673 l1=1.13455 l2=0.36611 surv=0.26804 task1=0.35394 joint=0.51257 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=4600/8407 loss_total=1.64617 l1=1.53245 l2=0.04327 surv=0.53535 task1=0.49630 joint=0.50081 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=4700/8407 loss_total=1.00728 l1=0.97966 l2=0.01051 surv=0.47430 task1=0.25444 joint=0.25093 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=4800/8407 loss_total=2.47302 l1=1.11163 l2=0.51801 surv=0.40584 task1=0.35386 joint=0.35193 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=4900/8407 loss_total=1.79842 l1=1.71680 l2=0.03106 surv=0.55903 task1=0.57784 joint=0.57993 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=5000/8407 loss_total=6.77761 l1=1.28883 l2=2.08848 surv=0.36844 task1=0.41798 joint=0.50242 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=5100/8407 loss_total=1.69115 l1=1.59493 l2=0.03661 surv=0.42312 task1=0.58616 joint=0.58564 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=5200/8407 loss_total=1.12224 l1=1.06661 l2=0.02117 surv=0.41478 task1=0.35575 joint=0.29608 lambda=2.6281 lr_min=9.92e-06 lr_max=9.92e-05 it/s=21.27
+[HB] epoch=005 split=train step=5300/8407 loss_total=4.74382 l1=1.05099 l2=1.40512 surv=0.41870 task1=0.31286 joint=0.31943 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.27
+[HB] epoch=005 split=train step=5400/8407 loss_total=0.77468 l1=0.74692 l2=0.01056 surv=0.33118 task1=0.20813 joint=0.20761 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.27
+[HB] epoch=005 split=train step=5500/8407 loss_total=1.22858 l1=1.17759 l2=0.01940 surv=0.51659 task1=0.33479 joint=0.32621 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.26
+[HB] epoch=005 split=train step=5600/8407 loss_total=1.05053 l1=1.02882 l2=0.00826 surv=0.35401 task1=0.33854 joint=0.33626 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.26
+[HB] epoch=005 split=train step=5700/8407 loss_total=1.32340 l1=1.27908 l2=0.01686 surv=0.64366 task1=0.33251 joint=0.30291 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.26
+[HB] epoch=005 split=train step=5800/8407 loss_total=0.96833 l1=0.89376 l2=0.02837 surv=0.31347 task1=0.29177 joint=0.28852 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.26
+[HB] epoch=005 split=train step=5900/8407 loss_total=3.13660 l1=0.59052 l2=0.96878 surv=0.26383 task1=0.12923 joint=0.19746 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.27
+[HB] epoch=005 split=train step=6000/8407 loss_total=1.17714 l1=1.12537 l2=0.01970 surv=0.30672 task1=0.40922 joint=0.40944 lambda=2.6281 lr_min=9.91e-06 lr_max=9.91e-05 it/s=21.29
+[HB] epoch=005 split=train step=6100/8407 loss_total=0.84831 l1=0.77442 l2=0.02811 surv=0.24334 task1=0.26426 joint=0.26681 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.30
+[HB] epoch=005 split=train step=6200/8407 loss_total=1.11522 l1=1.08043 l2=0.01324 surv=0.43396 task1=0.32684 joint=0.31962 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.30
+[HB] epoch=005 split=train step=6300/8407 loss_total=2.72306 l1=1.33116 l2=0.52962 surv=0.29560 task1=0.40436 joint=0.63120 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.30
+[HB] epoch=005 split=train step=6400/8407 loss_total=0.94117 l1=0.92503 l2=0.00614 surv=0.42657 task1=0.25114 joint=0.24732 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.29
+[HB] epoch=005 split=train step=6500/8407 loss_total=1.83314 l1=1.24843 l2=0.22248 surv=0.48712 task1=0.34069 joint=0.42062 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.29
+[HB] epoch=005 split=train step=6600/8407 loss_total=1.37363 l1=1.33947 l2=0.01300 surv=0.42547 task1=0.45676 joint=0.45723 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.29
+[HB] epoch=005 split=train step=6700/8407 loss_total=1.14194 l1=1.08151 l2=0.02299 surv=0.42112 task1=0.33470 joint=0.32569 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.28
+[HB] epoch=005 split=train step=6800/8407 loss_total=1.22470 l1=1.06944 l2=0.05907 surv=0.46626 task1=0.29942 joint=0.30377 lambda=2.6281 lr_min=9.90e-06 lr_max=9.90e-05 it/s=21.28
+[HB] epoch=005 split=train step=6900/8407 loss_total=1.25846 l1=1.20599 l2=0.01996 surv=0.44990 task1=0.39798 joint=0.35810 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.28
+[HB] epoch=005 split=train step=7000/8407 loss_total=1.26483 l1=1.21611 l2=0.01854 surv=0.32455 task1=0.44379 joint=0.44778 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.27
+[HB] epoch=005 split=train step=7100/8407 loss_total=0.97894 l1=0.94190 l2=0.01409 surv=0.48906 task1=0.22938 joint=0.22346 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.27
+[HB] epoch=005 split=train step=7200/8407 loss_total=1.16019 l1=1.07364 l2=0.03293 surv=0.61620 task1=0.23875 joint=0.21870 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.27
+[HB] epoch=005 split=train step=7300/8407 loss_total=0.80450 l1=0.77173 l2=0.01247 surv=0.35996 task1=0.20574 joint=0.20603 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.27
+[HB] epoch=005 split=train step=7400/8407 loss_total=0.98550 l1=0.94613 l2=0.01498 surv=0.40184 task1=0.27391 joint=0.27037 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.27
+[HB] epoch=005 split=train step=7500/8407 loss_total=1.00962 l1=0.90939 l2=0.03814 surv=0.34721 task1=0.28074 joint=0.28144 lambda=2.6281 lr_min=9.89e-06 lr_max=9.89e-05 it/s=21.26
+[HB] epoch=005 split=train step=7600/8407 loss_total=0.86051 l1=0.81881 l2=0.01587 surv=0.34086 task1=0.23796 joint=0.23999 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.26
+[HB] epoch=005 split=train step=7700/8407 loss_total=1.42918 l1=1.26244 l2=0.06344 surv=0.46549 task1=0.39216 joint=0.40480 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.26
+[HB] epoch=005 split=train step=7800/8407 loss_total=1.02092 l1=0.95098 l2=0.02661 surv=0.37123 task1=0.29036 joint=0.28939 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.25
+[HB] epoch=005 split=train step=7900/8407 loss_total=0.86338 l1=0.80612 l2=0.02179 surv=0.25482 task1=0.27509 joint=0.27621 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.25
+[HB] epoch=005 split=train step=8000/8407 loss_total=3.80597 l1=1.01415 l2=1.06229 surv=0.38875 task1=0.39600 joint=0.22940 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.25
+[HB] epoch=005 split=train step=8100/8407 loss_total=1.17437 l1=1.11781 l2=0.02152 surv=0.41676 task1=0.34976 joint=0.35128 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.25
+[HB] epoch=005 split=train step=8200/8407 loss_total=4.03058 l1=0.97668 l2=1.16201 surv=0.29081 task1=0.37515 joint=0.31072 lambda=2.6281 lr_min=9.88e-06 lr_max=9.88e-05 it/s=21.25
+[HB] epoch=005 split=train step=8300/8407 loss_total=0.83214 l1=0.81284 l2=0.00734 surv=0.27844 task1=0.26979 joint=0.26460 lambda=2.6281 lr_min=9.87e-06 lr_max=9.87e-05 it/s=21.26
+[HB] epoch=005 split=train step=8400/8407 loss_total=3.54738 l1=1.41287 l2=0.81218 surv=0.64807 task1=0.51900 joint=0.24580 lambda=2.6281 lr_min=9.87e-06 lr_max=9.87e-05 it/s=21.26
+Epoch 005 | monitor=legacy val_legacy=0.64057 val_aligned=1.85279 surv=0.39585 task1=0.35299 joint=0.35800 task2=0.24473 lambda=2.6281->3.0481
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=006 split=train step=1 loss_total=1.24463 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=006 split=train step=1 loss_total=0.90059 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[HB] epoch=006 split=train step=100/8407 loss_total=0.91133 l1=0.86244 l2=0.01604 surv=0.28613 task1=0.28706 joint=0.28925 lambda=3.0481 lr_min=9.87e-06 lr_max=9.87e-05 it/s=21.22
+[HB] epoch=006 split=train step=200/8407 loss_total=0.81304 l1=0.77075 l2=0.01387 surv=0.28610 task1=0.24263 joint=0.24202 lambda=3.0481 lr_min=9.87e-06 lr_max=9.87e-05 it/s=21.18
+[HB] epoch=006 split=train step=300/8407 loss_total=0.94028 l1=0.92172 l2=0.00609 surv=0.29319 task1=0.31604 joint=0.31249 lambda=3.0481 lr_min=9.87e-06 lr_max=9.87e-05 it/s=21.16
+[HB] epoch=006 split=train step=400/8407 loss_total=1.50552 l1=1.11445 l2=0.12830 surv=0.39829 task1=0.46319 joint=0.25297 lambda=3.0481 lr_min=9.87e-06 lr_max=9.87e-05 it/s=21.14
+[HB] epoch=006 split=train step=500/8407 loss_total=0.89795 l1=0.85371 l2=0.01451 surv=0.49194 task1=0.18227 joint=0.17950 lambda=3.0481 lr_min=9.86e-06 lr_max=9.86e-05 it/s=21.14
+[HB] epoch=006 split=train step=600/8407 loss_total=1.45132 l1=1.38899 l2=0.02045 surv=0.40831 task1=0.48859 joint=0.49209 lambda=3.0481 lr_min=9.86e-06 lr_max=9.86e-05 it/s=21.13
+[HB] epoch=006 split=train step=700/8407 loss_total=1.82760 l1=1.75140 l2=0.02500 surv=0.46697 task1=0.64961 joint=0.63482 lambda=3.0481 lr_min=9.86e-06 lr_max=9.86e-05 it/s=21.17
+[HB] epoch=006 split=train step=800/8407 loss_total=0.69077 l1=0.65620 l2=0.01134 surv=0.31333 task1=0.17261 joint=0.17026 lambda=3.0481 lr_min=9.86e-06 lr_max=9.86e-05 it/s=21.22
+[HB] epoch=006 split=train step=900/8407 loss_total=0.99996 l1=0.90606 l2=0.03081 surv=0.38980 task1=0.26148 joint=0.25478 lambda=3.0481 lr_min=9.86e-06 lr_max=9.86e-05 it/s=21.24
+[HB] epoch=006 split=train step=1000/8407 loss_total=1.42071 l1=1.40830 l2=0.00407 surv=0.53754 task1=0.44035 joint=0.43041 lambda=3.0481 lr_min=9.86e-06 lr_max=9.86e-05 it/s=21.25
+[HB] epoch=006 split=train step=1100/8407 loss_total=1.00440 l1=0.95474 l2=0.01629 surv=0.25254 task1=0.35133 joint=0.35086 lambda=3.0481 lr_min=9.85e-06 lr_max=9.85e-05 it/s=21.26
+[HB] epoch=006 split=train step=1200/8407 loss_total=1.62723 l1=1.59717 l2=0.00986 surv=0.54648 task1=0.54179 joint=0.50890 lambda=3.0481 lr_min=9.85e-06 lr_max=9.85e-05 it/s=21.26
+[HB] epoch=006 split=train step=1300/8407 loss_total=1.17653 l1=1.12561 l2=0.01671 surv=0.42932 task1=0.35062 joint=0.34567 lambda=3.0481 lr_min=9.85e-06 lr_max=9.85e-05 it/s=21.30
+[HB] epoch=006 split=train step=1400/8407 loss_total=4.00414 l1=1.39253 l2=0.85679 surv=0.49828 task1=0.57132 joint=0.32293 lambda=3.0481 lr_min=9.85e-06 lr_max=9.85e-05 it/s=21.32
+[HB] epoch=006 split=train step=1500/8407 loss_total=1.48360 l1=1.44543 l2=0.01252 surv=0.50637 task1=0.46955 joint=0.46951 lambda=3.0481 lr_min=9.85e-06 lr_max=9.85e-05 it/s=21.31
+[HB] epoch=006 split=train step=1600/8407 loss_total=0.82480 l1=0.72283 l2=0.03345 surv=0.28313 task1=0.24798 joint=0.19172 lambda=3.0481 lr_min=9.85e-06 lr_max=9.85e-05 it/s=21.32
+[HB] epoch=006 split=train step=1700/8407 loss_total=0.91980 l1=0.89593 l2=0.00783 surv=0.34590 task1=0.27538 joint=0.27465 lambda=3.0481 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.32
+[HB] epoch=006 split=train step=1800/8407 loss_total=1.35094 l1=1.31325 l2=0.01237 surv=0.44315 task1=0.43594 joint=0.43416 lambda=3.0481 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.32
+[HB] epoch=006 split=train step=1900/8407 loss_total=1.06926 l1=0.96833 l2=0.03311 surv=0.25700 task1=0.35242 joint=0.35890 lambda=3.0481 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.32
+[HB] epoch=006 split=train step=2000/8407 loss_total=1.25746 l1=1.17285 l2=0.02776 surv=0.49125 task1=0.34558 joint=0.33602 lambda=3.0481 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.32
+[HB] epoch=006 split=train step=2100/8407 loss_total=5.33270 l1=1.31757 l2=1.31724 surv=0.39734 task1=0.47112 joint=0.44911 lambda=3.0481 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.33
+[HB] epoch=006 split=train step=2200/8407 loss_total=0.77109 l1=0.74898 l2=0.00726 surv=0.29223 task1=0.22872 joint=0.22802 lambda=3.0481 lr_min=9.84e-06 lr_max=9.84e-05 it/s=21.33
+[HB] epoch=006 split=train step=2300/8407 loss_total=1.10192 l1=0.96017 l2=0.04650 surv=0.34831 task1=0.30778 joint=0.30408 lambda=3.0481 lr_min=9.83e-06 lr_max=9.83e-05 it/s=21.33
+[HB] epoch=006 split=train step=2400/8407 loss_total=0.97099 l1=0.90105 l2=0.02294 surv=0.35878 task1=0.27007 joint=0.27221 lambda=3.0481 lr_min=9.83e-06 lr_max=9.83e-05 it/s=21.33
+[HB] epoch=006 split=train step=2500/8407 loss_total=1.15147 l1=1.04420 l2=0.03519 surv=0.30071 task1=0.36873 joint=0.37476 lambda=3.0481 lr_min=9.83e-06 lr_max=9.83e-05 it/s=21.32
+[HB] epoch=006 split=train step=2600/8407 loss_total=0.65652 l1=0.63923 l2=0.00567 surv=0.32074 task1=0.16043 joint=0.15805 lambda=3.0481 lr_min=9.83e-06 lr_max=9.83e-05 it/s=21.33
+[HB] epoch=006 split=train step=2700/8407 loss_total=1.81287 l1=1.67807 l2=0.04422 surv=0.62496 task1=0.52759 joint=0.52552 lambda=3.0481 lr_min=9.83e-06 lr_max=9.83e-05 it/s=21.33
+[HB] epoch=006 split=train step=2800/8407 loss_total=1.16828 l1=1.09069 l2=0.02545 surv=0.44135 task1=0.32936 joint=0.31998 lambda=3.0481 lr_min=9.83e-06 lr_max=9.83e-05 it/s=21.33
+[HB] epoch=006 split=train step=2900/8407 loss_total=1.22248 l1=1.15983 l2=0.02055 surv=0.36943 task1=0.39417 joint=0.39623 lambda=3.0481 lr_min=9.82e-06 lr_max=9.82e-05 it/s=21.32
+[HB] epoch=006 split=train step=3000/8407 loss_total=1.36022 l1=1.31431 l2=0.01506 surv=0.50648 task1=0.40655 joint=0.40127 lambda=3.0481 lr_min=9.82e-06 lr_max=9.82e-05 it/s=21.32
+[HB] epoch=006 split=train step=3100/8407 loss_total=0.79161 l1=0.77490 l2=0.00548 surv=0.37186 task1=0.20390 joint=0.19913 lambda=3.0481 lr_min=9.82e-06 lr_max=9.82e-05 it/s=21.34
+[HB] epoch=006 split=train step=3200/8407 loss_total=0.51258 l1=0.48719 l2=0.00833 surv=0.20659 task1=0.14028 joint=0.14033 lambda=3.0481 lr_min=9.82e-06 lr_max=9.82e-05 it/s=21.34
+[HB] epoch=006 split=train step=3300/8407 loss_total=0.95950 l1=0.92936 l2=0.00989 surv=0.45578 task1=0.23832 joint=0.23526 lambda=3.0481 lr_min=9.82e-06 lr_max=9.82e-05 it/s=21.36
+[HB] epoch=006 split=train step=3400/8407 loss_total=0.92401 l1=0.89972 l2=0.00797 surv=0.43662 task1=0.23242 joint=0.23069 lambda=3.0481 lr_min=9.82e-06 lr_max=9.82e-05 it/s=21.38
+[HB] epoch=006 split=train step=3500/8407 loss_total=0.86108 l1=0.84264 l2=0.00605 surv=0.31083 task1=0.26647 joint=0.26535 lambda=3.0481 lr_min=9.81e-06 lr_max=9.81e-05 it/s=21.39
+[HB] epoch=006 split=train step=3600/8407 loss_total=0.54347 l1=0.53577 l2=0.00252 surv=0.27555 task1=0.13147 joint=0.12875 lambda=3.0481 lr_min=9.81e-06 lr_max=9.81e-05 it/s=21.39
+[HB] epoch=006 split=train step=3700/8407 loss_total=0.83510 l1=0.80928 l2=0.00847 surv=0.33738 task1=0.23568 joint=0.23622 lambda=3.0481 lr_min=9.81e-06 lr_max=9.81e-05 it/s=21.38
+[HB] epoch=006 split=train step=3800/8407 loss_total=0.87107 l1=0.80414 l2=0.02196 surv=0.32103 task1=0.24076 joint=0.24236 lambda=3.0481 lr_min=9.81e-06 lr_max=9.81e-05 it/s=21.37
+[HB] epoch=006 split=train step=3900/8407 loss_total=1.05311 l1=1.01133 l2=0.01371 surv=0.36727 task1=0.32333 joint=0.32073 lambda=3.0481 lr_min=9.81e-06 lr_max=9.81e-05 it/s=21.38
+[HB] epoch=006 split=train step=4000/8407 loss_total=0.88630 l1=0.84686 l2=0.01294 surv=0.33212 task1=0.26857 joint=0.24617 lambda=3.0481 lr_min=9.80e-06 lr_max=9.80e-05 it/s=21.40
+[HB] epoch=006 split=train step=4100/8407 loss_total=1.53372 l1=1.49451 l2=0.01286 surv=0.57823 task1=0.46091 joint=0.45538 lambda=3.0481 lr_min=9.80e-06 lr_max=9.80e-05 it/s=21.42
+[HB] epoch=006 split=train step=4200/8407 loss_total=1.38115 l1=1.34524 l2=0.01178 surv=0.50089 task1=0.42699 joint=0.41736 lambda=3.0481 lr_min=9.80e-06 lr_max=9.80e-05 it/s=21.43
+[HB] epoch=006 split=train step=4300/8407 loss_total=0.58827 l1=0.55784 l2=0.00998 surv=0.29923 task1=0.12909 joint=0.12953 lambda=3.0481 lr_min=9.80e-06 lr_max=9.80e-05 it/s=21.45
+[HB] epoch=006 split=train step=4400/8407 loss_total=0.37652 l1=0.34007 l2=0.01196 surv=0.20199 task1=0.07004 joint=0.06804 lambda=3.0481 lr_min=9.80e-06 lr_max=9.80e-05 it/s=21.46
+[HB] epoch=006 split=train step=4500/8407 loss_total=1.02971 l1=0.88923 l2=0.04609 surv=0.34342 task1=0.26891 joint=0.27691 lambda=3.0481 lr_min=9.79e-06 lr_max=9.79e-05 it/s=21.47
+[HB] epoch=006 split=train step=4600/8407 loss_total=1.04604 l1=0.98999 l2=0.01839 surv=0.23351 task1=0.40089 joint=0.35559 lambda=3.0481 lr_min=9.79e-06 lr_max=9.79e-05 it/s=21.49
+[HB] epoch=006 split=train step=4700/8407 loss_total=1.23640 l1=1.19351 l2=0.01407 surv=0.37738 task1=0.41033 joint=0.40580 lambda=3.0481 lr_min=9.79e-06 lr_max=9.79e-05 it/s=21.50
+[HB] epoch=006 split=train step=4800/8407 loss_total=1.12242 l1=1.06355 l2=0.01931 surv=0.43384 task1=0.31637 joint=0.31335 lambda=3.0481 lr_min=9.79e-06 lr_max=9.79e-05 it/s=21.51
+[HB] epoch=006 split=train step=4900/8407 loss_total=1.12400 l1=1.07674 l2=0.01550 surv=0.42187 task1=0.32725 joint=0.32761 lambda=3.0481 lr_min=9.79e-06 lr_max=9.79e-05 it/s=21.52
+[HB] epoch=006 split=train step=5000/8407 loss_total=3.37518 l1=1.08235 l2=0.75221 surv=0.60278 task1=0.24716 joint=0.23241 lambda=3.0481 lr_min=9.79e-06 lr_max=9.79e-05 it/s=21.52
+[HB] epoch=006 split=train step=5100/8407 loss_total=1.06866 l1=1.00498 l2=0.02089 surv=0.23263 task1=0.40704 joint=0.36531 lambda=3.0481 lr_min=9.78e-06 lr_max=9.78e-05 it/s=21.51
+[HB] epoch=006 split=train step=5200/8407 loss_total=0.90353 l1=0.88306 l2=0.00672 surv=0.37613 task1=0.25607 joint=0.25086 lambda=3.0481 lr_min=9.78e-06 lr_max=9.78e-05 it/s=21.50
+[HB] epoch=006 split=train step=5300/8407 loss_total=0.44304 l1=0.43520 l2=0.00257 surv=0.23454 task1=0.10308 joint=0.09757 lambda=3.0481 lr_min=9.78e-06 lr_max=9.78e-05 it/s=21.49
+[HB] epoch=006 split=train step=5400/8407 loss_total=2.28637 l1=1.42036 l2=0.28411 surv=0.43068 task1=0.54617 joint=0.44351 lambda=3.0481 lr_min=9.78e-06 lr_max=9.78e-05 it/s=21.49
+[HB] epoch=006 split=train step=5500/8407 loss_total=0.73597 l1=0.71883 l2=0.00562 surv=0.29779 task1=0.21056 joint=0.21047 lambda=3.0481 lr_min=9.78e-06 lr_max=9.78e-05 it/s=21.48
+[HB] epoch=006 split=train step=5600/8407 loss_total=0.51450 l1=0.49764 l2=0.00553 surv=0.22240 task1=0.14000 joint=0.13523 lambda=3.0481 lr_min=9.77e-06 lr_max=9.77e-05 it/s=21.47
+[HB] epoch=006 split=train step=5700/8407 loss_total=1.13128 l1=1.00790 l2=0.04048 surv=0.37716 task1=0.33822 joint=0.29252 lambda=3.0481 lr_min=9.77e-06 lr_max=9.77e-05 it/s=21.47
+[HB] epoch=006 split=train step=5800/8407 loss_total=0.77027 l1=0.73960 l2=0.01006 surv=0.23305 task1=0.25180 joint=0.25474 lambda=3.0481 lr_min=9.77e-06 lr_max=9.77e-05 it/s=21.46
+[HB] epoch=006 split=train step=5900/8407 loss_total=1.56402 l1=1.48590 l2=0.02563 surv=0.46792 task1=0.50393 joint=0.51406 lambda=3.0481 lr_min=9.77e-06 lr_max=9.77e-05 it/s=21.46
+[HB] epoch=006 split=train step=6000/8407 loss_total=0.63427 l1=0.62339 l2=0.00357 surv=0.32046 task1=0.15346 joint=0.14947 lambda=3.0481 lr_min=9.77e-06 lr_max=9.77e-05 it/s=21.45
+[HB] epoch=006 split=train step=6100/8407 loss_total=1.22028 l1=1.18485 l2=0.01162 surv=0.41738 task1=0.38617 joint=0.38130 lambda=3.0481 lr_min=9.76e-06 lr_max=9.76e-05 it/s=21.45
+[HB] epoch=006 split=train step=6200/8407 loss_total=1.73981 l1=1.64340 l2=0.03163 surv=0.48257 task1=0.57834 joint=0.58249 lambda=3.0481 lr_min=9.76e-06 lr_max=9.76e-05 it/s=21.44
+[HB] epoch=006 split=train step=6300/8407 loss_total=1.11287 l1=1.05676 l2=0.01841 surv=0.45499 task1=0.30153 joint=0.30024 lambda=3.0481 lr_min=9.76e-06 lr_max=9.76e-05 it/s=21.44
+[HB] epoch=006 split=train step=6400/8407 loss_total=0.72015 l1=0.70005 l2=0.00660 surv=0.37130 task1=0.16465 joint=0.16410 lambda=3.0481 lr_min=9.76e-06 lr_max=9.76e-05 it/s=21.44
+[HB] epoch=006 split=train step=6500/8407 loss_total=1.13286 l1=1.07889 l2=0.01771 surv=0.37787 task1=0.35122 joint=0.34980 lambda=3.0481 lr_min=9.75e-06 lr_max=9.75e-05 it/s=21.44
+[HB] epoch=006 split=train step=6600/8407 loss_total=2.22092 l1=2.00886 l2=0.06957 surv=0.62750 task1=0.68535 joint=0.69601 lambda=3.0481 lr_min=9.75e-06 lr_max=9.75e-05 it/s=21.44
+[HB] epoch=006 split=train step=6700/8407 loss_total=0.69305 l1=0.64798 l2=0.01479 surv=0.31399 task1=0.16557 joint=0.16842 lambda=3.0481 lr_min=9.75e-06 lr_max=9.75e-05 it/s=21.43
+[HB] epoch=006 split=train step=6800/8407 loss_total=1.07289 l1=1.00137 l2=0.02346 surv=0.33527 task1=0.33049 joint=0.33562 lambda=3.0481 lr_min=9.75e-06 lr_max=9.75e-05 it/s=21.43
+[HB] epoch=006 split=train step=6900/8407 loss_total=0.74138 l1=0.71084 l2=0.01002 surv=0.27847 task1=0.21678 joint=0.21560 lambda=3.0481 lr_min=9.75e-06 lr_max=9.75e-05 it/s=21.43
+[HB] epoch=006 split=train step=7000/8407 loss_total=0.75570 l1=0.73964 l2=0.00527 surv=0.34733 task1=0.19710 joint=0.19521 lambda=3.0481 lr_min=9.74e-06 lr_max=9.74e-05 it/s=21.44
+[HB] epoch=006 split=train step=7100/8407 loss_total=0.91359 l1=0.80763 l2=0.03476 surv=0.34585 task1=0.23237 joint=0.22940 lambda=3.0481 lr_min=9.74e-06 lr_max=9.74e-05 it/s=21.45
+[HB] epoch=006 split=train step=7200/8407 loss_total=1.15418 l1=1.04805 l2=0.03482 surv=0.39607 task1=0.32610 joint=0.32587 lambda=3.0481 lr_min=9.74e-06 lr_max=9.74e-05 it/s=21.45
+[HB] epoch=006 split=train step=7300/8407 loss_total=0.93132 l1=0.84881 l2=0.02707 surv=0.36394 task1=0.24231 joint=0.24256 lambda=3.0481 lr_min=9.74e-06 lr_max=9.74e-05 it/s=21.45
+[HB] epoch=006 split=train step=7400/8407 loss_total=0.91372 l1=0.87717 l2=0.01199 surv=0.25307 task1=0.30963 joint=0.31447 lambda=3.0481 lr_min=9.74e-06 lr_max=9.74e-05 it/s=21.45
+[HB] epoch=006 split=train step=7500/8407 loss_total=1.88202 l1=1.61137 l2=0.08879 surv=0.47961 task1=0.71091 joint=0.42085 lambda=3.0481 lr_min=9.73e-06 lr_max=9.73e-05 it/s=21.45
+[HB] epoch=006 split=train step=7600/8407 loss_total=0.64450 l1=0.62060 l2=0.00784 surv=0.20775 task1=0.20673 joint=0.20612 lambda=3.0481 lr_min=9.73e-06 lr_max=9.73e-05 it/s=21.44
+[HB] epoch=006 split=train step=7700/8407 loss_total=3.06487 l1=1.05891 l2=0.65810 surv=0.39088 task1=0.37359 joint=0.29443 lambda=3.0481 lr_min=9.73e-06 lr_max=9.73e-05 it/s=21.44
+[HB] epoch=006 split=train step=7800/8407 loss_total=0.94378 l1=0.89409 l2=0.01630 surv=0.38658 task1=0.25867 joint=0.24883 lambda=3.0481 lr_min=9.73e-06 lr_max=9.73e-05 it/s=21.43
+[HB] epoch=006 split=train step=7900/8407 loss_total=0.52228 l1=0.50194 l2=0.00667 surv=0.32042 task1=0.10139 joint=0.08013 lambda=3.0481 lr_min=9.72e-06 lr_max=9.72e-05 it/s=21.43
+[HB] epoch=006 split=train step=8000/8407 loss_total=0.82138 l1=0.76726 l2=0.01776 surv=0.37458 task1=0.19696 joint=0.19572 lambda=3.0481 lr_min=9.72e-06 lr_max=9.72e-05 it/s=21.43
+[HB] epoch=006 split=train step=8100/8407 loss_total=3.06179 l1=1.69837 l2=0.44730 surv=0.47435 task1=0.66284 joint=0.56117 lambda=3.0481 lr_min=9.72e-06 lr_max=9.72e-05 it/s=21.42
+[HB] epoch=006 split=train step=8200/8407 loss_total=0.82894 l1=0.79365 l2=0.01157 surv=0.34198 task1=0.22814 joint=0.22353 lambda=3.0481 lr_min=9.72e-06 lr_max=9.72e-05 it/s=21.42
+[HB] epoch=006 split=train step=8300/8407 loss_total=4.82607 l1=1.76178 l2=1.00530 surv=0.44491 task1=0.47342 joint=0.84345 lambda=3.0481 lr_min=9.72e-06 lr_max=9.72e-05 it/s=21.42
+[HB] epoch=006 split=train step=8400/8407 loss_total=1.26825 l1=1.23112 l2=0.01218 surv=0.46376 task1=0.40977 joint=0.35758 lambda=3.0481 lr_min=9.71e-06 lr_max=9.71e-05 it/s=21.42
+Epoch 006 | monitor=legacy val_legacy=0.65568 val_aligned=2.02188 surv=0.39692 task1=0.35437 joint=0.35721 task2=0.25876 lambda=3.0481->3.5298
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=007 split=train step=1 loss_total=1.11492 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=007 split=train step=1 loss_total=0.82711 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[HB] epoch=007 split=train step=100/8407 loss_total=1.45733 l1=1.42555 l2=0.00900 surv=0.47051 task1=0.48030 joint=0.47473 lambda=3.5298 lr_min=9.71e-06 lr_max=9.71e-05 it/s=21.83
+[HB] epoch=007 split=train step=200/8407 loss_total=0.46181 l1=0.44845 l2=0.00379 surv=0.19069 task1=0.12964 joint=0.12812 lambda=3.5298 lr_min=9.71e-06 lr_max=9.71e-05 it/s=21.52
+[HB] epoch=007 split=train step=300/8407 loss_total=0.88109 l1=0.77383 l2=0.03039 surv=0.32662 task1=0.22221 joint=0.22500 lambda=3.5298 lr_min=9.71e-06 lr_max=9.71e-05 it/s=21.40
+[HB] epoch=007 split=train step=400/8407 loss_total=0.74975 l1=0.72264 l2=0.00768 surv=0.32212 task1=0.20088 joint=0.19964 lambda=3.5298 lr_min=9.70e-06 lr_max=9.70e-05 it/s=21.37
+[HB] epoch=007 split=train step=500/8407 loss_total=1.44413 l1=1.30274 l2=0.04006 surv=0.37897 task1=0.45464 joint=0.46913 lambda=3.5298 lr_min=9.70e-06 lr_max=9.70e-05 it/s=21.43
+[HB] epoch=007 split=train step=600/8407 loss_total=1.03187 l1=1.00916 l2=0.00644 surv=0.30447 task1=0.35623 joint=0.34846 lambda=3.5298 lr_min=9.70e-06 lr_max=9.70e-05 it/s=21.51
+[HB] epoch=007 split=train step=700/8407 loss_total=0.87379 l1=0.81071 l2=0.01787 surv=0.37292 task1=0.22359 joint=0.21420 lambda=3.5298 lr_min=9.70e-06 lr_max=9.70e-05 it/s=21.48
+[HB] epoch=007 split=train step=800/8407 loss_total=1.51786 l1=1.42491 l2=0.02633 surv=0.53763 task1=0.45110 joint=0.43619 lambda=3.5298 lr_min=9.70e-06 lr_max=9.70e-05 it/s=21.50
+[HB] epoch=007 split=train step=900/8407 loss_total=1.09692 l1=1.04738 l2=0.01403 surv=0.51117 task1=0.26735 joint=0.26886 lambda=3.5298 lr_min=9.69e-06 lr_max=9.69e-05 it/s=21.55
+[HB] epoch=007 split=train step=1000/8407 loss_total=0.97567 l1=0.95316 l2=0.00638 surv=0.27014 task1=0.34148 joint=0.34155 lambda=3.5298 lr_min=9.69e-06 lr_max=9.69e-05 it/s=21.57
+[HB] epoch=007 split=train step=1100/8407 loss_total=7.59669 l1=0.69893 l2=1.95414 surv=0.28143 task1=0.24134 joint=0.17615 lambda=3.5298 lr_min=9.69e-06 lr_max=9.69e-05 it/s=21.59
+[HB] epoch=007 split=train step=1200/8407 loss_total=0.91678 l1=0.90007 l2=0.00473 surv=0.32016 task1=0.29112 joint=0.28878 lambda=3.5298 lr_min=9.69e-06 lr_max=9.69e-05 it/s=21.63
+[HB] epoch=007 split=train step=1300/8407 loss_total=2.49754 l1=0.95362 l2=0.43739 surv=0.34164 task1=0.36172 joint=0.25026 lambda=3.5298 lr_min=9.68e-06 lr_max=9.68e-05 it/s=21.63
+[HB] epoch=007 split=train step=1400/8407 loss_total=0.82508 l1=0.81045 l2=0.00414 surv=0.46716 task1=0.17268 joint=0.17061 lambda=3.5298 lr_min=9.68e-06 lr_max=9.68e-05 it/s=21.63
+[HB] epoch=007 split=train step=1500/8407 loss_total=1.56478 l1=1.51782 l2=0.01330 surv=0.46608 task1=0.53602 joint=0.51573 lambda=3.5298 lr_min=9.68e-06 lr_max=9.68e-05 it/s=21.62
+[HB] epoch=007 split=train step=1600/8407 loss_total=0.76829 l1=0.71174 l2=0.01602 surv=0.24456 task1=0.23375 joint=0.23343 lambda=3.5298 lr_min=9.68e-06 lr_max=9.68e-05 it/s=21.60
+[HB] epoch=007 split=train step=1700/8407 loss_total=2.15702 l1=2.06523 l2=0.02600 surv=0.49386 task1=0.78515 joint=0.78622 lambda=3.5298 lr_min=9.67e-06 lr_max=9.67e-05 it/s=21.58
+[HB] epoch=007 split=train step=1800/8407 loss_total=1.51905 l1=1.39312 l2=0.03567 surv=0.57974 task1=0.40351 joint=0.40987 lambda=3.5298 lr_min=9.67e-06 lr_max=9.67e-05 it/s=21.56
+[HB] epoch=007 split=train step=1900/8407 loss_total=0.65771 l1=0.63809 l2=0.00556 surv=0.38610 task1=0.12860 joint=0.12339 lambda=3.5298 lr_min=9.67e-06 lr_max=9.67e-05 it/s=21.55
+[HB] epoch=007 split=train step=2000/8407 loss_total=1.45720 l1=1.41373 l2=0.01231 surv=0.54796 task1=0.43400 joint=0.43177 lambda=3.5298 lr_min=9.67e-06 lr_max=9.67e-05 it/s=21.54
+[HB] epoch=007 split=train step=2100/8407 loss_total=1.39411 l1=1.32612 l2=0.01926 surv=0.47343 task1=0.42684 joint=0.42586 lambda=3.5298 lr_min=9.66e-06 lr_max=9.66e-05 it/s=21.56
+[HB] epoch=007 split=train step=2200/8407 loss_total=5.79164 l1=0.69653 l2=1.44345 surv=0.30508 task1=0.10823 joint=0.28322 lambda=3.5298 lr_min=9.66e-06 lr_max=9.66e-05 it/s=21.58
+[HB] epoch=007 split=train step=2300/8407 loss_total=0.97430 l1=0.89416 l2=0.02270 surv=0.31402 task1=0.28880 joint=0.29135 lambda=3.5298 lr_min=9.66e-06 lr_max=9.66e-05 it/s=21.59
+[HB] epoch=007 split=train step=2400/8407 loss_total=0.81061 l1=0.79827 l2=0.00350 surv=0.32624 task1=0.23633 joint=0.23570 lambda=3.5298 lr_min=9.66e-06 lr_max=9.66e-05 it/s=21.58
+[HB] epoch=007 split=train step=2500/8407 loss_total=0.54029 l1=0.51980 l2=0.00581 surv=0.26897 task1=0.12674 joint=0.12409 lambda=3.5298 lr_min=9.65e-06 lr_max=9.65e-05 it/s=21.57
+[HB] epoch=007 split=train step=2600/8407 loss_total=0.73649 l1=0.67168 l2=0.01836 surv=0.28601 task1=0.19254 joint=0.19313 lambda=3.5298 lr_min=9.65e-06 lr_max=9.65e-05 it/s=21.56
+[HB] epoch=007 split=train step=2700/8407 loss_total=0.83463 l1=0.77442 l2=0.01706 surv=0.38998 task1=0.19754 joint=0.18690 lambda=3.5298 lr_min=9.65e-06 lr_max=9.65e-05 it/s=21.55
+[HB] epoch=007 split=train step=2800/8407 loss_total=1.94656 l1=1.90137 l2=0.01280 surv=0.47701 task1=0.71036 joint=0.71400 lambda=3.5298 lr_min=9.65e-06 lr_max=9.65e-05 it/s=21.57
+[HB] epoch=007 split=train step=2900/8407 loss_total=1.19169 l1=1.09413 l2=0.02764 surv=0.32086 task1=0.39229 joint=0.38098 lambda=3.5298 lr_min=9.64e-06 lr_max=9.64e-05 it/s=21.59
+[HB] epoch=007 split=train step=3000/8407 loss_total=1.65041 l1=1.59044 l2=0.01699 surv=0.42622 task1=0.57986 joint=0.58436 lambda=3.5298 lr_min=9.64e-06 lr_max=9.64e-05 it/s=21.61
+[HB] epoch=007 split=train step=3100/8407 loss_total=1.00927 l1=0.96476 l2=0.01261 surv=0.35969 task1=0.30156 joint=0.30351 lambda=3.5298 lr_min=9.64e-06 lr_max=9.64e-05 it/s=21.58
+[HB] epoch=007 split=train step=3200/8407 loss_total=1.18291 l1=1.12152 l2=0.01739 surv=0.38200 task1=0.37125 joint=0.36827 lambda=3.5298 lr_min=9.64e-06 lr_max=9.64e-05 it/s=21.59
+[HB] epoch=007 split=train step=3300/8407 loss_total=0.68811 l1=0.60803 l2=0.02269 surv=0.21826 task1=0.22693 joint=0.16283 lambda=3.5298 lr_min=9.63e-06 lr_max=9.63e-05 it/s=21.60
+[HB] epoch=007 split=train step=3400/8407 loss_total=1.42053 l1=1.05065 l2=0.10479 surv=0.40285 task1=0.31760 joint=0.33020 lambda=3.5298 lr_min=9.63e-06 lr_max=9.63e-05 it/s=21.59
+[HB] epoch=007 split=train step=3500/8407 loss_total=1.41657 l1=1.33825 l2=0.02219 surv=0.44551 task1=0.44519 joint=0.44755 lambda=3.5298 lr_min=9.63e-06 lr_max=9.63e-05 it/s=21.58
+[HB] epoch=007 split=train step=3600/8407 loss_total=1.20552 l1=1.18272 l2=0.00646 surv=0.56278 task1=0.31253 joint=0.30741 lambda=3.5298 lr_min=9.63e-06 lr_max=9.63e-05 it/s=21.57
+[HB] epoch=007 split=train step=3700/8407 loss_total=0.59762 l1=0.58895 l2=0.00246 surv=0.22676 task1=0.19772 joint=0.16446 lambda=3.5298 lr_min=9.62e-06 lr_max=9.62e-05 it/s=21.56
+[HB] epoch=007 split=train step=3800/8407 loss_total=1.29008 l1=1.18704 l2=0.02919 surv=0.52979 task1=0.32668 joint=0.33057 lambda=3.5298 lr_min=9.62e-06 lr_max=9.62e-05 it/s=21.55
+[HB] epoch=007 split=train step=3900/8407 loss_total=7.25754 l1=1.94536 l2=1.50494 surv=0.61620 task1=0.55304 joint=0.77613 lambda=3.5298 lr_min=9.62e-06 lr_max=9.62e-05 it/s=21.57
+[HB] epoch=007 split=train step=4000/8407 loss_total=0.87782 l1=0.87229 l2=0.00157 surv=0.36416 task1=0.26345 joint=0.24468 lambda=3.5298 lr_min=9.62e-06 lr_max=9.62e-05 it/s=21.58
+[HB] epoch=007 split=train step=4100/8407 loss_total=0.79191 l1=0.77516 l2=0.00474 surv=0.35983 task1=0.20755 joint=0.20778 lambda=3.5298 lr_min=9.61e-06 lr_max=9.61e-05 it/s=21.47
+[HB] epoch=007 split=train step=4200/8407 loss_total=0.53163 l1=0.52544 l2=0.00176 surv=0.24764 task1=0.14220 joint=0.13560 lambda=3.5298 lr_min=9.61e-06 lr_max=9.61e-05 it/s=21.43
+[HB] epoch=007 split=train step=4300/8407 loss_total=1.55661 l1=1.52912 l2=0.00779 surv=0.46642 task1=0.55318 joint=0.50952 lambda=3.5298 lr_min=9.61e-06 lr_max=9.61e-05 it/s=21.43
+[HB] epoch=007 split=train step=4400/8407 loss_total=0.86428 l1=0.75267 l2=0.03162 surv=0.30753 task1=0.21918 joint=0.22596 lambda=3.5298 lr_min=9.61e-06 lr_max=9.61e-05 it/s=21.42
+[HB] epoch=007 split=train step=4500/8407 loss_total=1.59426 l1=1.49111 l2=0.02922 surv=0.46599 task1=0.50922 joint=0.51591 lambda=3.5298 lr_min=9.60e-06 lr_max=9.60e-05 it/s=21.42
+[HB] epoch=007 split=train step=4600/8407 loss_total=1.20700 l1=1.19001 l2=0.00481 surv=0.44623 task1=0.37492 joint=0.36886 lambda=3.5298 lr_min=9.60e-06 lr_max=9.60e-05 it/s=21.41
+[HB] epoch=007 split=train step=4700/8407 loss_total=0.70558 l1=0.69394 l2=0.00330 surv=0.24242 task1=0.27179 joint=0.17973 lambda=3.5298 lr_min=9.60e-06 lr_max=9.60e-05 it/s=21.40
+[HB] epoch=007 split=train step=4800/8407 loss_total=4.06340 l1=1.43970 l2=0.74330 surv=0.43356 task1=0.50559 joint=0.50054 lambda=3.5298 lr_min=9.60e-06 lr_max=9.60e-05 it/s=21.40
+[HB] epoch=007 split=train step=4900/8407 loss_total=0.96982 l1=0.91893 l2=0.01442 surv=0.37899 task1=0.32400 joint=0.21594 lambda=3.5298 lr_min=9.59e-06 lr_max=9.59e-05 it/s=21.40
+[HB] epoch=007 split=train step=5000/8407 loss_total=1.35845 l1=1.31887 l2=0.01121 surv=0.37797 task1=0.46951 joint=0.47139 lambda=3.5298 lr_min=9.59e-06 lr_max=9.59e-05 it/s=21.41
+[HB] epoch=007 split=train step=5100/8407 loss_total=4.71814 l1=0.68731 l2=1.14194 surv=0.34565 task1=0.15354 joint=0.18811 lambda=3.5298 lr_min=9.59e-06 lr_max=9.59e-05 it/s=21.41
+[HB] epoch=007 split=train step=5200/8407 loss_total=0.56650 l1=0.55745 l2=0.00256 surv=0.26060 task1=0.15062 joint=0.14623 lambda=3.5298 lr_min=9.59e-06 lr_max=9.59e-05 it/s=21.41
+[HB] epoch=007 split=train step=5300/8407 loss_total=1.32128 l1=1.18397 l2=0.03890 surv=0.38851 task1=0.39533 joint=0.40013 lambda=3.5298 lr_min=9.58e-06 lr_max=9.58e-05 it/s=21.42
+[HB] epoch=007 split=train step=5400/8407 loss_total=0.97723 l1=0.94045 l2=0.01042 surv=0.35159 task1=0.36363 joint=0.22523 lambda=3.5298 lr_min=9.58e-06 lr_max=9.58e-05 it/s=21.43
+[HB] epoch=007 split=train step=5500/8407 loss_total=0.46932 l1=0.46557 l2=0.00106 surv=0.25438 task1=0.10656 joint=0.10463 lambda=3.5298 lr_min=9.58e-06 lr_max=9.58e-05 it/s=21.42
+[HB] epoch=007 split=train step=5600/8407 loss_total=1.26002 l1=1.21571 l2=0.01255 surv=0.35705 task1=0.43010 joint=0.42856 lambda=3.5298 lr_min=9.57e-06 lr_max=9.57e-05 it/s=21.41
+[HB] epoch=007 split=train step=5700/8407 loss_total=1.13099 l1=0.98124 l2=0.04242 surv=0.43521 task1=0.27072 joint=0.27532 lambda=3.5298 lr_min=9.57e-06 lr_max=9.57e-05 it/s=21.40
+[HB] epoch=007 split=train step=5800/8407 loss_total=4.86473 l1=2.41257 l2=0.69470 surv=0.61791 task1=0.91460 joint=0.88006 lambda=3.5298 lr_min=9.57e-06 lr_max=9.57e-05 it/s=21.40
+[HB] epoch=007 split=train step=5900/8407 loss_total=0.90791 l1=0.81247 l2=0.02704 surv=0.21392 task1=0.29380 joint=0.30475 lambda=3.5298 lr_min=9.57e-06 lr_max=9.57e-05 it/s=21.39
+[HB] epoch=007 split=train step=6000/8407 loss_total=3.21109 l1=1.31512 l2=0.53713 surv=0.42325 task1=0.41202 joint=0.47985 lambda=3.5298 lr_min=9.56e-06 lr_max=9.56e-05 it/s=21.40
+[HB] epoch=007 split=train step=6100/8407 loss_total=0.94824 l1=0.91594 l2=0.00915 surv=0.37505 task1=0.27064 joint=0.27025 lambda=3.5298 lr_min=9.56e-06 lr_max=9.56e-05 it/s=21.41
+[HB] epoch=007 split=train step=6200/8407 loss_total=4.85920 l1=0.74852 l2=1.16456 surv=0.29066 task1=0.19504 joint=0.26282 lambda=3.5298 lr_min=9.56e-06 lr_max=9.56e-05 it/s=21.42
+[HB] epoch=007 split=train step=6300/8407 loss_total=0.85533 l1=0.83442 l2=0.00592 surv=0.38601 task1=0.22727 joint=0.22115 lambda=3.5298 lr_min=9.56e-06 lr_max=9.56e-05 it/s=21.43
+[HB] epoch=007 split=train step=6400/8407 loss_total=1.18303 l1=1.13006 l2=0.01500 surv=0.41428 task1=0.35749 joint=0.35829 lambda=3.5298 lr_min=9.55e-06 lr_max=9.55e-05 it/s=21.44
+[HB] epoch=007 split=train step=6500/8407 loss_total=0.71260 l1=0.69895 l2=0.00387 surv=0.47580 task1=0.11277 joint=0.11039 lambda=3.5298 lr_min=9.55e-06 lr_max=9.55e-05 it/s=21.45
+[HB] epoch=007 split=train step=6600/8407 loss_total=2.09853 l1=1.99800 l2=0.02848 surv=0.53177 task1=0.72991 joint=0.73632 lambda=3.5298 lr_min=9.55e-06 lr_max=9.55e-05 it/s=21.46
+[HB] epoch=007 split=train step=6700/8407 loss_total=1.42472 l1=1.38972 l2=0.00992 surv=0.49333 task1=0.44747 joint=0.44893 lambda=3.5298 lr_min=9.54e-06 lr_max=9.54e-05 it/s=21.46
+[HB] epoch=007 split=train step=6800/8407 loss_total=1.52450 l1=1.51256 l2=0.00338 surv=0.66298 task1=0.42795 joint=0.42163 lambda=3.5298 lr_min=9.54e-06 lr_max=9.54e-05 it/s=21.47
+[HB] epoch=007 split=train step=6900/8407 loss_total=2.58145 l1=1.52534 l2=0.29920 surv=0.35402 task1=0.61804 joint=0.55328 lambda=3.5298 lr_min=9.54e-06 lr_max=9.54e-05 it/s=21.48
+[HB] epoch=007 split=train step=7000/8407 loss_total=1.33517 l1=1.30431 l2=0.00874 surv=0.49255 task1=0.40618 joint=0.40558 lambda=3.5298 lr_min=9.54e-06 lr_max=9.54e-05 it/s=21.49
+[HB] epoch=007 split=train step=7100/8407 loss_total=1.28494 l1=1.27342 l2=0.00326 surv=0.51714 task1=0.39292 joint=0.36336 lambda=3.5298 lr_min=9.53e-06 lr_max=9.53e-05 it/s=21.50
+[HB] epoch=007 split=train step=7200/8407 loss_total=0.75420 l1=0.74994 l2=0.00121 surv=0.35617 task1=0.19809 joint=0.19568 lambda=3.5298 lr_min=9.53e-06 lr_max=9.53e-05 it/s=21.50
+[HB] epoch=007 split=train step=7300/8407 loss_total=1.06306 l1=1.04587 l2=0.00487 surv=0.68678 task1=0.22173 joint=0.13737 lambda=3.5298 lr_min=9.53e-06 lr_max=9.53e-05 it/s=21.50
+[HB] epoch=007 split=train step=7400/8407 loss_total=1.15172 l1=1.15172 l2=0.00000 surv=0.51404 task1=0.32335 joint=0.31432 lambda=3.5298 lr_min=9.52e-06 lr_max=9.52e-05 it/s=21.49
+[HB] epoch=007 split=train step=7500/8407 loss_total=0.72743 l1=0.70326 l2=0.00685 surv=0.27867 task1=0.21360 joint=0.21099 lambda=3.5298 lr_min=9.52e-06 lr_max=9.52e-05 it/s=21.49
+[HB] epoch=007 split=train step=7600/8407 loss_total=1.25566 l1=1.18497 l2=0.02003 surv=0.37734 task1=0.40110 joint=0.40653 lambda=3.5298 lr_min=9.52e-06 lr_max=9.52e-05 it/s=21.49
+[HB] epoch=007 split=train step=7700/8407 loss_total=0.92371 l1=0.87033 l2=0.01512 surv=0.30006 task1=0.28359 joint=0.28668 lambda=3.5298 lr_min=9.52e-06 lr_max=9.52e-05 it/s=21.49
+[HB] epoch=007 split=train step=7800/8407 loss_total=0.69002 l1=0.67139 l2=0.00528 surv=0.24809 task1=0.21258 joint=0.21072 lambda=3.5298 lr_min=9.51e-06 lr_max=9.51e-05 it/s=21.49
+[HB] epoch=007 split=train step=7900/8407 loss_total=1.17695 l1=1.12559 l2=0.01455 surv=0.30912 task1=0.40810 joint=0.40837 lambda=3.5298 lr_min=9.51e-06 lr_max=9.51e-05 it/s=21.49
+[HB] epoch=007 split=train step=8000/8407 loss_total=0.90909 l1=0.84150 l2=0.01915 surv=0.29298 task1=0.27033 joint=0.27819 lambda=3.5298 lr_min=9.51e-06 lr_max=9.51e-05 it/s=21.48
+[HB] epoch=007 split=train step=8100/8407 loss_total=1.12831 l1=1.11380 l2=0.00411 surv=0.36216 task1=0.37929 joint=0.37235 lambda=3.5298 lr_min=9.50e-06 lr_max=9.50e-05 it/s=21.48
+[HB] epoch=007 split=train step=8200/8407 loss_total=1.11450 l1=1.05558 l2=0.01669 surv=0.33481 task1=0.35948 joint=0.36129 lambda=3.5298 lr_min=9.50e-06 lr_max=9.50e-05 it/s=21.47
+[HB] epoch=007 split=train step=8300/8407 loss_total=0.81794 l1=0.79468 l2=0.00659 surv=0.27684 task1=0.25975 joint=0.25810 lambda=3.5298 lr_min=9.50e-06 lr_max=9.50e-05 it/s=21.47
+[HB] epoch=007 split=train step=8400/8407 loss_total=1.11462 l1=1.04695 l2=0.01917 surv=0.42376 task1=0.31263 joint=0.31056 lambda=3.5298 lr_min=9.49e-06 lr_max=9.49e-05 it/s=21.47
+Epoch 007 | monitor=legacy val_legacy=0.67562 val_aligned=2.23978 surv=0.40182 task1=0.36230 joint=0.36903 task2=0.27380 lambda=3.5298->4.0418
+[GPU-TRAIN-CHECK] rank=1 local_rank=1 epoch=008 split=train step=1 loss_total=0.78747 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[GPU-TRAIN-CHECK] rank=0 local_rank=0 epoch=008 split=train step=1 loss_total=0.49899 mem_alloc_mb=2680.9 mem_reserved_mb=2794.0
+[HB] epoch=008 split=train step=100/8407 loss_total=0.95794 l1=0.91097 l2=0.01162 surv=0.42480 task1=0.24217 joint=0.24400 lambda=4.0418 lr_min=9.49e-06 lr_max=9.49e-05 it/s=20.34
+[HB] epoch=008 split=train step=200/8407 loss_total=0.86364 l1=0.84817 l2=0.00383 surv=0.34803 task1=0.25250 joint=0.24764 lambda=4.0418 lr_min=9.49e-06 lr_max=9.49e-05 it/s=20.73
+[HB] epoch=008 split=train step=300/8407 loss_total=6.13276 l1=0.88383 l2=1.29866 surv=0.51942 task1=0.25696 joint=0.10745 lambda=4.0418 lr_min=9.49e-06 lr_max=9.49e-05 it/s=20.89
+[HB] epoch=008 split=train step=400/8407 loss_total=0.81687 l1=0.80890 l2=0.00197 surv=0.31907 task1=0.24684 joint=0.24298 lambda=4.0418 lr_min=9.48e-06 lr_max=9.48e-05 it/s=20.97
+[HB] epoch=008 split=train step=500/8407 loss_total=1.39270 l1=1.34093 l2=0.01281 surv=0.46171 task1=0.43870 joint=0.44052 lambda=4.0418 lr_min=9.48e-06 lr_max=9.48e-05 it/s=21.02
+[HB] epoch=008 split=train step=600/8407 loss_total=0.58041 l1=0.57126 l2=0.00226 surv=0.30543 task1=0.13323 joint=0.13259 lambda=4.0418 lr_min=9.48e-06 lr_max=9.48e-05 it/s=21.03
+[HB] epoch=008 split=train step=700/8407 loss_total=0.99656 l1=0.99044 l2=0.00151 surv=0.47848 task1=0.26026 joint=0.25169 lambda=4.0418 lr_min=9.47e-06 lr_max=9.47e-05 it/s=21.06
+[HB] epoch=008 split=train step=800/8407 loss_total=1.27096 l1=1.21966 l2=0.01269 surv=0.38181 task1=0.41873 joint=0.41912 lambda=4.0418 lr_min=9.47e-06 lr_max=9.47e-05 it/s=21.08
+[HB] epoch=008 split=train step=900/8407 loss_total=0.90552 l1=0.84649 l2=0.01460 surv=0.26147 task1=0.29238 joint=0.29263 lambda=4.0418 lr_min=9.47e-06 lr_max=9.47e-05 it/s=21.11
+[HB] epoch=008 split=train step=1000/8407 loss_total=0.70340 l1=0.69376 l2=0.00239 surv=0.36880 task1=0.16371 joint=0.16125 lambda=4.0418 lr_min=9.46e-06 lr_max=9.46e-05 it/s=21.15
+[HB] epoch=008 split=train step=1100/8407 loss_total=1.94102 l1=0.89931 l2=0.25773 surv=0.24506 task1=0.33775 joint=0.31650 lambda=4.0418 lr_min=9.46e-06 lr_max=9.46e-05 it/s=21.24
+[HB] epoch=008 split=train step=1200/8407 loss_total=0.79177 l1=0.75787 l2=0.00839 surv=0.35795 task1=0.20098 joint=0.19894 lambda=4.0418 lr_min=9.46e-06 lr_max=9.46e-05 it/s=21.27
+[HB] epoch=008 split=train step=1300/8407 loss_total=1.12945 l1=1.05758 l2=0.01778 surv=0.32200 task1=0.36455 joint=0.37103 lambda=4.0418 lr_min=9.46e-06 lr_max=9.46e-05 it/s=21.26
+[HB] epoch=008 split=train step=1400/8407 loss_total=0.98525 l1=0.96726 l2=0.00445 surv=0.59238 task1=0.19447 joint=0.18041 lambda=4.0418 lr_min=9.45e-06 lr_max=9.45e-05 it/s=21.27
+[HB] epoch=008 split=train step=1500/8407 loss_total=2.29103 l1=1.46486 l2=0.20441 surv=0.46316 task1=0.47037 joint=0.53134 lambda=4.0418 lr_min=9.45e-06 lr_max=9.45e-05 it/s=21.27
+[HB] epoch=008 split=train step=1600/8407 loss_total=0.78585 l1=0.76600 l2=0.00491 surv=0.31240 task1=0.22769 joint=0.22591 lambda=4.0418 lr_min=9.45e-06 lr_max=9.45e-05 it/s=21.32
+[HB] epoch=008 split=train step=1700/8407 loss_total=2.13488 l1=1.24110 l2=0.22113 surv=0.36112 task1=0.42021 joint=0.45977 lambda=4.0418 lr_min=9.44e-06 lr_max=9.44e-05 it/s=21.36
+[HB] epoch=008 split=train step=1800/8407 loss_total=0.88500 l1=0.83565 l2=0.01221 surv=0.27381 task1=0.28138 joint=0.28046 lambda=4.0418 lr_min=9.44e-06 lr_max=9.44e-05 it/s=21.38
+[HB] epoch=008 split=train step=1900/8407 loss_total=0.47937 l1=0.46662 l2=0.00316 surv=0.20053 task1=0.13336 joint=0.13273 lambda=4.0418 lr_min=9.44e-06 lr_max=9.44e-05 it/s=21.37
+[HB] epoch=008 split=train step=2000/8407 loss_total=1.22497 l1=1.15750 l2=0.01669 surv=0.33408 task1=0.41086 joint=0.41257 lambda=4.0418 lr_min=9.43e-06 lr_max=9.43e-05 it/s=21.37
+[HB] epoch=008 split=train step=2100/8407 loss_total=1.01894 l1=0.98898 l2=0.00741 surv=0.28651 task1=0.35047 joint=0.35200 lambda=4.0418 lr_min=9.43e-06 lr_max=9.43e-05 it/s=21.36
+[HB] epoch=008 split=train step=2200/8407 loss_total=0.49104 l1=0.41915 l2=0.01779 surv=0.22918 task1=0.09509 joint=0.09489 lambda=4.0418 lr_min=9.43e-06 lr_max=9.43e-05 it/s=21.37
+[HB] epoch=008 split=train step=2300/8407 loss_total=0.93958 l1=0.90298 l2=0.00905 surv=0.29107 task1=0.30623 joint=0.30568 lambda=4.0418 lr_min=9.42e-06 lr_max=9.42e-05 it/s=21.41
+[HB] epoch=008 split=train step=2400/8407 loss_total=2.18024 l1=1.69616 l2=0.11977 surv=0.58803 task1=0.54402 joint=0.56411 lambda=4.0418 lr_min=9.42e-06 lr_max=9.42e-05 it/s=21.43
+[HB] epoch=008 split=train step=2500/8407 loss_total=0.46249 l1=0.45389 l2=0.00213 surv=0.26058 task1=0.09797 joint=0.09535 lambda=4.0418 lr_min=9.42e-06 lr_max=9.42e-05 it/s=21.46
+[HB] epoch=008 split=train step=2600/8407 loss_total=0.65884 l1=0.62291 l2=0.00889 surv=0.32500 task1=0.14938 joint=0.14852 lambda=4.0418 lr_min=9.42e-06 lr_max=9.42e-05 it/s=21.48
+[HB] epoch=008 split=train step=2700/8407 loss_total=0.31511 l1=0.31138 l2=0.00092 surv=0.16476 task1=0.07451 joint=0.07211 lambda=4.0418 lr_min=9.41e-06 lr_max=9.41e-05 it/s=21.50
+[HB] epoch=008 split=train step=2800/8407 loss_total=0.60256 l1=0.58924 l2=0.00330 surv=0.28065 task1=0.15910 joint=0.14949 lambda=4.0418 lr_min=9.41e-06 lr_max=9.41e-05 it/s=21.53
+[HB] epoch=008 split=train step=2900/8407 loss_total=6.42595 l1=0.87257 l2=1.37398 surv=0.34476 task1=0.30256 joint=0.22526 lambda=4.0418 lr_min=9.41e-06 lr_max=9.41e-05 it/s=21.54
+[HB] epoch=008 split=train step=3000/8407 loss_total=2.08570 l1=1.84310 l2=0.06002 surv=0.46483 task1=0.67999 joint=0.69828 lambda=4.0418 lr_min=9.40e-06 lr_max=9.40e-05 it/s=21.56
+[HB] epoch=008 split=train step=3100/8407 loss_total=1.01947 l1=0.93084 l2=0.02193 surv=0.35813 task1=0.28698 joint=0.28573 lambda=4.0418 lr_min=9.40e-06 lr_max=9.40e-05 it/s=21.58
+[HB] epoch=008 split=train step=3200/8407 loss_total=0.67433 l1=0.66340 l2=0.00270 surv=0.33233 task1=0.16639 joint=0.16468 lambda=4.0418 lr_min=9.40e-06 lr_max=9.40e-05 it/s=21.59
+[HB] epoch=008 split=train step=3300/8407 loss_total=0.94988 l1=0.89924 l2=0.01253 surv=0.34227 task1=0.28504 joint=0.27193 lambda=4.0418 lr_min=9.39e-06 lr_max=9.39e-05 it/s=21.60
+[HB] epoch=008 split=train step=3400/8407 loss_total=2.37219 l1=1.27975 l2=0.27028 surv=0.36571 task1=0.52257 joint=0.39147 lambda=4.0418 lr_min=9.39e-06 lr_max=9.39e-05 it/s=21.60
+[HB] epoch=008 split=train step=3500/8407 loss_total=0.72302 l1=0.68417 l2=0.00961 surv=0.26200 task1=0.21125 joint=0.21092 lambda=4.0418 lr_min=9.39e-06 lr_max=9.39e-05 it/s=21.61
+[HB] epoch=008 split=train step=3600/8407 loss_total=0.70750 l1=0.69121 l2=0.00403 surv=0.25434 task1=0.21928 joint=0.21759 lambda=4.0418 lr_min=9.38e-06 lr_max=9.38e-05 it/s=21.60
+[HB] epoch=008 split=train step=3700/8407 loss_total=0.90508 l1=0.88834 l2=0.00414 surv=0.27873 task1=0.30632 joint=0.30328 lambda=4.0418 lr_min=9.38e-06 lr_max=9.38e-05 it/s=21.61
+[HB] epoch=008 split=train step=3800/8407 loss_total=0.66199 l1=0.64777 l2=0.00352 surv=0.26180 task1=0.19681 joint=0.18917 lambda=4.0418 lr_min=9.38e-06 lr_max=9.38e-05 it/s=21.62
+[HB] epoch=008 split=train step=3900/8407 loss_total=0.93883 l1=0.88461 l2=0.01342 surv=0.37239 task1=0.25840 joint=0.25381 lambda=4.0418 lr_min=9.37e-06 lr_max=9.37e-05 it/s=21.62
+[HB] epoch=008 split=train step=4000/8407 loss_total=0.99145 l1=0.97467 l2=0.00415 surv=0.37544 task1=0.30132 joint=0.29792 lambda=4.0418 lr_min=9.37e-06 lr_max=9.37e-05 it/s=21.63
+[HB] epoch=008 split=train step=4100/8407 loss_total=0.85706 l1=0.85042 l2=0.00164 surv=0.42812 task1=0.21398 joint=0.20831 lambda=4.0418 lr_min=9.37e-06 lr_max=9.37e-05 it/s=21.61
+[HB] epoch=008 split=train step=4200/8407 loss_total=1.78984 l1=1.69646 l2=0.02310 surv=0.50420 task1=0.59616 joint=0.59610 lambda=4.0418 lr_min=9.36e-06 lr_max=9.36e-05 it/s=21.61
+[HB] epoch=008 split=train step=4300/8407 loss_total=0.46663 l1=0.44911 l2=0.00433 surv=0.24618 task1=0.10209 joint=0.10085 lambda=4.0418 lr_min=9.36e-06 lr_max=9.36e-05 it/s=21.61
+[HB] epoch=008 split=train step=4400/8407 loss_total=1.14036 l1=1.13530 l2=0.00125 surv=0.37811 task1=0.38000 joint=0.37720 lambda=4.0418 lr_min=9.36e-06 lr_max=9.36e-05 it/s=21.61
+[HB] epoch=008 split=train step=4500/8407 loss_total=0.72978 l1=0.69136 l2=0.00950 surv=0.29124 task1=0.20043 joint=0.19970 lambda=4.0418 lr_min=9.35e-06 lr_max=9.35e-05 it/s=21.62
+[HB] epoch=008 split=train step=4600/8407 loss_total=1.09100 l1=1.06869 l2=0.00552 surv=0.33013 task1=0.36870 joint=0.36985 lambda=4.0418 lr_min=9.35e-06 lr_max=9.35e-05 it/s=21.62
+[HB] epoch=008 split=train step=4700/8407 loss_total=0.90245 l1=0.84201 l2=0.01495 surv=0.36716 task1=0.23834 joint=0.23650 lambda=4.0418 lr_min=9.35e-06 lr_max=9.35e-05 it/s=21.62
+[HB] epoch=008 split=train step=4800/8407 loss_total=6.61066 l1=1.22131 l2=1.33340 surv=0.32490 task1=0.46429 joint=0.43212 lambda=4.0418 lr_min=9.34e-06 lr_max=9.34e-05 it/s=21.62
+[HB] epoch=008 split=train step=4900/8407 loss_total=1.15589 l1=1.14582 l2=0.00249 surv=0.42358 task1=0.36165 joint=0.36059 lambda=4.0418 lr_min=9.34e-06 lr_max=9.34e-05 it/s=21.61
+[HB] epoch=008 split=train step=5000/8407 loss_total=2.77377 l1=0.74169 l2=0.50276 surv=0.38265 task1=0.18233 joint=0.17671 lambda=4.0418 lr_min=9.34e-06 lr_max=9.34e-05 it/s=21.61
+[HB] epoch=008 split=train step=5100/8407 loss_total=0.75675 l1=0.73800 l2=0.00464 surv=0.41089 task1=0.16660 joint=0.16051 lambda=4.0418 lr_min=9.33e-06 lr_max=9.33e-05 it/s=21.62
+[HB] epoch=008 split=train step=5200/8407 loss_total=1.20980 l1=1.13581 l2=0.01831 surv=0.54368 task1=0.29458 joint=0.29755 lambda=4.0418 lr_min=9.33e-06 lr_max=9.33e-05 it/s=21.62
+[HB] epoch=008 split=train step=5300/8407 loss_total=0.44443 l1=0.41914 l2=0.00626 surv=0.26742 task1=0.09042 joint=0.06131 lambda=4.0418 lr_min=9.33e-06 lr_max=9.33e-05 it/s=21.62
+[HB] epoch=008 split=train step=5400/8407 loss_total=1.00195 l1=0.99010 l2=0.00293 surv=0.39777 task1=0.29653 joint=0.29580 lambda=4.0418 lr_min=9.32e-06 lr_max=9.32e-05 it/s=21.62
+[HB] epoch=008 split=train step=5500/8407 loss_total=1.26744 l1=1.24153 l2=0.00641 surv=0.45518 task1=0.39236 joint=0.39399 lambda=4.0418 lr_min=9.32e-06 lr_max=9.32e-05 it/s=21.62
+[HB] epoch=008 split=train step=5600/8407 loss_total=0.66749 l1=0.50371 l2=0.04052 surv=0.16614 task1=0.16666 joint=0.17091 lambda=4.0418 lr_min=9.32e-06 lr_max=9.32e-05 it/s=21.63
+[HB] epoch=008 split=train step=5700/8407 loss_total=0.91411 l1=0.90340 l2=0.00265 surv=0.40073 task1=0.25210 joint=0.25057 lambda=4.0418 lr_min=9.31e-06 lr_max=9.31e-05 it/s=21.63
+[HB] epoch=008 split=train step=5800/8407 loss_total=0.94696 l1=0.85259 l2=0.02335 surv=0.40603 task1=0.22229 joint=0.22426 lambda=4.0418 lr_min=9.31e-06 lr_max=9.31e-05 it/s=21.63
+[HB] epoch=008 split=train step=5900/8407 loss_total=1.93608 l1=1.87064 l2=0.01619 surv=0.53087 task1=0.66912 joint=0.67064 lambda=4.0418 lr_min=9.31e-06 lr_max=9.31e-05 it/s=21.63
+[HB] epoch=008 split=train step=6000/8407 loss_total=1.10516 l1=1.06559 l2=0.00979 surv=0.42371 task1=0.32183 joint=0.32006 lambda=4.0418 lr_min=9.30e-06 lr_max=9.30e-05 it/s=21.64
+[HB] epoch=008 split=train step=6100/8407 loss_total=0.82877 l1=0.78983 l2=0.00963 surv=0.24895 task1=0.26986 joint=0.27102 lambda=4.0418 lr_min=9.30e-06 lr_max=9.30e-05 it/s=21.65
+[HB] epoch=008 split=train step=6200/8407 loss_total=0.95617 l1=0.94457 l2=0.00287 surv=0.47571 task1=0.23471 joint=0.23414 lambda=4.0418 lr_min=9.30e-06 lr_max=9.30e-05 it/s=21.65
+[HB] epoch=008 split=train step=6300/8407 loss_total=1.22469 l1=1.16400 l2=0.01502 surv=0.50870 task1=0.33498 joint=0.32032 lambda=4.0418 lr_min=9.29e-06 lr_max=9.29e-05 it/s=21.66
+[HB] epoch=008 split=train step=6400/8407 loss_total=1.37166 l1=1.21555 l2=0.03862 surv=0.55246 task1=0.33409 joint=0.32900 lambda=4.0418 lr_min=9.29e-06 lr_max=9.29e-05 it/s=21.67
+[HB] epoch=008 split=train step=6500/8407 loss_total=0.93119 l1=0.91851 l2=0.00314 surv=0.41685 task1=0.25057 joint=0.25109 lambda=4.0418 lr_min=9.29e-06 lr_max=9.29e-05 it/s=21.67
+[HB] epoch=008 split=train step=6600/8407 loss_total=0.62482 l1=0.61595 l2=0.00219 surv=0.34003 task1=0.13930 joint=0.13662 lambda=4.0418 lr_min=9.28e-06 lr_max=9.28e-05 it/s=21.68
+[HB] epoch=008 split=train step=6700/8407 loss_total=3.77978 l1=0.65666 l2=0.77270 surv=0.26848 task1=0.29155 joint=0.09664 lambda=4.0418 lr_min=9.28e-06 lr_max=9.28e-05 it/s=21.69
+[HB] epoch=008 split=train step=6800/8407 loss_total=1.75233 l1=1.68064 l2=0.01774 surv=0.51372 task1=0.58291 joint=0.58401 lambda=4.0418 lr_min=9.28e-06 lr_max=9.28e-05 it/s=21.69
+[HB] epoch=008 split=train step=6900/8407 loss_total=0.65985 l1=0.64370 l2=0.00400 surv=0.22202 task1=0.21088 joint=0.21080 lambda=4.0418 lr_min=9.27e-06 lr_max=9.27e-05 it/s=21.68
+[HB] epoch=008 split=train step=7000/8407 loss_total=3.94758 l1=1.50042 l2=0.60546 surv=0.36909 task1=0.59465 joint=0.53668 lambda=4.0418 lr_min=9.27e-06 lr_max=9.27e-05 it/s=21.67
+[HB] epoch=008 split=train step=7100/8407 loss_total=1.28952 l1=1.23214 l2=0.01420 surv=0.45589 task1=0.45893 joint=0.31732 lambda=4.0418 lr_min=9.27e-06 lr_max=9.27e-05 it/s=21.67
+[HB] epoch=008 split=train step=7200/8407 loss_total=1.17958 l1=1.11606 l2=0.01572 surv=0.34337 task1=0.38411 joint=0.38857 lambda=4.0418 lr_min=9.26e-06 lr_max=9.26e-05 it/s=21.66
+[HB] epoch=008 split=train step=7300/8407 loss_total=0.85915 l1=0.85376 l2=0.00134 surv=0.37493 task1=0.24250 joint=0.23632 lambda=4.0418 lr_min=9.26e-06 lr_max=9.26e-05 it/s=21.66
+[HB] epoch=008 split=train step=7400/8407 loss_total=1.43110 l1=1.30875 l2=0.03027 surv=0.51352 task1=0.39895 joint=0.39628 lambda=4.0418 lr_min=9.25e-06 lr_max=9.25e-05 it/s=21.66
+[HB] epoch=008 split=train step=7500/8407 loss_total=1.11820 l1=1.08955 l2=0.00709 surv=0.39483 task1=0.34845 joint=0.34627 lambda=4.0418 lr_min=9.25e-06 lr_max=9.25e-05 it/s=21.65
+[HB] epoch=008 split=train step=7600/8407 loss_total=1.19455 l1=1.09804 l2=0.02388 surv=0.44325 task1=0.32359 joint=0.33119 lambda=4.0418 lr_min=9.25e-06 lr_max=9.25e-05 it/s=21.64
+[HB] epoch=008 split=train step=7700/8407 loss_total=0.86422 l1=0.84637 l2=0.00442 surv=0.30692 task1=0.26998 joint=0.26946 lambda=4.0418 lr_min=9.24e-06 lr_max=9.24e-05 it/s=21.64
+[HB] epoch=008 split=train step=7800/8407 loss_total=0.97704 l1=0.96219 l2=0.00368 surv=0.29056 task1=0.36544 joint=0.30619 lambda=4.0418 lr_min=9.24e-06 lr_max=9.24e-05 it/s=21.63
+[HB] epoch=008 split=train step=7900/8407 loss_total=1.10876 l1=1.05143 l2=0.01418 surv=0.33572 task1=0.35711 joint=0.35859 lambda=4.0418 lr_min=9.24e-06 lr_max=9.24e-05 it/s=21.62
+[HB] epoch=008 split=train step=8000/8407 loss_total=0.41812 l1=0.41515 l2=0.00074 surv=0.21890 task1=0.09908 joint=0.09717 lambda=4.0418 lr_min=9.23e-06 lr_max=9.23e-05 it/s=21.62
+[HB] epoch=008 split=train step=8100/8407 loss_total=1.23419 l1=1.22657 l2=0.00188 surv=0.45956 task1=0.38592 joint=0.38109 lambda=4.0418 lr_min=9.23e-06 lr_max=9.23e-05 it/s=21.62
+[HB] epoch=008 split=train step=8200/8407 loss_total=1.09862 l1=1.08095 l2=0.00437 surv=0.32681 task1=0.37675 joint=0.37739 lambda=4.0418 lr_min=9.23e-06 lr_max=9.23e-05 it/s=21.62
+[HB] epoch=008 split=train step=8300/8407 loss_total=0.71370 l1=0.69328 l2=0.00505 surv=0.26569 task1=0.21382 joint=0.21378 lambda=4.0418 lr_min=9.22e-06 lr_max=9.22e-05 it/s=21.62
+[HB] epoch=008 split=train step=8400/8407 loss_total=0.76136 l1=0.75640 l2=0.00123 surv=0.45458 task1=0.15259 joint=0.14923 lambda=4.0418 lr_min=9.22e-06 lr_max=9.22e-05 it/s=21.63
+Epoch 008 | monitor=legacy val_legacy=0.72820 val_aligned=2.63371 surv=0.40537 task1=0.36532 joint=0.37871 task2=0.32283 lambda=4.0418->4.5978
+Early stopping at epoch=8, patience=5, mode=legacy, no_improve=5.
+Training finished in 3374.4s. monitor=legacy
+
+Saved CMA-Surv outputs to: /scratch/users/nus/e1553307/sph6004/cma_surv_abtest_20260416_141013/code/result/cma_surv_ab_g2_legacy_cu124_fixbce_20260416_231242
+                    task      auc   pr_auc   recall  precision  threshold  n_eval    tn   fp   fn    tp
+         task1_discharge 0.892794 0.690976 0.620501   0.674953        0.5   83538 58133 5845 7423 12137
+task2_no_return72_masked 0.643824 0.969713 1.000000   0.949642        0.5   19560     0  985    0 18575
+     joint_both_positive 0.890302 0.667280 0.624872   0.645479        0.5   83538 58588 6375 6968 11607

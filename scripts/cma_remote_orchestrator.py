@@ -204,12 +204,12 @@ else
   rm -rf '${{VENV_DIR}}' || true
 fi
 if [[ ! -x '${{VENV_DIR}}/bin/python3' ]]; then
-  python3 -m venv '${{VENV_DIR}}'
+  python3 -m venv --system-site-packages '${{VENV_DIR}}'
 fi
 
 source '${{VENV_DIR}}/bin/activate'
 python -m pip install -U pip
-python -m pip install -U numpy pandas scikit-learn matplotlib joblib torch torchvision torchaudio transformers
+python -m pip install -U numpy pandas scikit-learn matplotlib joblib transformers
 
 ln -sfn '${{DATA_DIR}}' '${{CODE_DIR}}/dataset'
 ln -sfn '${{RESULT_ROOT}}' '${{CODE_DIR}}/result'
@@ -233,6 +233,22 @@ export CMA_WARMUP_RATIO='{DEFAULT_WARMUP_RATIO}'
 export CMA_MIN_LR_RATIO='{DEFAULT_MIN_LR_RATIO}'
 export CMA_EARLYSTOP_MODE='{DEFAULT_EARLYSTOP_MODE}'
 export OMP_NUM_THREADS=1
+
+python - <<'PY'
+import torch
+nproc = int("${NPROC}")
+if not torch.cuda.is_available():
+    raise SystemExit("GPU preflight failed: torch.cuda.is_available() is False")
+if torch.cuda.device_count() < nproc:
+    raise SystemExit(
+        f"GPU preflight failed: visible cuda devices={torch.cuda.device_count()} < nproc={nproc}"
+    )
+_ = torch.zeros(1, device="cuda:0")
+print(
+    f"GPU preflight OK: torch={torch.__version__}, cuda={torch.version.cuda}, "
+    f"visible={torch.cuda.device_count()}, nproc={nproc}"
+)
+PY
 
 cd '${{CODE_DIR}}'
 if [[ "${{NPROC}}" -gt 1 ]]; then

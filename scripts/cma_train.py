@@ -141,13 +141,15 @@ def joint_loss(
 ) -> torch.Tensor:
     task2_prob = torch.sigmoid(task2_logits)
     joint_prob = torch.clamp(task1_prob * task2_prob, min=1e-6, max=1.0 - 1e-6)
-    joint_target = ((task1_label > 0.5) & (task2_label > 0.5)).to(joint_prob.dtype)
+    # Use BCEWithLogits to stay AMP-safe (plain BCE is not autocast-safe on CUDA).
+    joint_logit = torch.logit(joint_prob)
+    joint_target = ((task1_label > 0.5) & (task2_label > 0.5)).to(joint_logit.dtype)
     if use_mask_for_joint and task2_mask is not None:
         mask = task2_mask > 0.5
         if mask.any():
-            return F.binary_cross_entropy(joint_prob[mask], joint_target[mask])
-        return torch.zeros((), device=joint_prob.device, dtype=joint_prob.dtype)
-    return F.binary_cross_entropy(joint_prob, joint_target)
+            return F.binary_cross_entropy_with_logits(joint_logit[mask], joint_target[mask])
+        return torch.zeros((), device=joint_logit.device, dtype=joint_logit.dtype)
+    return F.binary_cross_entropy_with_logits(joint_logit, joint_target)
 
 
 def build_optimizer(
@@ -504,11 +506,24 @@ def main() -> None:
     if earlystop_mode not in {"legacy", "aligned"}:
         earlystop_mode = "aligned"
 
-    use_cuda = use_gpu and torch.cuda.is_available()
+    cuda_available = torch.cuda.is_available()
+    if use_gpu and not cuda_available:
+        raise RuntimeError(
+            "CMA_USE_GPU=1 but torch.cuda.is_available() is False. "
+            "Refusing to fallback to CPU; please fix CUDA runtime/container compatibility."
+        )
+
+    use_cuda = use_gpu and cuda_available
     use_ddp, rank, world_size, local_rank = setup_distributed(use_cuda=use_cuda)
     if world_size > 1 and not enable_multi_gpu:
         _log("WORLD_SIZE>1 detected; forcing DDP despite CMA_MULTI_GPU=0.", main_only=False)
     use_ddp = bool(world_size > 1)
+    detected_gpu_count = torch.cuda.device_count() if use_cuda else 0
+    if use_ddp and use_cuda and detected_gpu_count < world_size:
+        raise RuntimeError(
+            f"DDP world_size={world_size} but only {detected_gpu_count} CUDA devices are visible. "
+            "Refusing to run with inconsistent GPU visibility."
+        )
 
     if use_cuda:
         if use_ddp:
@@ -520,7 +535,6 @@ def main() -> None:
     else:
         device = torch.device("cpu")
     use_amp = bool(use_cuda)
-    detected_gpu_count = torch.cuda.device_count() if use_cuda else 0
 
     if freeze_bert_requested and _is_main():
         _log("CMA_FREEZE_BERT=1 was requested, but this pipeline enforces unfreezed BERT training.")
