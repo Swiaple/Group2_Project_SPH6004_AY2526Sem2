@@ -1,12 +1,12 @@
 {
-  "result_dir": "/Users/youmaowei/Workspace/PythonProject/6004/groupproject/result/logisticmultiresult",
+  "result_dir": "/Users/xu/Documents/workspace/Group2_Project_SPH6004_AY2526Sem2/result/logisticmultiresult",
   "debug_max_stays": 0,
-  "n_epochs": 25,
+  "n_epochs": 40,
   "alpha": 0.0001,
   "patience": 8,
   "best_epoch": 25,
-  "best_lambda": 1.121105583065397,
-  "best_val_total_loss": 0.7380364800382097,
+  "best_lambda": 1.1211055832100723,
+  "best_val_total_loss": 0.7380364802248927,
   "trainable_head1": true,
   "trainable_head2": true
 }
