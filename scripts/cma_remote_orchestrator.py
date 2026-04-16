@@ -16,9 +16,19 @@ PBS_PROJECT_ID = (os.getenv("PBS_PROJECT_ID", "") or "").strip()
 POLL_SECONDS = int(os.getenv("POLL_SECONDS", "120") or "120")
 DEFAULT_BATCH_SIZE = int(os.getenv("CMA_BATCH_SIZE", "32") or "32")
 DEFAULT_GRAD_ACCUM = int(os.getenv("CMA_GRAD_ACCUM", "1") or "1")
+DEFAULT_NGPUS = max(1, int(os.getenv("CMA_NGPUS", "2") or "2"))
+DEFAULT_NCPUS = max(4, int(os.getenv("CMA_NCPUS", "8") or "8"))
 DEFAULT_MODEL_NAME = os.getenv("CMA_MODEL_NAME", "emilyalsentzer/Bio_ClinicalBERT")
 DEFAULT_CMA_EPOCHS = int(os.getenv("CMA_EPOCHS", "30") or "30")
 DEFAULT_USE_GPU = os.getenv("CMA_USE_GPU", "1")
+DEFAULT_LR_HEAD = os.getenv("CMA_LR_HEAD", os.getenv("CMA_LR", "1e-4"))
+DEFAULT_LR_BERT = os.getenv("CMA_LR_BERT", "1e-5")
+DEFAULT_SCHEDULER = os.getenv("CMA_SCHEDULER", "cosine")
+DEFAULT_WARMUP_RATIO = os.getenv("CMA_WARMUP_RATIO", "0.1")
+DEFAULT_MIN_LR_RATIO = os.getenv("CMA_MIN_LR_RATIO", "0.05")
+DEFAULT_EARLYSTOP_MODE = os.getenv("CMA_EARLYSTOP_MODE", "aligned")
+DEFAULT_DDP_FIND_UNUSED = os.getenv("CMA_DDP_FIND_UNUSED", "0")
+DEFAULT_DDP_STATIC_GRAPH = os.getenv("CMA_DDP_STATIC_GRAPH", "1")
 RUN_SMOKE = os.getenv("RUN_SMOKE", "1").strip().lower() not in {"0", "false", "no"}
 DEFAULT_CONTAINER_IMAGE = os.getenv(
     "CMA_CONTAINER_IMAGE",
@@ -112,7 +122,7 @@ readlink -f "$HOME"
 def create_remote_layout(host: str, remote_root: str) -> None:
     run_ssh(
         host,
-        f'mkdir -p "{remote_root}/code/model" "{remote_root}/code/utils" "{remote_root}/dataset" "{remote_root}/result" "{remote_root}/logs"',
+        f'mkdir -p "{remote_root}/code/model" "{remote_root}/code/scripts" "{remote_root}/code/utils" "{remote_root}/dataset" "{remote_root}/result" "{remote_root}/logs"',
         check=True,
     )
 
@@ -120,14 +130,20 @@ def create_remote_layout(host: str, remote_root: str) -> None:
 def sync_code_and_data(host: str, remote_root: str) -> None:
     code_files = [
         PROJECT_ROOT / "model" / "cma_surv.py",
-        PROJECT_ROOT / "model" / "cma_train.py",
+        PROJECT_ROOT / "scripts" / "cma_train.py",
+        PROJECT_ROOT / "scripts" / "cma_compare_results.py",
         PROJECT_ROOT / "utils" / "cma_dataset.py",
         PROJECT_ROOT / "utils" / "multitask_common.py",
     ]
     for file_path in code_files:
         if not file_path.exists():
             raise FileNotFoundError(f"Local code file not found: {file_path}")
-        subdir = "model" if file_path.parent.name == "model" else "utils"
+        if file_path.parent.name == "model":
+            subdir = "model"
+        elif file_path.parent.name == "scripts":
+            subdir = "scripts"
+        else:
+            subdir = "utils"
         scp_put(file_path, f"{host}:{remote_root}/code/{subdir}/")
 
     for name in DATASET_FILES:
@@ -140,7 +156,7 @@ def sync_code_and_data(host: str, remote_root: str) -> None:
         "CMA remote staging completed",
         [
             f"Remote root: `{remote_root}`",
-            "Uploaded code files: model/cma_surv.py, scripts/cma_train.py, utils/cma_dataset.py, utils/multitask_common.py",
+            "Uploaded code files: model/cma_surv.py, scripts/cma_train.py, scripts/cma_compare_results.py, utils/cma_dataset.py, utils/multitask_common.py",
             "Uploaded dataset files: static/text/time_series CSV.",
         ],
     )
@@ -151,7 +167,7 @@ def _render_pbs_script(remote_root: str, cfg: PhaseConfig) -> str:
     return f"""#!/bin/bash
 #PBS -N cma_surv_{cfg.phase}
 #PBS -q normal
-#PBS -l select=1:ncpus=8:ngpus=1:mem=64gb
+#PBS -l select=1:ncpus={DEFAULT_NCPUS}:ngpus={DEFAULT_NGPUS}:mem=64gb
 #PBS -l walltime=24:00:00
 #PBS -j oe
 {pbs_project_line}
@@ -167,6 +183,7 @@ LOG_DIR=${{BASE}}/logs
 TRAIN_LOG=${{RUN_DIR}}/train_${{PBS_JOBID}}.log
 IMG={DEFAULT_CONTAINER_IMAGE}
 VENV_DIR=${{BASE}}/venv/cma_surv
+NPROC={DEFAULT_NGPUS}
 
 mkdir -p "${{RUN_DIR}}" "${{LOG_DIR}}" "${{BASE}}/tmp"
 
@@ -205,9 +222,24 @@ export CMA_GRAD_ACCUM='{cfg.grad_accum}'
 export CMA_RESUME='{cfg.resume}'
 export CMA_USE_GPU='{DEFAULT_USE_GPU}'
 export CMA_MODEL_NAME='{DEFAULT_MODEL_NAME}'
+export CMA_FREEZE_BERT='0'
+export CMA_MULTI_GPU='1'
+export CMA_DDP_FIND_UNUSED='{DEFAULT_DDP_FIND_UNUSED}'
+export CMA_DDP_STATIC_GRAPH='{DEFAULT_DDP_STATIC_GRAPH}'
+export CMA_LR_HEAD='{DEFAULT_LR_HEAD}'
+export CMA_LR_BERT='{DEFAULT_LR_BERT}'
+export CMA_SCHEDULER='{DEFAULT_SCHEDULER}'
+export CMA_WARMUP_RATIO='{DEFAULT_WARMUP_RATIO}'
+export CMA_MIN_LR_RATIO='{DEFAULT_MIN_LR_RATIO}'
+export CMA_EARLYSTOP_MODE='{DEFAULT_EARLYSTOP_MODE}'
+export OMP_NUM_THREADS=1
 
 cd '${{CODE_DIR}}'
-python scripts/cma_train.py > '${{TRAIN_LOG}}' 2>&1
+if [[ "${{NPROC}}" -gt 1 ]]; then
+  torchrun --standalone --nnodes=1 --nproc_per_node="${{NPROC}}" scripts/cma_train.py > '${{TRAIN_LOG}}' 2>&1
+else
+  python scripts/cma_train.py > '${{TRAIN_LOG}}' 2>&1
+fi
 "
 RC=$?
 set -e
@@ -240,7 +272,7 @@ def submit_job(host: str, remote_root: str, cfg: PhaseConfig) -> str:
             f"Job ID: {job_id}",
             f"Result subdir: {cfg.result_subdir}",
             f"PBS script: {remote_pbs}",
-            f"Config: debug_max_stays={cfg.debug_max_stays}, epochs={cfg.epochs}, batch_size={cfg.batch_size}, grad_accum={cfg.grad_accum}, resume={cfg.resume}",
+            f"Config: debug_max_stays={cfg.debug_max_stays}, epochs={cfg.epochs}, batch_size={cfg.batch_size}, grad_accum={cfg.grad_accum}, resume={cfg.resume}, ngpus={DEFAULT_NGPUS}, lr_head={DEFAULT_LR_HEAD}, lr_bert={DEFAULT_LR_BERT}",
         ],
     )
     return job_id
@@ -375,7 +407,7 @@ def pull_remote_result(host: str, remote_root: str, result_subdir: str, local_st
 def run_local_comparison(cma_metrics_path: Path) -> None:
     env = os.environ.copy()
     env["CMA_METRICS_PATH"] = str(cma_metrics_path)
-    cmd = ["python", str(PROJECT_ROOT / "model" / "cma_compare_results.py")]
+    cmd = ["python", str(PROJECT_ROOT / "scripts" / "cma_compare_results.py")]
     print(f"[local] {' '.join(cmd)} with CMA_METRICS_PATH={cma_metrics_path}")
     proc = subprocess.run(cmd, text=True, capture_output=True, env=env)
     if proc.returncode != 0:
