@@ -9,8 +9,8 @@ This document converts the three modeling ideas into executable implementation p
   - Task 2: predict `label_no_return_72h` on `task2_mask == 1`
 - Current baseline code:
   - `utils/multitask_common.py`
-  - `model/xgboostmulti.py`
-  - `model/logisticmulti.py`
+  - `scripts/xgboostmulti.py`
+  - `scripts/logisticmulti.py`
 - Current data:
   - `dataset/MIMIC-IV-static(Group Assignment).csv`
   - `dataset/MIMIC-IV-text(Group Assignment).csv`
@@ -25,8 +25,8 @@ This document converts the three modeling ideas into executable implementation p
    ```
 3. Run baseline once for reference metrics:
    ```bash
-   python model/xgboostmulti.py
-   python model/logisticmulti.py
+   python scripts/xgboostmulti.py
+   python scripts/logisticmulti.py
    ```
 4. Save baseline metrics snapshot:
    - Copy `result/xgboostmultiresult/metrics_summary.csv`
@@ -159,7 +159,7 @@ This document converts the three modeling ideas into executable implementation p
 
 - `utils/cma_dataset.py`
 - `model/cma_surv.py`
-- `model/cma_train.py`
+- `scripts/cma_train.py`
 - `result/cma_surv_result/` (runtime outputs)
 
 ### Step-by-Step Execution
@@ -178,7 +178,7 @@ This document converts the three modeling ideas into executable implementation p
    - MLP for static branch
    - gated cross-modal attention fusion
    - discrete-time competing-risk output heads
-4. Training loop in `model/cma_train.py`:
+4. Training loop in `scripts/cma_train.py`:
    - group-aware split by `subject_id`
    - early stopping by validation total loss
    - save best checkpoint
@@ -191,7 +191,7 @@ This document converts the three modeling ideas into executable implementation p
    - produce `P(discharge within 24h)` aligned with Task 1 reporting
 7. Run:
    ```bash
-   python model/cma_train.py
+   python scripts/cma_train.py
    ```
 
 ### Acceptance Criteria
@@ -239,7 +239,7 @@ This document converts the three modeling ideas into executable implementation p
 
 ### A.3 How to apply it to this repository
 
-1. Keep `model/xgboostmulti.py` as baseline.
+1. Keep `scripts/xgboostmulti.py` as baseline.
 2. Build a multimodal deep main model with three branches:
    - static (MLP),
    - time-series (GRU/TCN),
@@ -258,7 +258,7 @@ This document converts the three modeling ideas into executable implementation p
   - unify `(stay_id, t_end)` samples across modalities.
 - Add `model/multimodal_fusion.py`:
   - encoders + fusion + heads.
-- Add `model/train_multimodal_main.py`:
+- Add `scripts/train_multimodal_main.py`:
   - train/eval/export pipeline.
 - Output to `result/multimodal_main_<timestamp>/` (no overwrite baseline).
 
@@ -275,7 +275,7 @@ This document converts the three modeling ideas into executable implementation p
 ### A.6 Suggested launch command for upcoming main model
 
 ```bash
-MM_EPOCHS=30 MM_BATCH_SIZE=128 MM_LR=1e-3 MM_USE_TEXT=1 MM_USE_GPU=1 python model/train_multimodal_main.py
+MM_EPOCHS=30 MM_BATCH_SIZE=128 MM_LR=1e-3 MM_USE_TEXT=1 MM_USE_GPU=1 python scripts/train_multimodal_main.py
 ```
 
 ### A.7 Metadata references used for this appendix

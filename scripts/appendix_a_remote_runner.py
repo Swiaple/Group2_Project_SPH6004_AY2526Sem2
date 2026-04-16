@@ -124,7 +124,7 @@ python -m pip install numpy pandas scikit-learn matplotlib joblib torch torchvis
 {env_lines}
 export RESULT_SUBDIR={shlex.quote(result_subdir)}
 
-python model/train_multimodal_main.py
+python scripts/train_multimodal_main.py
 """
     return pbs
 
@@ -350,7 +350,7 @@ def main() -> None:
     env["XGB_METRICS_PATH"] = str(PROJECT_ROOT / BASELINE_XGB)
     env["LOGI_METRICS_PATH"] = str(PROJECT_ROOT / BASELINE_LOGI)
     subprocess.run(
-        ["python", "model/multimodal_compare_results.py"],
+        ["python", "scripts/multimodal_compare_results.py"],
         check=True,
         cwd=PROJECT_ROOT,
         env=env,

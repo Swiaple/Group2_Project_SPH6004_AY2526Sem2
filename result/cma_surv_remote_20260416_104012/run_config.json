@@ -1,0 +1,47 @@
+{
+  "result_dir": "/scratch/users/nus/e1553307/sph6004/cma_surv_20260415_160722/code/result/cma_surv_full_g2x2_ddp_freezebert_attempt2",
+  "result_subdir": "cma_surv_full_g2x2_ddp_freezebert_attempt2",
+  "debug_max_stays": 0,
+  "cma_epochs": 30,
+  "cma_batch_size": 128,
+  "cma_lr": 0.0001,
+  "cma_weight_decay": 0.01,
+  "cma_max_text_len": 128,
+  "cma_grad_accum": 1,
+  "cma_patience": 3,
+  "cma_seed": 42,
+  "cma_num_workers": 8,
+  "cma_freeze_bert": true,
+  "cma_multi_gpu": true,
+  "cma_ddp": true,
+  "cma_heartbeat_steps": 50,
+  "cma_model_name": "emilyalsentzer/Bio_ClinicalBERT",
+  "cma_resume": false,
+  "device": "cuda:0",
+  "detected_gpu_count": 2,
+  "world_size": 2,
+  "best_epoch": 4,
+  "best_val_loss": 0.5922242166806561,
+  "time_feature_dim": 24,
+  "static_feature_dim": 108,
+  "tokenizer_name": "emilyalsentzer/Bio_ClinicalBERT",
+  "survival_intervals": [
+    [
+      0,
+      24
+    ],
+    [
+      24,
+      48
+    ],
+    [
+      48,
+      72
+    ]
+  ],
+  "task_columns": {
+    "task1": "label_can_discharge_24h",
+    "task2": "label_no_return_72h",
+    "task2_mask": "task2_mask"
+  }
+}

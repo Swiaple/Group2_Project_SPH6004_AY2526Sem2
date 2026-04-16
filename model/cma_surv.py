@@ -40,6 +40,13 @@ class CmaSurvModel(nn.Module):
         if freeze_bert:
             for param in self.text_encoder.parameters():
                 param.requires_grad = False
+        else:
+            # We consume CLS from last_hidden_state, not pooler_output.
+            # Keep pooler frozen to avoid DDP unused-parameter reduction errors.
+            pooler = getattr(self.text_encoder, "pooler", None)
+            if pooler is not None:
+                for param in pooler.parameters():
+                    param.requires_grad = False
 
         text_hidden_dim = int(self.text_encoder.config.hidden_size)
         self.text_proj = nn.Sequential(

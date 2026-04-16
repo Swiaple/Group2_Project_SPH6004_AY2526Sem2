@@ -140,7 +140,7 @@ def sync_code_and_data(host: str, remote_root: str) -> None:
         "CMA remote staging completed",
         [
             f"Remote root: `{remote_root}`",
-            "Uploaded code files: model/cma_surv.py, model/cma_train.py, utils/cma_dataset.py, utils/multitask_common.py",
+            "Uploaded code files: model/cma_surv.py, scripts/cma_train.py, utils/cma_dataset.py, utils/multitask_common.py",
             "Uploaded dataset files: static/text/time_series CSV.",
         ],
     )
@@ -207,7 +207,7 @@ export CMA_USE_GPU='{DEFAULT_USE_GPU}'
 export CMA_MODEL_NAME='{DEFAULT_MODEL_NAME}'
 
 cd '${{CODE_DIR}}'
-python model/cma_train.py > '${{TRAIN_LOG}}' 2>&1
+python scripts/cma_train.py > '${{TRAIN_LOG}}' 2>&1
 "
 RC=$?
 set -e
@@ -385,7 +385,7 @@ def run_local_comparison(cma_metrics_path: Path) -> None:
         "CMA baseline comparison generated",
         [
             f"Input CMA metrics: `{cma_metrics_path}`",
-            "Ran `model/cma_compare_results.py` successfully.",
+            "Ran `scripts/cma_compare_results.py` successfully.",
         ],
     )
 

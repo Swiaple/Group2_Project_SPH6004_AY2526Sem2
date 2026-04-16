@@ -284,6 +284,7 @@ def main() -> None:
     freeze_bert = (os.getenv("CMA_FREEZE_BERT", "0") or "0").strip().lower() in {"1", "true", "yes", "y", "on"}
     enable_multi_gpu = (os.getenv("CMA_MULTI_GPU", "1") or "1").strip().lower() in {"1", "true", "yes", "y", "on"}
     bert_model_name = (os.getenv("CMA_MODEL_NAME", "emilyalsentzer/Bio_ClinicalBERT") or "emilyalsentzer/Bio_ClinicalBERT").strip()
+    ddp_find_unused_env = (os.getenv("CMA_DDP_FIND_UNUSED", "auto") or "auto").strip().lower()
 
     use_cuda = use_gpu and torch.cuda.is_available()
     use_ddp, rank, world_size, local_rank = setup_distributed(use_cuda=use_cuda)
@@ -357,12 +358,20 @@ def main() -> None:
         freeze_bert=freeze_bert,
     ).to(device)
     if use_ddp:
+        if ddp_find_unused_env in {"1", "true", "yes", "y", "on"}:
+            ddp_find_unused = True
+        elif ddp_find_unused_env in {"0", "false", "no", "n", "off"}:
+            ddp_find_unused = False
+        else:
+            # Default to safer behavior when BERT is unfrozen.
+            ddp_find_unused = not freeze_bert
         _log("Wrapping model with DistributedDataParallel.")
+        _log(f"DDP config: find_unused_parameters={ddp_find_unused}", main_only=False)
         model = DDP(
             model,
             device_ids=[local_rank] if use_cuda else None,
             output_device=local_rank if use_cuda else None,
-            find_unused_parameters=False,
+            find_unused_parameters=ddp_find_unused,
         )
 
     optimizer = AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
